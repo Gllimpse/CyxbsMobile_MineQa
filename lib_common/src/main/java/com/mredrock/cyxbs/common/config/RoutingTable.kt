@@ -12,6 +12,7 @@ const val COURSE_ENTRY = "/course/entry"
 const val QA_ENTRY = "/qa/entry"
 const val DISCOVER_ENTRY = "/discover/entry"
 const val MINE_ENTRY = "/mine/entry"
+const val SHOP_ENTRY = "/shop/entry"
 
 const val MAIN_SPLASH = "/main/splash"
 

@@ -64,6 +64,7 @@ class UserFragment : BaseViewModelFragment<UserViewModel>() {
             mine_main_tv_comment.setOnSingleClickListener { doIfLogin { jumpAndSaveTime(QA_MY_COMMENT, 1) } }
             mine_main_tv_praise.setOnSingleClickListener { doIfLogin { jumpAndSaveTime(QA_MY_PRAISE, 2) } }
             mine_main_fm_feedback.setOnSingleClickListener { doIfLogin { Jump2QQHelper.onFeedBackClick(this) } }
+            mine_main_fm_point_store.setOnSingleClickListener { ARouter.getInstance().build(SHOP_ENTRY).navigation() }
             mine_main_cl_info_edit.setOnClickListener {
                 doIfLogin {
                     startActivity(
