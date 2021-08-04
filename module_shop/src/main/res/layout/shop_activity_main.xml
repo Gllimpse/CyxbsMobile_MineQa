@@ -24,23 +24,37 @@
             android:textColor="#15315B"
             android:textSize="22sp" />
 
-        <TextView
-            android:id="@+id/shop_main_tv_my_stamp"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="27dp"
-            android:text="189"
-            android:textColor="#E9F2FB"
-            android:textSize="18sp"
-            android:gravity="center"
-            android:paddingTop="2dp"
-            android:paddingBottom="2dp"
-            android:paddingStart="11dp"
-            android:paddingEnd="11dp"
             android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
             android:layout_marginEnd="16dp"
-            android:textAppearance="@style/shop_main_price_number_appearance"
-            android:drawableStart="@drawable/shop_ic_my_stamp"
-            android:background="@drawable/shop_shape_tv_stamp_counts"/>
+            android:background="@drawable/shop_shape_tv_stamp_counts"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingStart="11dp"
+            android:paddingTop="2dp"
+            android:paddingEnd="11dp"
+            android:paddingBottom="2dp">
+
+            <ImageView
+                android:layout_width="21dp"
+                android:layout_height="21dp"
+                android:src="@drawable/shop_ic_my_stamp" />
+
+            <TextView
+                android:id="@+id/shop_main_tv_my_stamp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:gravity="center"
+                android:text="189"
+                android:textAppearance="@style/shop_main_price_number_appearance"
+                android:textColor="#E9F2FB"
+                android:textSize="18sp" />
+
+        </LinearLayout>
 
     </RelativeLayout>
 
@@ -95,7 +109,8 @@
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <LinearLayout
                 android:layout_width="match_parent"
