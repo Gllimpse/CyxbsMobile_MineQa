@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="shop_main_banner_number_appearance" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/shop_font_banner_number</item>
+    </style>
+
+    <style name="shop_main_price_number_appearance" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/shop_font_price_number</item>
+    </style>
+</resources>

@@ -1,4 +1,4 @@
-package com.aefottt.module_shop
+package com.mredrock.cyxbs.shop
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

@@ -1,7 +1,8 @@
-package com.aefottt.module_shop
+package com.mredrock.cyxbs.shop
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.aefottt.module_shop.R
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.mredrock.cyxbs.common.config.SHOP_ENTRY
 

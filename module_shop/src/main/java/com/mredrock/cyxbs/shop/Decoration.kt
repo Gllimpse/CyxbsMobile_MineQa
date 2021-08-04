@@ -1,4 +1,4 @@
-package com.aefottt.module_shop
+package com.mredrock.cyxbs.shop
 
 
 import androidx.annotation.Keep

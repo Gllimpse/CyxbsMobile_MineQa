@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">module_shop</string>
+    <string name="shop_app_name">module_shop</string>
+    <string name="shop_title_stamp_center">邮票中心</string>
+    <string name="shop_main_banner_detail">明细</string>
 </resources>
