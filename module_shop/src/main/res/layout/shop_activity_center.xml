@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/shop_include"
+        layout="@layout/shop_layout_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.060000002" />
+
+    <include
+        android:id="@+id/shop_include2"
+        layout="@layout/shop_layout_center_mystamp"
+        android:layout_width="match_parent"
+        android:layout_height="129dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.14999998" />
+
+    <ImageView
+        android:id="@+id/shop_imageview3"
+        android:layout_width="132dp"
+        android:layout_height="119dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.93"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.110000014"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="9dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shop_tablayout" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/shop_tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/shop_include2" />
+
+    <ImageView
+        android:id="@+id/shop_imageview6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/shop_imageview3"
+        app:layout_constraintHorizontal_bias="0.41"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.152"
+        app:srcCompat="@drawable/shop_ic_stamp_detail" />
+
+    <TextView
+        android:id="@+id/shop_textview6"
+        android:layout_width="23dp"
+        android:layout_height="13dp"
+        android:layout_marginStart="13dp"
+        android:text="明细"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/shop_imageview6"
+        app:layout_constraintStart_toEndOf="@+id/shop_imageview6"
+        app:layout_constraintTop_toTopOf="@+id/shop_imageview6"
+        app:layout_constraintVertical_bias="0.45999998" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
