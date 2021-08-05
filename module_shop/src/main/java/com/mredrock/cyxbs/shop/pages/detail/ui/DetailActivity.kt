@@ -12,6 +12,7 @@ import com.mredrock.cyxbs.shop.GoodType
 import com.mredrock.cyxbs.shop.bean.Decoration
 import com.mredrock.cyxbs.shop.bean.StampGood
 import com.mredrock.cyxbs.shop.pages.detail.viewmodel.DetailViewModel
+import com.mredrock.cyxbs.shop.widget.ShopDialog
 import kotlinx.android.synthetic.main.shop_activity_detail.*
 import kotlinx.android.synthetic.main.shop_dialog_detail_exchange.view.*
 import java.io.Serializable
@@ -42,6 +43,7 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
         initView()
         initListener()
         initObserve()
+
     }
 
     private fun initGoodData() {
@@ -49,6 +51,7 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
             viewModel.getDecorationData(title)
         }else {
             viewModel.getStampGoodData(title)
+
         }
     }
 
@@ -101,86 +104,44 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
     }
 
     private fun showSureDialog(dialogType: Int) {
-        val tag = "notice"
-        supportFragmentManager.let { f ->
-            if (f.findFragmentByTag(tag) == null) {
-                CommonDialogFragment().apply {
-                    if (dialogType == DIALOG_TYPE_FIRST_SURE) {
-                        initView(
-                                containerRes = R.layout.shop_dialog_detail_exchange,
-                                positiveString = "确定",
-                                onPositiveClick = {
-                                    viewModel.apply {
-                                        if (goodType == GoodType.TYPE_DECORATION) {
-                                            (goodData as Decoration).apply {
-                                                when{
-                                                    left_Count -> showSureDialog(DIALOG_TYPE_COUNT_SHORTAGE)
-                                                    price > -> showSureDialog(DIALOG_TYPE_STAMP_SHORTAGE)
-                                                    else -> exGood((goodData as Decoration).title)
-                                                }
-                                            }
-                                        }else {
-                                            (goodData as StampGood).apply {
-                                                when{
-                                                    left_count -> showSureDialog(DIALOG_TYPE_COUNT_SHORTAGE)
-                                                    price > -> showSureDialog(DIALOG_TYPE_STAMP_SHORTAGE)
-                                                    else -> exGood((goodData as StampGood).title)
-                                                }
-                                            }
-                                        }
-                                    }
-                                    dismiss()
-                                },
-                                onNegativeClick = {
-                                    dismiss()
-                                },
-                                elseFunction = {
-                                    if (goodType == GoodType.TYPE_DECORATION) {
-                                        it.dialog_content.text = "确认要用${(goodData as Decoration).price}邮票兑换PM名片吗"
-                                    }
-                                }
-
-                        )
+        var content = ""
+        var onDeny : (() -> Unit)? = {}
+        var onPositive : (() -> Unit)? = {}
+        content = when(dialogType) {
+            DIALOG_TYPE_FIRST_SURE -> if (goodType == GoodType.TYPE_DECORATION) {
+                "确认要用${(goodData as Decoration).price}邮票兑换PM名片吗"
+            } else {
+                "确认要用${(goodData as StampGood).price}邮票兑换PM名片吗"
+            }
+            DIALOG_TYPE_COUNT_SHORTAGE -> "啊哦！手慢了！下次再来吧!"
+            DIALOG_TYPE_STAMP_SHORTAGE -> "邮票数量不足！"
+            DIALOG_TYPE_SUCCESS ->  "兑换成功"
+            else -> ""
+        }
+        if (dialogType == DIALOG_TYPE_FIRST_SURE) {
+            onPositive = {
+                viewModel.apply {
+                    if (goodType == GoodType.TYPE_DECORATION) {
+                        (goodData as Decoration).apply {
+                            when {
+                                left_Count -> showSureDialog(DIALOG_TYPE_COUNT_SHORTAGE)
+                                price > -> showSureDialog(DIALOG_TYPE_STAMP_SHORTAGE)
+                                else -> exGood((goodData as Decoration).title)
+                            }
+                        }
+                    } else {
+                        (goodData as StampGood).apply {
+                            when {
+                                left_count -> showSureDialog(DIALOG_TYPE_COUNT_SHORTAGE)
+                                price > -> showSureDialog(DIALOG_TYPE_STAMP_SHORTAGE)
+                                else -> exGood((goodData as StampGood).title)
+                            }
+                        }
                     }
-                    if (dialogType == DIALOG_TYPE_COUNT_SHORTAGE) {
-                        initView(
-                                containerRes = R.layout.shop_dialog_detail_exchange,
-                                positiveString = "确认",
-                                onPositiveClick = { dismiss() },
-                                elseFunction = {
-
-                                        it.findViewById<TextView>(R.id.dialog_content).text = "啊哦！手慢了！下次再来吧!"
-
-                                }
-                        )
-                    }
-                    if (dialogType == DIALOG_TYPE_STAMP_SHORTAGE) {
-                        initView(
-                                containerRes = R.layout.shop_dialog_detail_exchange,
-                                positiveString = "确认",
-                                onPositiveClick = { dismiss() },
-                                elseFunction = {
-
-                                    it.findViewById<TextView>(R.id.dialog_content).text = "邮票数量不足！"
-
-                                }
-                        )
-                    }
-                    if(dialogType == DIALOG_TYPE_SUCCESS) {
-                        initView(
-                                containerRes = R.layout.shop_dialog_detail_exchange,
-                                positiveString = "确认",
-                                onPositiveClick = { dismiss() },
-                                elseFunction = {
-
-                                    it.findViewById<TextView>(R.id.dialog_content).text = "兑换成功"
-
-                                }
-                        )
-                    }
-                }.show(f, tag)
                 }
             }
         }
+        ShopDialog.show(this,content, onDeny, onPositive)
+
     }
 }

@@ -17,6 +17,7 @@ class DetailViewModel : BaseViewModel(){
     val exResp : LiveData<ExResp>
         get() = _exResp
 
+
     private val _decorResp = MutableLiveData<DecorationResp>()
     val decorResp : LiveData<DecorationResp>
             get() = _decorResp
@@ -26,6 +27,7 @@ class DetailViewModel : BaseViewModel(){
         get() = _stampGoodResp
 
     fun exGood(title: String){
+
         ApiGenerator.getApiService(ApiService::class.java)
                 .exGood(title)
                 .mapOrThrowApiException()

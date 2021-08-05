@@ -1,26 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="255dp"
+    android:layout_height="178dp"
+    android:background="@drawable/shop_bg_dialog">
+
 
     <TextView
-        android:id="@+id/dialog_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="17dp"
-        android:textColor="@color/common_level_two_font_color"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:id="@+id/shop_dialog_tv_content"
+        android:layout_width="216dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="34dp"
+        android:text="确认要用100邮票兑换PM名片吗"
+        android:textColor="#15315B"
+        android:textSize="14sp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/dialog_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/levelFourFontColor"
-        android:textSize="13sp" />
+        android:id="@+id/shop_dialog_tv_negative"
+        android:layout_width="93dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginBottom="34dp"
+        android:text="取消"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:background="@drawable/shop_bg_dialog_tv_negative"
 
-</LinearLayout>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/shop_dialog_tv_positive"
+        android:layout_width="93dp"
+        android:layout_height="34dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="34dp"
+        android:text="确定"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:gravity="center"
+
+        android:background="@drawable/shop_bg_dialog_tv_positive"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
