@@ -1,4 +1,4 @@
-package com.mredrock.cyxbs.shop.pages.stampcenter.activity
+package com.mredrock.cyxbs.shop.pages.stampcenter.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

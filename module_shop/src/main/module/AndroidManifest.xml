@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CyxbsMobile_Single">
-        <activity android:name="com.mredrock.cyxbs.shop.pages.stampcenter.activity.ShopActivity">
+        <activity android:name="com.mredrock.cyxbs.shop.pages.stampcenter.ui.activity.ShopActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

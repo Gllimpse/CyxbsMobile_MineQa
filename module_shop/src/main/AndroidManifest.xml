@@ -3,7 +3,7 @@
     package="com.aefottt.module_shop">
 
     <application android:theme="@style/AppTheme">
-        <activity android:name="com.mredrock.cyxbs.shop.pages.stampcenter.activity.ShopActivity" />
+        <activity android:name="com.mredrock.cyxbs.shop.pages.stampcenter.ui.activity.ShopActivity" />
     </application>
 
 </manifest>
