@@ -3,64 +3,75 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="167dp"
+    android:layout_height="237dp">
 
 
     <ImageView
-        android:id="@+id/shop_imageview"
+        android:id="@+id/shop_item_iv_desc"
         android:layout_width="167dp"
         android:layout_height="145dp"
+        android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/shop_bg_recycle_item_image"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/shop_textview"
+        android:id="@+id/shop_item_tv_title"
         android:layout_width="143dp"
         android:layout_height="20dp"
         android:layout_marginTop="10dp"
         android:text="TextView"
-        app:layout_constraintEnd_toEndOf="@+id/shop_imageview"
+        android:textSize="14sp"
+        android:textColor="#15315B"
+        android:gravity="center_vertical"
+        app:layout_constraintEnd_toEndOf="@+id/shop_item_iv_desc"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shop_imageview" />
+        app:layout_constraintTop_toBottomOf="@+id/shop_item_iv_desc" />
 
     <TextView
-        android:id="@+id/shop_textview2"
+        android:id="@+id/shop_item_tv_left_count"
         android:layout_width="47dp"
         android:layout_height="15dp"
         android:text="TextView"
-        app:layout_constraintEnd_toEndOf="@+id/shop_textview"
+        android:textSize="11sp"
+        android:textColor="#B315315B"
+        android:gravity="center_vertical"
+        app:layout_constraintEnd_toEndOf="@+id/shop_item_tv_title"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/shop_textview"
-        app:layout_constraintTop_toBottomOf="@+id/shop_textview" />
+        app:layout_constraintStart_toStartOf="@+id/shop_item_tv_title"
+        app:layout_constraintTop_toBottomOf="@+id/shop_item_tv_title" />
 
     <ImageView
-        android:id="@+id/shop_imageview2"
+        android:id="@+id/shop_item_iv_stamp"
         android:layout_width="18dp"
         android:layout_height="18dp"
-        android:layout_marginTop="9dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/shop_ic_my_stamp"
-        app:layout_constraintEnd_toEndOf="@+id/shop_textview2"
+        app:layout_constraintEnd_toEndOf="@+id/shop_item_tv_left_count"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/shop_textview2"
-        app:layout_constraintTop_toBottomOf="@+id/shop_textview2"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintStart_toStartOf="@+id/shop_item_tv_left_count"
+        app:layout_constraintTop_toBottomOf="@+id/shop_item_tv_left_count" />
 
     <TextView
-        android:id="@+id/shop_textview3"
+        android:id="@+id/shop_item_tv_price"
         android:layout_width="23dp"
         android:layout_height="17dp"
         android:layout_marginStart="4dp"
         android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/shop_imageview2"
-        app:layout_constraintEnd_toEndOf="@+id/shop_textview2"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/shop_imageview2"
-        app:layout_constraintTop_toTopOf="@+id/shop_imageview2" />
+        android:textSize="14sp"
+        android:textColor="#5177FF"
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/shop_item_iv_desc"
+        app:layout_constraintEnd_toEndOf="@+id/shop_item_tv_left_count"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/shop_item_iv_stamp"
+        app:layout_constraintTop_toTopOf="@+id/shop_item_iv_stamp"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/shop_button"
+        android:id="@+id/shop_item_btn_exchange"
         android:layout_width="48dp"
         android:layout_height="26dp"
         android:layout_marginStart="50dp"
@@ -71,8 +82,8 @@
         android:gravity="center"
         android:textSize="14sp"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/shop_textview3"
-        app:layout_constraintEnd_toEndOf="@+id/shop_imageview"
-        app:layout_constraintStart_toEndOf="@+id/shop_textview3"
-        app:layout_constraintTop_toBottomOf="@+id/shop_textview" />
+        app:layout_constraintBottom_toBottomOf="@+id/shop_item_tv_price"
+        app:layout_constraintEnd_toEndOf="@+id/shop_item_iv_desc"
+        app:layout_constraintStart_toEndOf="@+id/shop_item_tv_price"
+        app:layout_constraintTop_toBottomOf="@+id/shop_item_tv_title" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import com.aefottt.module_shop.R
+import com.mredrock.cyxbs.api.account.IAccountService
 import com.mredrock.cyxbs.common.component.CommonDialogFragment
+import com.mredrock.cyxbs.common.service.ServiceManager
 import com.mredrock.cyxbs.common.ui.BaseViewModelActivity
 import com.mredrock.cyxbs.shop.GoodType
 import com.mredrock.cyxbs.shop.bean.Decoration
@@ -18,11 +20,15 @@ import kotlinx.android.synthetic.main.shop_dialog_detail_exchange.view.*
 import java.io.Serializable
 
 class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
+    //所选商品
     private lateinit var goodData : Serializable
+    //所选商品类型
     private lateinit var goodType: GoodType
+    //所选商品名称
     private lateinit var title: String
 
     companion object{
+        //Dialog类型
         const val DIALOG_TYPE_FIRST_SURE = 0
         const val DIALOG_TYPE_SUCCESS = 1
         const val DIALOG_TYPE_STAMP_SHORTAGE = 2
@@ -37,6 +43,7 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.shop_activity_detail)
         goodType = intent.getSerializableExtra("type") as GoodType
         title = intent.getStringExtra("title")
         initGoodData()
@@ -72,8 +79,18 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
             if (it.status) {
                 showSureDialog(DIALOG_TYPE_SUCCESS)
                 updateStampCount()
+            }else if (it.data == "物品存货不够"){
+                showSureDialog(DIALOG_TYPE_COUNT_SHORTAGE)
             }
         })
+    }
+
+    private fun updateStampCount(): Int{
+        ServiceManager.getService(IAccountService::class.java)
+                .getUserService().getIntegral().apply {
+                    shop_detail_tv_stamp_count.text = toString()
+                    return this
+                }
     }
 
     private fun initView(){
@@ -124,16 +141,14 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
                     if (goodType == GoodType.TYPE_DECORATION) {
                         (goodData as Decoration).apply {
                             when {
-                                left_Count -> showSureDialog(DIALOG_TYPE_COUNT_SHORTAGE)
-                                price > -> showSureDialog(DIALOG_TYPE_STAMP_SHORTAGE)
+                                price > updateStampCount()-> showSureDialog(DIALOG_TYPE_STAMP_SHORTAGE)
                                 else -> exGood((goodData as Decoration).title)
                             }
                         }
                     } else {
                         (goodData as StampGood).apply {
                             when {
-                                left_count -> showSureDialog(DIALOG_TYPE_COUNT_SHORTAGE)
-                                price > -> showSureDialog(DIALOG_TYPE_STAMP_SHORTAGE)
+                                price > updateStampCount()-> showSureDialog(DIALOG_TYPE_STAMP_SHORTAGE)
                                 else -> exGood((goodData as StampGood).title)
                             }
                         }

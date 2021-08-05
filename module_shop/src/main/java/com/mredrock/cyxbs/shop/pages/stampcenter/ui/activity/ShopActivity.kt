@@ -13,5 +13,6 @@ class ShopActivity : BaseViewModelActivity<ShopViewModel>(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.shop_activity_main)
+
     }
 }
