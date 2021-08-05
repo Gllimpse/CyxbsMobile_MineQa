@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -10,51 +11,53 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="53dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:layout_marginBottom="7dp">
 
         <TextView
             android:id="@+id/shop_main_tv_title"
             android:layout_width="wrap_content"
-            android:layout_height="31dp"
-            android:drawableStart="@drawable/shop_ic_back"
-            android:drawablePadding="13dp"
-            android:gravity="center_vertical"
+            android:layout_height="32dp"
+            android:layout_marginStart="13dp"
+            android:gravity="center"
             android:text="@string/shop_title_stamp_center"
             android:textColor="#15315B"
-            android:textSize="22sp" />
+            android:textSize="22sp"
+            android:drawablePadding="13dp"
+            android:drawableStart="@drawable/shop_ic_back" />
 
         <LinearLayout
+            android:id="@+id/shop_main_ll_my_stamps"
             android:layout_width="wrap_content"
-            android:layout_height="27dp"
+            android:layout_height="32dp"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/shop_shape_tv_stamp_counts"
-            android:gravity="center"
             android:orientation="horizontal"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
             android:paddingStart="11dp"
-            android:paddingTop="2dp"
+            android:paddingTop="4dp"
             android:paddingEnd="11dp"
-            android:paddingBottom="2dp">
+            android:paddingBottom="4dp"
+            android:alpha="0"
+            android:background="@drawable/shop_shape_tv_stamp_counts">
 
             <ImageView
+                android:id="@+id/shop_main_iv_my_stamps"
                 android:layout_width="21dp"
                 android:layout_height="21dp"
                 android:src="@drawable/shop_ic_my_stamp" />
 
             <TextView
-                android:id="@+id/shop_main_tv_my_stamp"
+                android:id="@+id/shop_main_tv_my_stamps"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:gravity="center"
+                android:layout_height="22dp"
                 android:text="189"
+                android:layout_marginStart="4dp"
                 android:textAppearance="@style/shop_main_price_number_appearance"
                 android:textColor="#E9F2FB"
-                android:textSize="18sp" />
+                android:textSize="17sp"/>
 
         </LinearLayout>
+
 
     </RelativeLayout>
 
@@ -63,14 +66,16 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/shop_main_ll_banner"
             android:layout_width="match_parent"
-            android:layout_height="154dp"
+            android:layout_height="164dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginStart="17dp"
             android:layout_marginTop="7dp"
             android:layout_marginEnd="17dp"
             android:background="@drawable/shop_bg_my_stamp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            app:layout_behavior="com.mredrock.cyxbs.shop.behavior.NestedHeaderBehavior">
 
             <TextView
                 android:id="@+id/shop_main_tv_banner_detail"
@@ -82,13 +87,13 @@
                 android:drawablePadding="2dp"
                 android:text="@string/shop_main_banner_detail"
                 android:textColor="#FFFFFF"
-                android:textSize="12sp" />
+                android:textSize="10sp" />
 
             <TextView
                 android:id="@+id/shop_main_tv_banner_number"
-                android:layout_width="154dp"
+                android:layout_width="wrap_content"
                 android:layout_height="66dp"
-                android:layout_marginStart="9dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="-5dp"
                 android:gravity="center"
                 android:text="110000"
@@ -108,9 +113,10 @@
         </LinearLayout>
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/shop_nested_scroll_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            app:layout_behavior="com.mredrock.cyxbs.shop.behavior.NestedContentBehavior">
 
             <LinearLayout
                 android:layout_width="match_parent"
