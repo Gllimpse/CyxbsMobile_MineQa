@@ -66,6 +66,7 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
         viewModel.decorResp.observe(this, Observer {
             if (it.status) {
                 goodData = it.decoration
+
             }
         })
 

@@ -2,6 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+    <com.mredrock.cyxbs.shop.widget.ProgressBar
+        android:id="@+id/shop_task_progress_bar"
+        android:layout_width="150dp"
+        android:layout_height="8dp" />
 
 </LinearLayout>

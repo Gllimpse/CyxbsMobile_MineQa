@@ -5,6 +5,9 @@ import android.content.Context
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.marginEnd
 import com.aefottt.module_shop.R
 import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
 import kotlinx.android.synthetic.main.shop_dialog_detail_exchange.view.*
@@ -22,8 +25,8 @@ object ShopDialog {
             if (onPositive == null) {
                 view.shop_dialog_tv_negative.visibility = View.GONE
                 view.shop_dialog_tv_positive.apply {
-                    layoutParams = layoutParams.apply {
-                        setPadding(0, 0, 81, 0)
+                    layoutParams = ConstraintLayout.LayoutParams(layoutParams).apply {
+                        marginEnd = 81
                     }
                 }
             }else onPositive.invoke()

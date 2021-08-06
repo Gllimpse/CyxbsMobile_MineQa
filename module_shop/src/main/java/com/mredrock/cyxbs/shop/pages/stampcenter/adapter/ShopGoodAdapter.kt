@@ -33,14 +33,13 @@ class ShopGoodAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (position == 0){
             (holder as TitleHolder).bindData("装饰")
-        }
-        if (position > 0 || position < decorationList.size){
+        } else if (position > 0 && position < decorationList.size){
             (holder as GoodHolder).bindData(decorationList[position])
-        }
-        if (position == decorationList.size){
+        } else if (position == decorationList.size){
             (holder as TitleHolder).bindData("邮货")
+        } else {
+            (holder as GoodHolder).bindData(stampGoodList[position - decorationList.size])
         }
-        (holder as GoodHolder).bindData(stampGoodList[position - decorationList.size])
 
     }
 
