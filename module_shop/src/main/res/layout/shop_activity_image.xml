@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/shop_image_vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:transitionName="shop_detail_trans_name_vp_pic"/>
+
+    <TextView
+        android:id="@+id/shop_image_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_marginBottom="50dp"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+</FrameLayout>

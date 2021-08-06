@@ -1,194 +1,217 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/shop_detail_tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="31dp"
-        android:drawableStart="@drawable/shop_ic_back"
-        android:drawablePadding="13dp"
-        android:gravity="center_vertical"
-        android:text="详情"
-        android:textColor="#15315B"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.060000002" />
+    <data>
+        <variable
+            name="type"
+            type="int" />
+        <variable
+            name="viewModel"
+            type="com.mredrock.cyxbs.shop.pages.detail.viewmodel.DetailViewModel" />
+    </data>
 
-    <TextView
-        android:id="@+id/shop_detail_tv_line"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#1A2A4E84"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.110000014" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/shop_detail_banner_description"
-        android:layout_width="match_parent"
-        android:layout_height="178dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:src="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_line"
-        app:layout_constraintVertical_bias="0.0" />
+        <TextView
+            android:id="@+id/shop_detail_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="31dp"
+            android:drawableStart="@drawable/shop_ic_back"
+            android:drawablePadding="13dp"
+            android:gravity="center_vertical"
+            app:titleByType="@{type}"
+            android:textColor="#15315B"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.060000002" />
 
-    <TextView
-        android:id="@+id/shop_detail_tv_name"
-        android:layout_width="100dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
-        android:text="掌邮PM名片"
-        android:gravity="center"
-        android:textSize="18sp"
-        android:textColor="#15315B"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shop_detail_banner_description"
-        app:layout_constraintVertical_bias="0.0" />
+        <TextView
+            android:id="@+id/shop_detail_tv_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#1A2A4E84"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.110000014" />
 
-    <TextView
-        android:id="@+id/shop_detail_tv_left_count"
-        android:layout_width="77dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="15dp"
-        android:gravity="center"
-        android:text="库存量："
-        android:textColor="#6615315B"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/shop_detail_tv_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/shop_detail_tv_name"
-        app:layout_constraintVertical_bias="1.0" />
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/shop_detail_vp_banner"
+            android:layout_width="match_parent"
+            android:layout_height="178dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_line"
+            app:layout_constraintVertical_bias="0.0"
+            android:transitionName="shop_detail_trans_name_vp_pic"/>
 
-    <TextView
-        android:id="@+id/shop_detail_tv_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="69dp"
-        android:layout_marginEnd="16dp"
-        android:gravity="center_vertical"
-        android:text="带上这个名片，你就是这条街最亮的仔带上这个名片，你就是这条街最亮的仔"
-        android:textColor="#CC15315B"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shop_detail_banner_description"
-        app:layout_constraintVertical_bias="0.0" />
+        <LinearLayout
+            android:id="@+id/shop_detail_ll_banner_dots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/shop_detail_vp_banner"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    <TextView
-        android:id="@+id/shop_detail_tv_valid_time"
-        android:layout_width="83dp"
-        android:layout_height="18dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center_vertical"
-        android:text="有效期："
-        android:textColor="#CC15315B"
-        android:textSize="13sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_description" />
+        <TextView
+            android:id="@+id/shop_detail_tv_name"
+            android:layout_width="100dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="28dp"
+            android:gravity="center"
+            android:text="@string/shop_detail_pm"
+            android:textColor="#15315B"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shop_detail_vp_banner"
+            app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/shop_detail_tv_tips"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="94dp"
-        android:layout_marginEnd="15dp"
-        android:text="1、每个实物商品每人限兑换一次，已经兑换的商品不能退货换货也不予折现。 2、在法律允许的范围内，本活动的最终解释权归红岩网校工作站所有。"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_description" />
+        <TextView
+            android:id="@+id/shop_detail_tv_left_count"
+            android:layout_width="77dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:gravity="center"
+            android:text='@{"库存量：" + viewModel.getLeftCounts(type)}'
+            android:textColor="#6615315B"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/shop_detail_tv_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/shop_detail_tv_name"
+            app:layout_constraintVertical_bias="1.0" />
 
-    <TextView
-        android:id="@+id/shop_detail_tv_right"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="62dp"
-        android:text="权益说明"
-        android:textColor="#CC15315B"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_description" />
+        <TextView
+            android:id="@+id/shop_detail_tv_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="69dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center_vertical"
+            android:text="@{viewModel.getDescription(type)}"
+            android:textColor="#CC15315B"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shop_detail_vp_banner"
+            app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/shop_detail_tv_line2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#1A2A4E84"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_tips"
-        app:layout_constraintVertical_bias="0.7" />
+        <TextView
+            android:id="@+id/shop_detail_tv_valid_time"
+            android:layout_width="83dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:text='@{"有效期：" + viewModel.getPeriod()}'
+            android:textColor="#CC15315B"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_description" />
 
-    <ImageView
-        android:id="@+id/shop_detail_iv_my_stamp"
-        android:layout_width="21dp"
-        android:layout_height="21dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="11dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_line2"
-        app:srcCompat="@drawable/shop_ic_my_stamp" />
+        <TextView
+            android:id="@+id/shop_detail_tv_right_tips"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="94dp"
+            android:layout_marginEnd="15dp"
+            app:rightTipsByType="@{type}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_description" />
 
-    <TextView
-        android:id="@+id/shop_detail_tv_price"
-        android:layout_width="29dp"
-        android:layout_height="22dp"
-        android:layout_marginStart="5dp"
-        android:gravity="center"
-        android:text="121"
-        android:textColor="#5177FF"
-        android:textSize="17sp"
-        app:layout_constraintBottom_toBottomOf="@+id/shop_detail_iv_my_stamp"
-        app:layout_constraintStart_toEndOf="@+id/shop_detail_iv_my_stamp"
-        app:layout_constraintTop_toTopOf="@+id/shop_detail_iv_my_stamp" />
+        <TextView
+            android:id="@+id/shop_detail_tv_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="62dp"
+            android:text="@string/shop_detail_equity_desc_title"
+            android:textColor="#CC15315B"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_description" />
 
-    <TextView
-        android:id="@+id/shop_detail_tv_stamp_count"
-        android:layout_width="60dp"
-        android:layout_height="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="6dp"
-        android:text="余额：6666"
-        android:textSize="11sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_price" />
+        <TextView
+            android:id="@+id/shop_detail_tv_line2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#1A2A4E84"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_right_tips"
+            app:layout_constraintVertical_bias="0.7" />
 
-    <TextView
-        android:id="@+id/shop_detail_tv_exchange"
-        android:layout_width="112dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="16dp"
-        android:text="兑换"
-        android:textSize="16sp"
-        android:textColor="#FFFFFF"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_line2" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/shop_detail_iv_my_stamp"
+            android:layout_width="21dp"
+            android:layout_height="21dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="11dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_line2"
+            app:srcCompat="@drawable/shop_ic_my_stamp" />
+
+        <TextView
+            android:id="@+id/shop_detail_tv_price"
+            android:layout_width="29dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="5dp"
+            android:gravity="center"
+            android:text="@{viewModel.getPrice(type)}"
+            android:textColor="#5177FF"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="@+id/shop_detail_iv_my_stamp"
+            app:layout_constraintStart_toEndOf="@+id/shop_detail_iv_my_stamp"
+            app:layout_constraintTop_toTopOf="@+id/shop_detail_iv_my_stamp" />
+
+        <TextView
+            android:id="@+id/shop_detail_tv_stamp_count"
+            android:layout_width="60dp"
+            android:layout_height="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="6dp"
+            android:text='@{"余额：" + viewModel.getUserStamps()}'
+            android:textSize="11sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_price" />
+
+        <TextView
+            android:id="@+id/shop_detail_tv_exchange"
+            android:layout_width="112dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
+            android:text="@string/shop_detail_btn_exchange"
+            android:onClick="@{(v) -> viewModel.onExchangeClick(v, type)}"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_line2" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
