@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.shop_fragment_shop.*
 import okhttp3.internal.wait
 
 class ShopFragment: BaseViewModelFragment<ShopViewModel>() {
-    private val goodsRvAdapter = ShopGoodAdapter()
+    private val goodsRvAdapter = ShopGoodAdapter(context)
     //邮货title的位置
     private var stampStartPosition = 0
 

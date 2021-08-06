@@ -4,9 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
-    <com.mredrock.cyxbs.shop.widget.ProgressBar
-        android:id="@+id/shop_task_progress_bar"
-        android:layout_width="150dp"
-        android:layout_height="8dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/shop_task_rv_tasks"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

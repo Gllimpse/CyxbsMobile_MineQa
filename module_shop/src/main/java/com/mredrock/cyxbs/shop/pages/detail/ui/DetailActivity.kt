@@ -13,6 +13,7 @@ import com.mredrock.cyxbs.common.ui.BaseViewModelActivity
 import com.mredrock.cyxbs.shop.GoodType
 import com.mredrock.cyxbs.shop.bean.Decoration
 import com.mredrock.cyxbs.shop.bean.StampGood
+import com.mredrock.cyxbs.shop.config.ShopConfig
 import com.mredrock.cyxbs.shop.pages.detail.viewmodel.DetailViewModel
 import com.mredrock.cyxbs.shop.widget.ShopDialog
 import kotlinx.android.synthetic.main.shop_activity_detail.*
@@ -23,7 +24,7 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
     //所选商品
     private lateinit var goodData : Serializable
     //所选商品类型
-    private lateinit var goodType: GoodType
+    private var goodType = 233
     //所选商品名称
     private lateinit var title: String
 
@@ -33,7 +34,7 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
         const val DIALOG_TYPE_SUCCESS = 1
         const val DIALOG_TYPE_STAMP_SHORTAGE = 2
         const val DIALOG_TYPE_COUNT_SHORTAGE = 3
-        fun activityStart(context: Context,title: String,type: GoodType){
+        fun activityStart(context: Context,title: String,type: Int){
             context.startActivity(Intent(context, DetailActivity::class.java)
                     .apply {
                         putExtra("title",title)
@@ -44,7 +45,7 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.shop_activity_detail)
-        goodType = intent.getSerializableExtra("type") as GoodType
+        goodType = intent.getIntExtra("type",233)
         title = intent.getStringExtra("title")
         initGoodData()
         initView()
@@ -54,12 +55,13 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
     }
 
     private fun initGoodData() {
-        if (goodType == GoodType.TYPE_DECORATION) {
-            viewModel.getDecorationData(title)
-        }else {
-            viewModel.getStampGoodData(title)
-
-        }
+        goodData = Decoration("title",15,"带上这个名片，你就是这条街最亮的仔带上这个名片，你就是这条街最亮的仔",233,666, MutableList(2){""})
+//        if (goodType == GoodType.TYPE_DECORATION) {
+//            viewModel.getDecorationData(title)
+//        }else {
+//            viewModel.getStampGoodData(title)
+//
+//        }
     }
 
     private fun initObserve(){
@@ -102,7 +104,7 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
                 shop_detail_tv_title.text = "装饰详情"
                 shop_detail_tv_valid_time.text = "有效期：${period}天"
                 shop_detail_tv_description.text = desc
-                shop_detail_tv_price.text = "price"
+                shop_detail_tv_price.text = price.toString()
             }
         }else if (goodData is StampGood){
             (goodData as StampGood).apply {
@@ -110,6 +112,8 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
                 shop_detail_tv_left_count.text = "库存量：${left_count}"
                 shop_detail_tv_title.text = "邮货详情"
                 shop_detail_tv_description.text = desc
+                shop_detail_tv_price.text = price.toString()
+
             }
         }
         updateStampCount()
@@ -126,10 +130,10 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
         var onDeny : (() -> Unit)? = {}
         var onPositive : (() -> Unit)? = {}
         content = when(dialogType) {
-            DIALOG_TYPE_FIRST_SURE -> if (goodType == GoodType.TYPE_DECORATION) {
-                "确认要用${(goodData as Decoration).price}邮票兑换PM名片吗"
+            DIALOG_TYPE_FIRST_SURE -> if (goodType == ShopConfig.GOOD_TYPE_DECORATION) {
+                "确认要用${(goodData as Decoration).price}邮票兑换${(goodData as Decoration).title}吗"
             } else {
-                "确认要用${(goodData as StampGood).price}邮票兑换PM名片吗"
+                "确认要用${(goodData as StampGood).price}邮票兑换${(goodData as Decoration).title}吗"
             }
             DIALOG_TYPE_COUNT_SHORTAGE -> "啊哦！手慢了！下次再来吧!"
             DIALOG_TYPE_STAMP_SHORTAGE -> "邮票数量不足！"
@@ -139,7 +143,7 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
         if (dialogType == DIALOG_TYPE_FIRST_SURE) {
             onPositive = {
                 viewModel.apply {
-                    if (goodType == GoodType.TYPE_DECORATION) {
+                    if (goodType == ShopConfig.GOOD_TYPE_DECORATION) {
                         (goodData as Decoration).apply {
                             when {
                                 price > updateStampCount()-> showSureDialog(DIALOG_TYPE_STAMP_SHORTAGE)

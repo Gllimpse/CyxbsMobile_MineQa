@@ -21,7 +21,11 @@ class ProgressBar(context: Context?,attrs: AttributeSet?) : View(context,attrs) 
             drawCircle(r,r,r,mPaint)
             drawRect(r,height * 1f,r + rectWidth,0f,mPaint)
             drawCircle(r + rectWidth,height / 2f,r,mPaint)
+            mPaint.color = Color.parseColor("#E5E5E5")
+            drawRect(r,height * 1f,width - r,0f,mPaint)
+            drawCircle(width - r,height / 2f,r,mPaint)
         }
+
     }
 
     fun setMaxProgress(mProgress: Int){
