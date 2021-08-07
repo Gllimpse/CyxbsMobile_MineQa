@@ -2,11 +2,13 @@ package com.mredrock.cyxbs.shop.behavior
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import android.widget.OverScroller
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.ViewCompat
 import com.aefottt.module_shop.R
+import kotlin.math.abs
 
 class NestedContentBehavior(context: Context, attrs: AttributeSet):
     CoordinatorLayout.Behavior<View>(context, attrs) {
@@ -34,9 +36,7 @@ class NestedContentBehavior(context: Context, attrs: AttributeSet):
      * 放置contentView的布局
      */
     override fun onLayoutChild(
-        parent: CoordinatorLayout,
-        child: View,
-        layoutDirection: Int
+        parent: CoordinatorLayout, child: View, layoutDirection: Int
     ): Boolean {
         contentView = child
         // 让父布局按照标准方式解析
@@ -52,12 +52,8 @@ class NestedContentBehavior(context: Context, attrs: AttributeSet):
      * 开始滑动前询问是否需要滑动
      */
     override fun onStartNestedScroll(
-        coordinatorLayout: CoordinatorLayout,
-        child: View,
-        directTargetChild: View,
-        target: View,
-        axes: Int,
-        type: Int
+        coordinatorLayout: CoordinatorLayout, child: View, directTargetChild: View, target: View,
+        axes: Int, type: Int
     ): Boolean {
         // 只要垂直滑动才需要处理
         return (axes and ViewCompat.SCROLL_AXIS_VERTICAL) != 0
@@ -68,12 +64,7 @@ class NestedContentBehavior(context: Context, attrs: AttributeSet):
      */
     override fun onNestedPreScroll(
         coordinatorLayout: CoordinatorLayout,
-        child: View,
-        target: View,
-        dx: Int,
-        dy: Int,
-        consumed: IntArray,
-        type: Int
+        child: View, target: View, dx: Int, dy: Int, consumed: IntArray, type: Int
     ) {
         // 此时contentView还未滑动，父布局先滑动
         super.onNestedPreScroll(coordinatorLayout, child, target, dx, dy, consumed, type)
@@ -97,26 +88,14 @@ class NestedContentBehavior(context: Context, attrs: AttributeSet):
      * 父布局消费完后，子布局对剩下未消费部分进行消费
      */
     override fun onNestedScroll(
-        coordinatorLayout: CoordinatorLayout,
-        child: View,
-        target: View,
-        dxConsumed: Int,
-        dyConsumed: Int,
-        dxUnconsumed: Int,
-        dyUnconsumed: Int,
-        type: Int,
-        consumed: IntArray
+        coordinatorLayout: CoordinatorLayout, child: View, target: View,
+        dxConsumed: Int, dyConsumed: Int, dxUnconsumed: Int, dyUnconsumed: Int,
+        type: Int, consumed: IntArray
     ) {
         super.onNestedScroll(
-            coordinatorLayout,
-            child,
-            target,
-            dxConsumed,
-            dyConsumed,
-            dxUnconsumed,
-            dyUnconsumed,
-            type,
-            consumed
+            coordinatorLayout, child, target,
+            dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed,
+            type, consumed
         )
         // 防止在自动滑动期间用户再次滑动产生卡顿现象
         stopAutoScroll()
@@ -132,12 +111,10 @@ class NestedContentBehavior(context: Context, attrs: AttributeSet):
 
     override fun onStopNestedScroll(
         coordinatorLayout: CoordinatorLayout,
-        child: View,
-        target: View,
-        type: Int
+        child: View, target: View, type: Int
     ) {
         super.onStopNestedScroll(coordinatorLayout, child, target, type)
-        if (child.translationY >= 0 || child.translationY <= -headerHeight){
+        if (child.translationY >= 0f || child.translationY <= -headerHeight){
             // 如果完全折叠或者完全展开
             return
         }

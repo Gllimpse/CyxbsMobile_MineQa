@@ -24,14 +24,13 @@
         android:id="@+id/shop_dialog_tv_negative"
         android:layout_width="93dp"
         android:layout_height="34dp"
-        android:layout_marginStart="26dp"
         android:layout_marginBottom="34dp"
         android:text="取消"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
         android:gravity="center"
         android:background="@drawable/shop_bg_dialog_tv_negative"
-
+        app:layout_constraintEnd_toStartOf="@+id/shop_dialog_tv_positive"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -39,14 +38,13 @@
         android:id="@+id/shop_dialog_tv_positive"
         android:layout_width="93dp"
         android:layout_height="34dp"
-        android:layout_marginEnd="26dp"
         android:layout_marginBottom="34dp"
         android:text="确定"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
         android:gravity="center"
-
         android:background="@drawable/shop_bg_dialog_tv_positive"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/shop_dialog_tv_negative"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
