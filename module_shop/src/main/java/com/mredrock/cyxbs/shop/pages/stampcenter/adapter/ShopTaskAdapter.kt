@@ -3,33 +3,31 @@ package com.mredrock.cyxbs.shop.pages.stampcenter.adapter
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.aefottt.module_shop.R
 import com.aefottt.module_shop.databinding.ShopRecycleItemTaskBinding
+import com.mredrock.cyxbs.common.viewmodel.BaseViewModel
 import com.mredrock.cyxbs.shop.config.ShopConfig
 import com.mredrock.cyxbs.shop.pages.stampcenter.ui.fragment.TaskFragment
 import com.mredrock.cyxbs.shop.pages.stampcenter.viewmodel.TaskViewModel
 
-class ShopTaskAdapter(val fragment: TaskFragment,private val viewModel : TaskViewModel) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+class ShopTaskAdapter (private val lifecycleOwner: LifecycleOwner, private val mViewModel: BaseViewModel, @LayoutRes private val bindingLayoutId: Int)
+    : DataBindingAdapter<ShopRecycleItemTaskBinding>(lifecycleOwner,mViewModel,bindingLayoutId) {
+
+    private val viewModel = mViewModel as TaskViewModel
+
+    override fun createViewHolder(dataBinding: ShopRecycleItemTaskBinding, viewType: Int,parent: ViewGroup): RecyclerView.ViewHolder {
         return if (viewType == ShopConfig.TASK_ITEM_TYPE_TASK) {
-            val dataBinding = DataBindingUtil.inflate<ShopRecycleItemTaskBinding>(
-                    LayoutInflater.from(parent.context), R.layout.shop_recycle_item_task, parent, false)
-            dataBinding.lifecycleOwner = fragment
             TaskViewHolder(dataBinding)
         }else TitleViewHolder(parent)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
-        if(getItemViewType(position) == ShopConfig.TASK_ITEM_TYPE_TASK) {
-                if (getDataType(position) == ShopConfig.TASK_TYPE_TODAY) {
-                    (holder as TaskViewHolder).bindData(position, getDataType(position), viewModel)
-                }else{
-                    (holder as TaskViewHolder).bindData(position - viewModel.getTodayTaskSize() - 1, getDataType(position), viewModel)
-                }
-        }
+    override fun getItemViewType(position: Int): Int {
+        return if (position == (viewModel.getTodayTaskSize())) ShopConfig.TASK_ITEM_TYPE_TITLE
+        else ShopConfig.TASK_ITEM_TYPE_TASK
     }
 
     override fun getItemCount(): Int {
@@ -38,27 +36,27 @@ class ShopTaskAdapter(val fragment: TaskFragment,private val viewModel : TaskVie
         }
     }
 
-    private fun getDataType(position: Int): Int{
+    override fun getDataType(position: Int): Int{
         Log.e("TaskAdapter", "today:"+viewModel.getTodayTaskData().toString()+" more:"+viewModel.getMoreTaskSize().toString())
         return if (position < viewModel.getTodayTaskSize()) ShopConfig.TASK_TYPE_TODAY
         else ShopConfig.TASK_TYPE_MORE
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return if (position == (viewModel.getTodayTaskSize())) ShopConfig.TASK_ITEM_TYPE_TITLE
-        else ShopConfig.TASK_ITEM_TYPE_TASK
-    }
-
-    class TaskViewHolder(private val binding: ShopRecycleItemTaskBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bindData(position: Int,type: Int,viewModel: TaskViewModel){
-            binding.apply {
-                this.viewModel = viewModel
-                this.position = position
-                this.type = type
-            }
+    inner class TitleViewHolder(parent: ViewGroup) : CommonViewHolder(parent,R.layout.shop_recycle_item_title_task) {
+        override fun bindData(position: Int, viewModel: BaseViewModel, dataType: Int) {
         }
     }
 
-    class TitleViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.shop_recycle_item_title_task,parent,false))
+    inner class TaskViewHolder(private val dataBinding: ShopRecycleItemTaskBinding) : DataBindingViewHolder(dataBinding){
+        override fun bindData(position: Int, viewModel: BaseViewModel, dataType: Int) {
+            dataBinding.apply {
+                this.viewModel = viewModel as TaskViewModel
+                Log.e("ShopTaskAdapter",viewModel.getTodayTaskData().toString())
+                this.position = if (position > viewModel.getTodayTaskSize()) position - viewModel.getTodayTaskSize() - 1
+                                else position
+                this.type = type
+            }
+        }
+
+    }
 }

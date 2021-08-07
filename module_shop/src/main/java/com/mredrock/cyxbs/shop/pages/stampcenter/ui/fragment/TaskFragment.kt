@@ -48,7 +48,7 @@ class TaskFragment: BaseViewModelFragment<TaskViewModel>() {
     private fun initRecycler() {
         shop_task_rv_tasks.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = ShopTaskAdapter(this@TaskFragment, viewModel)
+            adapter = ShopTaskAdapter(this@TaskFragment, viewModel,R.layout.shop_recycle_item_task)
         }
     }
 

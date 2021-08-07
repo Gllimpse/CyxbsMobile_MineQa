@@ -15,7 +15,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@drawable/shop_bg_recycle_item_image"
-        android:src="@color/purple_200"/>
+        android:src="@color/purple_200"
+        android:transitionName="shop_iv_good_to_detail"/>
 
     <TextView
         android:id="@+id/shop_item_tv_title"

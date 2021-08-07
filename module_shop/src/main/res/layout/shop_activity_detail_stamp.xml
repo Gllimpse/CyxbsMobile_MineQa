@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
@@ -37,12 +36,14 @@
         android:id="@+id/shop_detail_stamp_tl"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        app:tabGravity="fill"
-        app:tabTextColor="#CC15315B"
-        app:tabSelectedTextColor="#5F75E4"
+        app:layout_constraintBottom_toTopOf="@+id/shop_detail_stamp_vp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shop_detail_stamp_tv_line" />
+        app:layout_constraintTop_toBottomOf="@+id/shop_detail_stamp_tv_line"
+        app:tabGravity="fill"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="#5F75E4"
+        app:tabTextColor="#CC15315B" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/shop_detail_stamp_vp"

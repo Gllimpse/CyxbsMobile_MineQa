@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CyxbsMobile_Single">
         <activity android:name="com.mredrock.cyxbs.shop.pages.detail.ui.DetailActivity" />
+        <activity android:name="com.mredrock.cyxbs.shop.pages.stampdetail.ui.activity.StampDetailActivity"/>
         <activity android:name="com.mredrock.cyxbs.shop.pages.stampcenter.ui.activity.ShopActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
