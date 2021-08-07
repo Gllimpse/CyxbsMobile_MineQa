@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.mredrock.cyxbs.shop.pages.stampcenter.viewmodel.TaskViewModel" />
+        <variable
+            name="position"
+            type="Integer" />
+        <variable
+            name="type"
+            type="Integer" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/shop_item_task_tv_title"
+            android:layout_width="50dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:gravity="center_vertical"
+            android:text="@{viewModel.getTitle(position,type)}"
+            android:textColor="#15315B"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/shop_item_task_tv_desc"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:gravity="center_vertical"
+            android:text='@{viewModel.getDesc(position,type)+"   "+viewModel.getRewardNum(position,type)}'
+            android:textColor="#6615315B"
+            android:textSize="14dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shop_item_task_tv_title" />
+
+        <TextView
+            android:id="@+id/shop_item_task_tv_go"
+            android:layout_width="66dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="28dp"
+            android:background="@drawable/shop_bg_recycle_item_btn_go"
+            android:gravity="center"
+            android:text="去完成"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.mredrock.cyxbs.shop.widget.ProgressBar
+            android:id="@+id/shop_item_task_progressbar"
+            android:layout_width="150dp"
+            android:layout_height="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="9dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shop_item_task_tv_desc" />
+
+        <TextView
+            android:id="@+id/shop_item_task_tv_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="17dp"
+            android:layout_marginStart="5dp"
+            android:textSize="12sp"
+            android:textColor="#7D8AFF"
+            android:gravity="center"
+            android:text='@{viewModel.getDoneAmount(position,type)+"/"+viewModel.getTotalAmount(position,type)}'
+            app:layout_constraintBottom_toBottomOf="@+id/shop_item_task_progressbar"
+            app:layout_constraintStart_toEndOf="@+id/shop_item_task_progressbar"
+            app:layout_constraintTop_toTopOf="@+id/shop_item_task_progressbar" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -4,6 +4,7 @@
 
     <application android:theme="@style/AppTheme">
         <activity android:name="com.mredrock.cyxbs.shop.pages.stampcenter.ui.activity.ShopActivity" />
+        <activity android:name="com.mredrock.cyxbs.shop.pages.detail.ui.DetailActivity"/>
     </application>
 
 </manifest>

@@ -15,7 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@drawable/shop_bg_recycle_item_image"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:src="@color/purple_200"/>
 
     <TextView
         android:id="@+id/shop_item_tv_title"
@@ -49,41 +49,39 @@
         android:layout_height="18dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/shop_ic_my_stamp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/shop_item_tv_left_count"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/shop_item_tv_left_count"
-        app:layout_constraintTop_toBottomOf="@+id/shop_item_tv_left_count" />
+        app:layout_constraintTop_toBottomOf="@+id/shop_item_tv_left_count"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/shop_item_tv_price"
         android:layout_width="23dp"
         android:layout_height="17dp"
         android:layout_marginStart="4dp"
-        android:text="TextView"
-        android:textSize="14sp"
-        android:textColor="#5177FF"
         android:gravity="center_vertical"
-        app:layout_constraintBottom_toBottomOf="@+id/shop_item_iv_desc"
-        app:layout_constraintEnd_toEndOf="@+id/shop_item_tv_left_count"
-        app:layout_constraintHorizontal_bias="1.0"
+        android:text="TextView"
+        android:textColor="#5177FF"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/shop_item_iv_stamp"
         app:layout_constraintStart_toEndOf="@+id/shop_item_iv_stamp"
-        app:layout_constraintTop_toTopOf="@+id/shop_item_iv_stamp"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/shop_item_iv_stamp" />
 
     <TextView
         android:id="@+id/shop_item_btn_exchange"
         android:layout_width="48dp"
         android:layout_height="26dp"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="24dp"
         android:layout_marginEnd="12dp"
         android:background="@drawable/shop_shape_btn_obtain"
-        android:text="兑换"
         android:gravity="center"
-        android:textSize="14sp"
+        android:text="兑换"
         android:textColor="@color/white"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/shop_item_tv_price"
         app:layout_constraintEnd_toEndOf="@+id/shop_item_iv_desc"
         app:layout_constraintStart_toEndOf="@+id/shop_item_tv_price"
-        app:layout_constraintTop_toBottomOf="@+id/shop_item_tv_title" />
+        app:layout_constraintTop_toTopOf="@+id/shop_item_tv_price" />
 </androidx.constraintlayout.widget.ConstraintLayout>

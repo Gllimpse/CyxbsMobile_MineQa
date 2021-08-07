@@ -1,18 +1,20 @@
 package com.mredrock.cyxbs.shop.pages.stampcenter.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.aefottt.module_shop.R
-import com.mredrock.cyxbs.api.account.IAccountService
-import com.mredrock.cyxbs.common.service.ServiceManager
+import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
 import com.mredrock.cyxbs.shop.bean.Decoration
 import com.mredrock.cyxbs.shop.bean.StampGood
+import com.mredrock.cyxbs.shop.config.ShopConfig
+import com.mredrock.cyxbs.shop.pages.detail.ui.DetailActivity
 import kotlinx.android.synthetic.main.shop_recycle_item_good.view.*
-import kotlinx.android.synthetic.main.shop_recycle_item_title.view.*
+import kotlinx.android.synthetic.main.shop_recycle_item_title_good.view.*
 import java.io.Serializable
 
-class ShopGoodAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ShopGoodAdapter(private val context: Context?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var decorationList: List<Decoration>
     private lateinit var stampGoodList: List<StampGood>
     fun setDecorationData(decorationList: List<Decoration>){
@@ -33,14 +35,23 @@ class ShopGoodAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (position == 0){
             (holder as TitleHolder).bindData("装饰")
-        }
-        if (position > 0 || position < decorationList.size){
+        } else if (position > 0 && position < decorationList.size){
             (holder as GoodHolder).bindData(decorationList[position])
-        }
-        if (position == decorationList.size){
+            holder.itemView.apply {
+                setOnSingleClickListener {
+                    DetailActivity.activityStart(context,shop_item_tv_title.text.toString(),ShopConfig.TASK_TYPE_TODAY)
+                }
+            }
+        } else if (position == decorationList.size){
             (holder as TitleHolder).bindData("邮货")
+        } else {
+            (holder as GoodHolder).bindData(stampGoodList[position - decorationList.size])
+            holder.itemView.apply {
+                setOnSingleClickListener {
+                    DetailActivity.activityStart(context,shop_item_tv_title.text.toString(),ShopConfig.TASK_TYPE_MORE)
+                }
+            }
         }
-        (holder as GoodHolder).bindData(stampGoodList[position - decorationList.size])
 
     }
 
@@ -77,7 +88,7 @@ class ShopGoodAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     class TitleHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.shop_recycle_item_title,parent,false))
+            LayoutInflater.from(parent.context).inflate(R.layout.shop_recycle_item_title_good,parent,false))
     {
         fun bindData(title: String) {
             itemView.shop_item_title_title.text = title

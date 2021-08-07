@@ -6,11 +6,11 @@ object ShopConfig {
     /**
      * 邮货
      */
-    const val TYPE_STAMP_GOOD = 0
+    const val GOOD_TYPE_STAMP_GOOD = 0
     /**
      * 装饰
      */
-    const val TYPE_DECORATION = 1
+    const val GOOD_TYPE_DECORATION = 1
 
     // 共享元素动画名称
     /**
@@ -43,4 +43,23 @@ object ShopConfig {
      * 兑换请求结果 -- 兑换失败
      */
     const val DIALOG_TYPE_FAIL = 5
+
+    // 任务类型
+    /**
+     * 每日任务
+     */
+    const val TASK_TYPE_TODAY = 0
+    /**
+     * 更多任务
+     */
+    const val TASK_TYPE_MORE = 1
+    // 任务界面RecyclerItem类型
+    /**
+     * 标题Item
+     */
+    const val TASK_ITEM_TYPE_TITLE = 0
+    /**
+     * 任务Item
+     */
+    const val TASK_ITEM_TYPE_TASK = 1
 }
