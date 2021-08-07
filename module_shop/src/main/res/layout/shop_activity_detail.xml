@@ -93,7 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="15dp"
             android:gravity="center"
-            android:text='@{"库存量：" + viewModel.getLeftCounts(type)}'
+            android:text='@{@string/shop_detail_left_counts + viewModel.getLeftCounts(type)}'
             android:textColor="#6615315B"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@+id/shop_detail_tv_name"
@@ -125,7 +125,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:gravity="center_vertical"
-            android:text='@{"有效期：" + viewModel.getPeriod()}'
+            android:text='@{@string/shop_detail_valid_time + viewModel.getPeriod()}'
             android:textColor="#CC15315B"
             android:textSize="13sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -195,7 +195,7 @@
             android:layout_height="15dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="6dp"
-            android:text='@{"余额：" + viewModel.getUserStamps()}'
+            android:text='@{@string/shop_detail_stamp_count + viewModel.getUserStamps()}'
             android:textSize="11sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_price" />

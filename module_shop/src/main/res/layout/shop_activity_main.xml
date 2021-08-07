@@ -18,27 +18,27 @@
             android:layout_width="wrap_content"
             android:layout_height="32dp"
             android:layout_marginStart="13dp"
+            android:drawableStart="@drawable/shop_ic_back"
+            android:drawablePadding="13dp"
             android:gravity="center"
             android:text="@string/shop_title_stamp_center"
             android:textColor="#15315B"
-            android:textSize="22sp"
-            android:drawablePadding="13dp"
-            android:drawableStart="@drawable/shop_ic_back" />
+            android:textSize="22dp" />
 
         <LinearLayout
             android:id="@+id/shop_main_ll_my_stamps"
             android:layout_width="wrap_content"
             android:layout_height="32dp"
             android:layout_alignParentEnd="true"
-            android:orientation="horizontal"
             android:layout_marginEnd="16dp"
+            android:alpha="0"
+            android:background="@drawable/shop_shape_tv_stamp_counts"
             android:gravity="center"
+            android:orientation="horizontal"
             android:paddingStart="11dp"
             android:paddingTop="4dp"
             android:paddingEnd="11dp"
-            android:paddingBottom="4dp"
-            android:alpha="0"
-            android:background="@drawable/shop_shape_tv_stamp_counts">
+            android:paddingBottom="4dp">
 
             <ImageView
                 android:id="@+id/shop_main_iv_my_stamps"
@@ -50,11 +50,11 @@
                 android:id="@+id/shop_main_tv_my_stamps"
                 android:layout_width="wrap_content"
                 android:layout_height="22dp"
-                android:text="189"
                 android:layout_marginStart="4dp"
+                android:text="189"
                 android:textAppearance="@style/shop_main_price_number_appearance"
                 android:textColor="#E9F2FB"
-                android:textSize="17sp"/>
+                android:textSize="17sp" />
 
         </LinearLayout>
 
@@ -112,41 +112,36 @@
 
         </LinearLayout>
 
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/shop_nested_scroll_content"
+        <LinearLayout
+            android:id="@+id/shop_main_ll_bottom"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
             app:layout_behavior="com.mredrock.cyxbs.shop.behavior.NestedContentBehavior">
 
-            <LinearLayout
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/shop_main_tl"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                app:tabBackground="@color/common_transparent_background"
+                app:tabGravity="fill"
+                app:tabIndicator="@drawable/shop_ic_tab_indicator"
+                app:tabIndicatorColor="@color/common_mine_tab_layout_indicator_color"
+                app:tabIndicatorFullWidth="false"
+                app:tabIndicatorHeight="3dp"
+                app:tabMode="fixed"
+                app:tabRippleColor="@color/common_transparent_background"
+                app:tabSelectedTextColor="@color/common_level_two_font_color"
+                app:tabTextColor="@color/common_alpha_level_two_font_color" />
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/shop_main_vp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:background="@drawable/shop_shape_tab_bg" />
 
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/shop_main_tl"
-                    android:layout_width="match_parent"
-                    android:layout_height="58dp"
-                    app:tabBackground="@color/common_transparent_background"
-                    app:tabGravity="fill"
-                    app:tabIndicator="@drawable/shop_ic_tab_indicator"
-                    app:tabIndicatorColor="@color/common_mine_tab_layout_indicator_color"
-                    app:tabIndicatorFullWidth="false"
-                    app:tabIndicatorHeight="3dp"
-                    app:tabMode="fixed"
-                    app:tabRippleColor="@color/common_transparent_background"
-                    app:tabSelectedTextColor="@color/common_level_two_font_color"
-                    app:tabTextColor="@color/common_alpha_level_two_font_color" />
-
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/shop_main_vp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/shop_shape_tab_bg" />
-
-            </LinearLayout>
-
-        </androidx.core.widget.NestedScrollView>
+        </LinearLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

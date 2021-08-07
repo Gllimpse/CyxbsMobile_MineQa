@@ -63,12 +63,12 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
             var onPositive: (() -> Unit)? = null
             when (it) {
                 ShopConfig.DIALOG_TYPE_FIRST_SURE_STAMP -> {
-                    content = "确认要用${viewModel.getPrice(ShopConfig.TYPE_STAMP_GOOD)}邮票兑换PM名片吗"
-                    onPositive = { viewModel.exchangeGood(ShopConfig.TYPE_STAMP_GOOD) }
+                    content = "确认要用${viewModel.getPrice(ShopConfig.GOOD_TYPE_STAMP_GOOD)}邮票兑换PM名片吗"
+                    onPositive = { viewModel.exchangeGood(ShopConfig.GOOD_TYPE_STAMP_GOOD) }
                 }
                 ShopConfig.DIALOG_TYPE_FIRST_SURE_DECORATION -> {
-                    content = "确认要用${viewModel.getPrice(ShopConfig.TYPE_DECORATION)}邮票兑换PM名片吗"
-                    onPositive = { viewModel.exchangeGood(ShopConfig.TYPE_DECORATION) }
+                    content = "确认要用${viewModel.getPrice(ShopConfig.GOOD_TYPE_DECORATION)}邮票兑换PM名片吗"
+                    onPositive = { viewModel.exchangeGood(ShopConfig.GOOD_TYPE_DECORATION) }
                 }
                 ShopConfig.DIALOG_TYPE_STAMP_SHORTAGE -> content = "邮票数量不足！"
                 ShopConfig.DIALOG_TYPE_FAIL -> content = "兑换失败！"

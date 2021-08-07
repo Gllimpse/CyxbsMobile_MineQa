@@ -1,6 +1,5 @@
 package com.mredrock.cyxbs.shop.pages.stampcenter.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.aefottt.module_shop.R
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -12,7 +11,6 @@ import com.mredrock.cyxbs.shop.pages.stampcenter.ui.fragment.ShopFragment
 import com.mredrock.cyxbs.shop.pages.stampcenter.ui.fragment.TaskFragment
 import com.mredrock.cyxbs.shop.pages.stampcenter.viewmodel.ShopViewModel
 import kotlinx.android.synthetic.main.shop_activity_main.*
-import kotlinx.android.synthetic.main.shop_fragment_task.*
 
 @Route(path= SHOP_ENTRY)
 class ShopActivity : BaseViewModelActivity<ShopViewModel>(){

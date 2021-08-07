@@ -24,7 +24,7 @@ class DetailViewModel : BaseViewModel(){
     /**
      * 商品类型，默认为装饰
      */
-    var type = ShopConfig.TYPE_DECORATION
+    var type = ShopConfig.GOOD_TYPE_DECORATION
 
     /**
      * Dialog响应网络请求事件
@@ -49,18 +49,18 @@ class DetailViewModel : BaseViewModel(){
     /**
      * 获取邮货/装饰的价格
      */
-    fun getPrice(type: Int): LiveData<Int> = if (type == ShopConfig.TYPE_STAMP_GOOD)
+    fun getPrice(type: Int): LiveData<Int> = if (type == ShopConfig.GOOD_TYPE_STAMP_GOOD)
         Transformations.map(stampGoodResp) { it.stamp_good.price }
     else Transformations.map(decorResp) { it.decoration.price }
 
     /**
      * 获取邮货/装饰的描述信息
      */
-    fun getDescription(type: Int): LiveData<String> = if (type == ShopConfig.TYPE_STAMP_GOOD)
+    fun getDescription(type: Int): LiveData<String> = if (type == ShopConfig.GOOD_TYPE_STAMP_GOOD)
         Transformations.map(stampGoodResp) { it.stamp_good.desc }
     else Transformations.map(decorResp) { it.decoration.desc }
 
-    fun getLeftCounts(type: Int): LiveData<Int> = if (type == ShopConfig.TYPE_STAMP_GOOD)
+    fun getLeftCounts(type: Int): LiveData<Int> = if (type == ShopConfig.GOOD_TYPE_STAMP_GOOD)
         Transformations.map(stampGoodResp) { it.stamp_good.left_count }
     else Transformations.map(decorResp) { it.decoration.left_Count }
 
@@ -82,7 +82,7 @@ class DetailViewModel : BaseViewModel(){
         // 单击判断
         v.setOnSingleClickListener {
             // 第一次点击，弹出是否确认兑换对话框
-            dialogEvent.value = if (type == ShopConfig.TYPE_STAMP_GOOD)
+            dialogEvent.value = if (type == ShopConfig.GOOD_TYPE_STAMP_GOOD)
                 ShopConfig.DIALOG_TYPE_FIRST_SURE_STAMP else ShopConfig.DIALOG_TYPE_FIRST_SURE_DECORATION
         }
     }
@@ -96,12 +96,12 @@ class DetailViewModel : BaseViewModel(){
             dialogEvent.value = ShopConfig.DIALOG_TYPE_STAMP_SHORTAGE
         }else {
             // 网络请求
-            if (type == ShopConfig.TYPE_STAMP_GOOD){ // 邮货数据
+            if (type == ShopConfig.GOOD_TYPE_STAMP_GOOD){ // 邮货数据
                 // 邮货信息不为空
                 stampGoodResp.value?.stamp_good?.let {
                     exGoodRequest(it.title)
                 }
-            }else if (type == ShopConfig.TYPE_DECORATION){ // 装饰数据
+            }else if (type == ShopConfig.GOOD_TYPE_DECORATION){ // 装饰数据
                 // 装饰信息不为空
                 decorResp.value?.decoration?.let {
                     exGoodRequest(it.title)
@@ -140,7 +140,7 @@ class DetailViewModel : BaseViewModel(){
      * 初始化商品信息
      */
     fun initGoodData(title: String){
-        if (type == ShopConfig.TYPE_DECORATION) {
+        if (type == ShopConfig.GOOD_TYPE_DECORATION) {
             getDecorationData(title)
         } else {
             getStampGoodData(title)
@@ -187,7 +187,7 @@ class DetailViewModel : BaseViewModel(){
     /**
      * 获取详情图片信息
      */
-    fun getPicUrls()= if (type == ShopConfig.TYPE_STAMP_GOOD)
+    fun getPicUrls()= if (type == ShopConfig.GOOD_TYPE_STAMP_GOOD)
         stampGoodResp.value?.stamp_good?.image_urls
     else decorResp.value?.decoration?.image_urls
 

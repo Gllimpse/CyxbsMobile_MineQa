@@ -17,7 +17,7 @@ class NestedHeaderBehavior constructor(context: Context, attrs: AttributeSet) :
         child: View,
         dependency: View
     ): Boolean {
-        return dependency.id == R.id.shop_nested_scroll_content
+        return dependency.id == R.id.shop_main_ll_bottom
     }
 
     /**
