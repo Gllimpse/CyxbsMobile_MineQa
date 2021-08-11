@@ -3,7 +3,6 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <androidx.recyclerview.widget.RecyclerView
-        android:background="@drawable/shop_bg_stamp_detail_vp"
         android:id="@+id/shop_exchange_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

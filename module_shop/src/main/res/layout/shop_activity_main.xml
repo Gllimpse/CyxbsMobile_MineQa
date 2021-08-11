@@ -53,7 +53,6 @@
                 android:layout_height="22dp"
                 android:layout_marginStart="4dp"
                 android:text="189"
-                android:textAppearance="@style/shop_main_price_number_appearance"
                 android:textColor="#E9F2FB"
                 android:textSize="17sp" />
 

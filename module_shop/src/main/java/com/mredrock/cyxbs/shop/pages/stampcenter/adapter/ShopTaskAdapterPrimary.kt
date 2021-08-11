@@ -1,5 +1,6 @@
 package com.mredrock.cyxbs.shop.pages.stampcenter.adapter
 
+import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.util.Log
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import com.mredrock.cyxbs.common.viewmodel.BaseViewModel
 import com.mredrock.cyxbs.shop.config.ShopConfig
 import com.mredrock.cyxbs.shop.pages.stampcenter.viewmodel.TaskViewModel
 import kotlinx.android.synthetic.main.shop_recycle_item_task.*
+import kotlinx.coroutines.delay
 
 class ShopTaskAdapterPrimary (private val lifecycleOwner: LifecycleOwner, private val mViewModel: BaseViewModel, @LayoutRes private val bindingLayoutId: Int)
     : PrimaryDataBindingAdapter<ShopRecycleItemTaskBinding>(lifecycleOwner,mViewModel,bindingLayoutId) {
@@ -55,17 +57,11 @@ class ShopTaskAdapterPrimary (private val lifecycleOwner: LifecycleOwner, privat
                 this.position = if (position > viewModel.getTodayTaskSize()) position - viewModel.getTodayTaskSize() - 1
                                 else position
                 this.type = dataType
-                val valueAnimator = ValueAnimator.ofInt(0,shopItemTaskProgressbar.progress)
-                valueAnimator.apply {
-                    addUpdateListener {
-                        shopItemTaskProgressbar.apply {
-                            progress = valueAnimator.animatedValue as Int
+                ObjectAnimator.ofInt(shopItemTaskProgressbar,"progress",0,shopItemTaskProgressbar.progress)
+                        .apply {
+                            duration = 1000
+                            start()
                         }
-                    }
-                    duration = 1000
-                    interpolator = AccelerateDecelerateInterpolator()
-                    start()
-                }
             }
         }
     }

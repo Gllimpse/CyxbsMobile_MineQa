@@ -44,7 +44,7 @@ class GetRecordFragment : BaseViewModelFragment<GetRecordViewModel>(){
                         }
                     })
             layoutManager = LinearLayoutManager(this.context)
-            layoutAnimation = LayoutAnimationController(AnimationUtils.loadAnimation(context,R.anim.shop_loding_in_stamp_detail))
+            layoutAnimation = LayoutAnimationController(AnimationUtils.loadAnimation(context,R.anim.shop_loding_in_stamp_detail_rv))
         }
     }
 }

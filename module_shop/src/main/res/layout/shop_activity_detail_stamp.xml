@@ -52,6 +52,7 @@
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/shop_detail_stamp_vp"
+        android:background="@drawable/shop_bg_stamp_detail_vp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

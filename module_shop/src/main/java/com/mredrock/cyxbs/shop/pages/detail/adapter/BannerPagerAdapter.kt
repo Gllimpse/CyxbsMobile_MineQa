@@ -25,7 +25,7 @@ class BannerPagerAdapter(private val picUrls: List<String>?) :
         val pv : PhotoView = holder.itemView as PhotoView
         pv.apply {
 //            setImageFromUrl(url)
-            setImageResource(R.drawable.shop_bg_detail_test)
+            setImageResource(R.drawable.shop_ic_shop_good)
             setOnPhotoTapListener{ _, _, _ ->
                 photoTapClick?.invoke()
             }

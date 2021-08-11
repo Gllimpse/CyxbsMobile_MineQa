@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import android.view.animation.LayoutAnimationController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aefottt.module_shop.R
 import com.mredrock.cyxbs.common.ui.BaseViewModelFragment
@@ -45,6 +47,7 @@ class TaskFragment: BaseViewModelFragment<TaskViewModel>() {
         shop_task_rv_tasks.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = ShopTaskAdapterPrimary(this@TaskFragment, viewModel,R.layout.shop_recycle_item_task)
+            layoutAnimation = LayoutAnimationController(AnimationUtils.loadAnimation(context,R.anim.shop_loading_in_shop_rv))
         }
     }
 

@@ -16,10 +16,9 @@ import com.mredrock.cyxbs.shop.bean.StampGood
 import com.mredrock.cyxbs.shop.pages.stampcenter.adapter.ShopGoodAdapterPrimary
 import com.mredrock.cyxbs.shop.pages.stampcenter.viewmodel.ShopViewModel
 import kotlinx.android.synthetic.main.shop_fragment_shop.*
-import kotlinx.android.synthetic.main.shop_recycle_item_task.*
 
 class ShopFragment: BaseViewModelFragment<ShopViewModel>() {
-    private lateinit var goodsRvAdapter: ShopGoodAdapter
+    private lateinit var goodsRvAdapter: ShopGoodAdapterPrimary
     //邮货title的位置
     private var stampStartPosition = 0
 
@@ -38,7 +37,7 @@ class ShopFragment: BaseViewModelFragment<ShopViewModel>() {
     }
 
     private fun initRecycler(){
-        goodsRvAdapter = ShopGoodAdapter(context)
+        goodsRvAdapter = ShopGoodAdapterPrimary(context)
         val fakeDecoration = Decoration("title",15,"描述",233,666, MutableList(2){""})
         val fakeStampGood = StampGood("title",MutableList(2){""},15,233,"描述")
         val decorationData = MutableList(20){fakeDecoration}

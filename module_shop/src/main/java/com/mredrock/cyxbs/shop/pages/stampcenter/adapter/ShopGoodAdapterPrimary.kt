@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.shop_recycle_item_good.view.*
 import kotlinx.android.synthetic.main.shop_recycle_item_title_good.view.*
 import java.io.Serializable
 
-class ShopGoodAdapter(private val c: Context?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ShopGoodAdapterPrimary(private val c: Context?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var decorationList: List<Decoration>
     private lateinit var stampGoodList: List<StampGood>
     fun setDecorationData(decorationList: List<Decoration>){
@@ -47,7 +47,7 @@ class ShopGoodAdapter(private val c: Context?) : RecyclerView.Adapter<RecyclerVi
             goodHolder.itemView.apply {
                 setOnSingleClickListener {
                     DetailActivity.activityStart(c?:context, shop_item_tv_title.text.toString(),
-                        ShopConfig.SHOP_GOOD_TYPE_DECORATION, goodHolder.itemView.pic)
+                        ShopConfig.SHOP_GOOD_TYPE_DECORATION, goodHolder.pic)
                 }
             }
         } else if (position == decorationList.size){
@@ -60,7 +60,7 @@ class ShopGoodAdapter(private val c: Context?) : RecyclerView.Adapter<RecyclerVi
             goodHolder.itemView.apply {
                 setOnSingleClickListener {
                     DetailActivity.activityStart(c?:context,shop_item_tv_title.text.toString(),
-                        ShopConfig.SHOP_GOOD_TYPE_STAMP_GOOD, goodHolder.itemView.pic)
+                        ShopConfig.SHOP_GOOD_TYPE_STAMP_GOOD, goodHolder.pic)
                 }
             }
         }

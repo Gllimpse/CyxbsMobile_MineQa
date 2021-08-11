@@ -40,9 +40,27 @@ class ShopActivity : BaseViewModelActivity<ShopViewModel>(){
     }
 
     private fun initView(){
-        shop_main_vp.adapter = ShopPagerAdapter(this).apply {
-            addFragment(ShopFragment())
-            addFragment(TaskFragment())
+        shop_main_vp.apply {
+            adapter = ShopPagerAdapter(this@ShopActivity).apply {
+                addFragment(ShopFragment())
+                addFragment(TaskFragment())
+            }
+
+            setPageTransformer{view, position ->
+                if (position < -1 || position > 1){
+                    view.alpha = 0f
+                }else if (position > 0){
+                    view.apply {
+                        scaleX = 0.4f * (position - 1/2f)*(position - 1/2f) +0.9f
+                        scaleY = 0.4f * (position - 1/2f)*(position - 1/2f) +0.9f
+                    }
+                }else {
+                    view.apply {
+                        scaleX = 0.4f * (-position - 1/2f)*(-position - 1/2f) +0.9f
+                        scaleY = 0.4f * (-position - 1/2f)*(-position - 1/2f) +0.9f
+                    }
+                }
+            }
         }
 
         shop_main_tl.addOnTabSelectedListener(object :TabLayout.OnTabSelectedListener{

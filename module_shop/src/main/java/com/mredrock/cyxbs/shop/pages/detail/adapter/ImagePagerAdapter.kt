@@ -26,7 +26,7 @@ class ImagePagerAdapter(private val picUrls: List<String>?) : RecyclerView.Adapt
         val pv : PhotoView = holder.itemView as PhotoView
         pv.apply {
 //            setImageFromUrl(url)
-            setImageResource(R.drawable.shop_bg_detail_test)
+            setImageResource(R.drawable.shop_ic_shop_good)
             setOnLongClickListener {
                 val drawable = this.drawable
                 if (drawable is BitmapDrawable){

@@ -23,7 +23,7 @@ class TaskViewModel : BaseViewModel() {
     /**
      * 获取任务名称
      */
-    fun getTitle(position: Int, type: Int) = if (type == ShopConfig.TASK_TYPE_TODAY) {
+    fun getTitle(position: Int, type: Int) = if (type == ShopConfig.SHOP_TASK_TYPE_TODAY) {
         Transformations.map(_todayTaskResp) {
             it[position].taskName
         }
@@ -36,7 +36,7 @@ class TaskViewModel : BaseViewModel() {
     /**
      * 获取任务描述
      */
-    fun getDesc(position: Int, type: Int) = if (type == ShopConfig.TASK_TYPE_TODAY) {
+    fun getDesc(position: Int, type: Int) = if (type == ShopConfig.SHOP_TASK_TYPE_TODAY) {
         Transformations.map(_todayTaskResp) {
             it[position].describe
         }
@@ -49,7 +49,7 @@ class TaskViewModel : BaseViewModel() {
     /**
      * 获取完成进度
      */
-    fun getDoneAmount(position: Int,type: Int) = if (type == ShopConfig.TASK_TYPE_TODAY){
+    fun getDoneAmount(position: Int,type: Int) = if (type == ShopConfig.SHOP_TASK_TYPE_TODAY){
         Transformations.map(_todayTaskResp) {
             it[position].doneAmount
         }
@@ -62,7 +62,7 @@ class TaskViewModel : BaseViewModel() {
     /**
      * 获取是否已完成
      */
-    fun isFinished(position: Int,type: Int) = if (type == ShopConfig.TASK_TYPE_TODAY){
+    fun isFinished(position: Int,type: Int) = if (type == ShopConfig.SHOP_TASK_TYPE_TODAY){
         Transformations.map(_todayTaskResp) {
             it[position].isFinished
         }
@@ -75,7 +75,7 @@ class TaskViewModel : BaseViewModel() {
     /**
      *
      */
-    fun isProgress(position: Int,type: Int) = if (type == ShopConfig.TASK_TYPE_TODAY){
+    fun isProgress(position: Int,type: Int) = if (type == ShopConfig.SHOP_TASK_TYPE_TODAY){
         Transformations.map(_todayTaskResp) {
             it[position].isProgress
         }
@@ -88,7 +88,7 @@ class TaskViewModel : BaseViewModel() {
     /**
      * 获取奖励邮票数量
      */
-    fun getRewardNum(position: Int,type: Int) = if (type == ShopConfig.TASK_TYPE_TODAY){
+    fun getRewardNum(position: Int,type: Int) = if (type == ShopConfig.SHOP_TASK_TYPE_TODAY){
         Transformations.map(_todayTaskResp) {
             it[position].rewardNumber
         }
@@ -101,7 +101,7 @@ class TaskViewModel : BaseViewModel() {
     /**
      * 获取总进度
      */
-    fun getTotalAmount(position: Int,type: Int) = if (type == ShopConfig.TASK_TYPE_TODAY){
+    fun getTotalAmount(position: Int,type: Int) = if (type == ShopConfig.SHOP_TASK_TYPE_TODAY){
         Transformations.map(_todayTaskResp) {
             it[position].totalAmount
         }
