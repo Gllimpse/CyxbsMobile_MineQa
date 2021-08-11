@@ -11,8 +11,4 @@ data class TodayTask(
     val rewardNumber: Int,
     val taskName: String,
     val totalAmount: Int
-) : Serializable,Task {
-    override fun getTaskType(): Int {
-        return ShopConfig.TASK_TYPE_TODAY
-    }
-}
+) : Serializable

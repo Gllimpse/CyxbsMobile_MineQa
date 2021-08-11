@@ -15,37 +15,44 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/shop_white">
+
+        <ImageView
+            android:id="@+id/shop_detail_btn_back"
+            android:layout_width="10dp"
+            android:layout_height="20dp"
+            android:src="@drawable/shop_ripple_btn_back"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="60dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless" />
 
         <TextView
             android:id="@+id/shop_detail_tv_title"
             android:layout_width="wrap_content"
             android:layout_height="31dp"
-            android:drawableStart="@drawable/shop_ic_back"
             android:drawablePadding="13dp"
             android:gravity="center_vertical"
             app:titleByType="@{type}"
             android:textColor="#15315B"
             android:textSize="22sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.05"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.060000002" />
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="53dp"
+            app:layout_constraintStart_toEndOf="@+id/shop_detail_btn_back"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/shop_detail_tv_line"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#1A2A4E84"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.110000014" />
+            app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_title"
+            android:layout_marginTop="4dp" />
 
-        <androidx.viewpager.widget.ViewPager
+        <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/shop_detail_vp_banner"
             android:layout_width="match_parent"
             android:layout_height="178dp"
@@ -57,8 +64,7 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_line"
-            app:layout_constraintVertical_bias="0.0"
-            android:transitionName="shop_detail_trans_name_vp_pic"/>
+            app:layout_constraintVertical_bias="0.0" />
 
         <LinearLayout
             android:id="@+id/shop_detail_ll_banner_dots"
@@ -67,6 +73,7 @@
             android:layout_gravity="center_horizontal|bottom"
             android:gravity="center"
             android:orientation="horizontal"
+            android:layout_marginBottom="4dp"
             app:layout_constraintBottom_toBottomOf="@+id/shop_detail_vp_banner"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -78,7 +85,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="28dp"
             android:gravity="center"
-            android:text="@string/shop_detail_pm"
+            android:text="@{viewModel.getName(type)}"
             android:textColor="#15315B"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -94,9 +101,9 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="15dp"
             android:gravity="center"
-            android:text='@{@string/shop_detail_left_counts + viewModel.getLeftCounts(type)}'
+            android:text='@{@string/shop_detail_left_counts + String.valueOf(viewModel.getLeftCounts(type))}'
             android:textColor="#6615315B"
-            android:textSize="18sp"
+            android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="@+id/shop_detail_tv_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/shop_detail_tv_name"
@@ -126,7 +133,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:gravity="center_vertical"
-            android:text='@{@string/shop_detail_valid_time + viewModel.getPeriod()}'
+            android:text='@{@string/shop_detail_valid_time + String.valueOf(viewModel.getPeriod())}'
             android:textColor="#CC15315B"
             android:textSize="13sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -165,7 +172,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_right_tips"
-            app:layout_constraintVertical_bias="0.7" />
+            app:layout_constraintVertical_bias="0.75" />
 
         <ImageView
             android:id="@+id/shop_detail_iv_my_stamp"
@@ -183,7 +190,7 @@
             android:layout_height="22dp"
             android:layout_marginStart="5dp"
             android:gravity="center"
-            android:text="@{viewModel.getPrice(type)}"
+            android:text="@{String.valueOf(viewModel.getPrice(type))}"
             android:textColor="#5177FF"
             android:textSize="17sp"
             app:layout_constraintBottom_toBottomOf="@+id/shop_detail_iv_my_stamp"
@@ -196,7 +203,7 @@
             android:layout_height="15dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="6dp"
-            android:text='@{@string/shop_detail_stamp_count + viewModel.getUserStamps()}'
+            android:text='@{@string/shop_detail_stamp_count + String.valueOf(viewModel.getUserStamps())}'
             android:textSize="11sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_price" />
@@ -213,6 +220,7 @@
             android:textColor="#FFFFFF"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/shop_bg_detail_btn_exchange"
             app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_line2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

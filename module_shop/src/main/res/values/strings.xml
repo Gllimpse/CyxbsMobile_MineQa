@@ -1,5 +1,6 @@
 <resources>
     <string name="shop_app_name">module_shop</string>
+
     <string name="shop_title_stamp_center">邮票中心</string>
     <string name="shop_main_banner_detail">明细</string>
 
@@ -23,5 +24,18 @@
     <string name="shop_detail_valid_time">有效期：</string>
     <string name="shop_detail_stamp_count">余额：</string>
     <string name="shop_good_recycler_item_exchange">兑换</string>
+
+    <string name="shop_exchange_detail_title">兑换详情</string>
+    <string name="shop_exchange_detail_shop_detail">商品详情</string>
+    <string name="shop_exchange_detail_good_name">商品名称:</string>
+    <string name="shop_exchange_detail_good_price">商品价格:</string>
+    <string name="shop_exchange_detail_good_exchange_time">交易时间:</string>
+    <string name="shop_exchange_detail_good_status">商品状态:</string>
+    <string name="shop_exchange_detail_good_price_suffix">邮豆</string>
+    <string name="shop_exchange_detail_good_exchange_blank">  </string>
+    <string name="shop_exchange_detail_good_status_collected">已领取</string>
+    <string name="shop_exchange_detail_good_status_not_collected">待领取</string>
+    <string name="shop_main_tip_to_received">你还有待领取的商品，请尽快领取</string>
+    <string name="shop_main_banner_my_stamps">我的邮票</string>
 
 </resources>

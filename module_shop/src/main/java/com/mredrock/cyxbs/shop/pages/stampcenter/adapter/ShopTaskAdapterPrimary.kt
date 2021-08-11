@@ -20,14 +20,14 @@ class ShopTaskAdapterPrimary (private val lifecycleOwner: LifecycleOwner, privat
     private val viewModel = mViewModel as TaskViewModel
 
     override fun createViewHolder(dataBinding: ShopRecycleItemTaskBinding, viewType: Int,parent: ViewGroup): RecyclerView.ViewHolder {
-        return if (viewType == ShopConfig.TASK_ITEM_TYPE_TASK) {
+        return if (viewType == ShopConfig.SHOP_TASK_ITEM_TYPE_TASK) {
             TaskViewHolder(dataBinding)
         }else TitleViewHolder(parent)
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (position == (viewModel.getTodayTaskSize())) ShopConfig.TASK_ITEM_TYPE_TITLE
-        else ShopConfig.TASK_ITEM_TYPE_TASK
+        return if (position == (viewModel.getTodayTaskSize())) ShopConfig.SHOP_TASK_ITEM_TYPE_TITLE
+        else ShopConfig.SHOP_TASK_ITEM_TYPE_TASK
     }
 
     override fun getItemCount(): Int {
@@ -38,8 +38,8 @@ class ShopTaskAdapterPrimary (private val lifecycleOwner: LifecycleOwner, privat
 
     override fun getDataType(position: Int): Int{
         Log.e("TaskAdapter", "today:"+viewModel.getTodayTaskData().toString()+" more:"+viewModel.getMoreTaskSize().toString())
-        return if (position < viewModel.getTodayTaskSize()) ShopConfig.TASK_TYPE_TODAY
-        else ShopConfig.TASK_TYPE_MORE
+        return if (position < viewModel.getTodayTaskSize()) ShopConfig.SHOP_TASK_TYPE_TODAY
+        else ShopConfig.SHOP_TASK_TYPE_MORE
     }
 
     inner class TitleViewHolder(parent: ViewGroup) : CommonViewHolder(parent,R.layout.shop_recycle_item_title_task) {

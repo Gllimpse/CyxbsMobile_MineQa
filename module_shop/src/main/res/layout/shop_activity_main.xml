@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:fitsSystemWindows="true">
+    android:orientation="vertical">
 
     <RelativeLayout
 
@@ -24,12 +23,13 @@
             android:gravity="center"
             android:text="@string/shop_title_stamp_center"
             android:textColor="#15315B"
-            android:textSize="22dp" />
+            android:textSize="22sp"
+            app:drawableStartCompat="@drawable/shop_ic_back" />
 
         <LinearLayout
             android:id="@+id/shop_main_ll_my_stamps"
             android:layout_width="wrap_content"
-            android:layout_height="23dp"
+            android:layout_height="32dp"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="16dp"
             android:alpha="0"
@@ -37,9 +37,9 @@
             android:gravity="center"
             android:orientation="horizontal"
             android:paddingStart="11dp"
-            android:paddingTop="3dp"
+            android:paddingTop="4dp"
             android:paddingEnd="11dp"
-            android:paddingBottom="3dp">
+            android:paddingBottom="4dp">
 
             <ImageView
                 android:id="@+id/shop_main_iv_my_stamps"
@@ -66,52 +66,83 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/shop_main_ll_banner"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/shop_main_cl_banner"
             android:layout_width="match_parent"
-            android:layout_height="164dp"
-            android:layout_gravity="center_horizontal"
+            android:layout_height="154dp"
             android:layout_marginStart="17dp"
             android:layout_marginTop="7dp"
             android:layout_marginEnd="17dp"
-            android:background="@drawable/shop_bg_my_stamp"
-            android:orientation="vertical"
             app:layout_behavior="com.mredrock.cyxbs.shop.behavior.NestedHeaderBehavior">
+
+            <ImageView
+                android:id="@+id/shop_main_iv_bg_stamp_card"
+                android:layout_width="match_parent"
+                android:layout_height="129dp"
+                android:background="@drawable/shop_bg_my_stamp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <ImageView
+                android:id="@+id/shop_main_iv_coupon"
+                android:layout_width="132dp"
+                android:layout_height="119dp"
+                android:layout_marginEnd="8dp"
+                android:translationY="-20dp"
+                android:alpha="0.4"
+                android:src="@drawable/shop_ic_main_banner_coupon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/shop_main_iv_bg_stamp_card" />
+
+            <TextView
+                android:id="@+id/shop_main_tv_banner_my_stamp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/shop_main_banner_my_stamps"
+                android:textColor="@color/shop_white"
+                android:textSize="13sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/shop_main_iv_bg_stamp_card" />
 
             <TextView
                 android:id="@+id/shop_main_tv_banner_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="76dp"
-                android:layout_marginTop="42dp"
-                android:drawableStart="@drawable/shop_ic_stamp_detail"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="18dp"
                 android:drawablePadding="2dp"
                 android:text="@string/shop_main_banner_detail"
                 android:textColor="#FFFFFF"
-                android:textSize="10sp" />
+                android:textSize="10sp"
+                app:drawableStartCompat="@drawable/shop_ic_stamp_detail"
+                app:layout_constraintStart_toEndOf="@+id/shop_main_tv_banner_my_stamp"
+                app:layout_constraintTop_toTopOf="@id/shop_main_iv_bg_stamp_card" />
 
-            <TextView
+            <com.mredrock.cyxbs.shop.pages.stampcenter.ui.view.SlideText
                 android:id="@+id/shop_main_tv_banner_number"
-                android:layout_width="wrap_content"
-                android:layout_height="66dp"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="-5dp"
-                android:gravity="center"
-                android:text="110000"
-                android:textAppearance="@style/shop_main_banner_number_appearance"
-                android:textColor="@color/white"
-                android:textSize="45sp" />
+                android:layout_marginTop="26dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/shop_main_iv_bg_stamp_card" />
 
             <TextView
                 android:id="@+id/shop_main_tv_banner_to_receive"
                 android:layout_width="wrap_content"
                 android:layout_height="18dp"
                 android:layout_marginStart="16dp"
-                android:text="你还有待领取的商品，请尽快领取"
+                android:layout_marginBottom="18dp"
+                android:text="@string/shop_main_tip_to_received"
                 android:textColor="#FFFFFF"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:id="@+id/shop_main_ll_bottom"

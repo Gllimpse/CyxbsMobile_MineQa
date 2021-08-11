@@ -1,13 +1,10 @@
 package com.mredrock.cyxbs.shop.pages.stampcenter.ui.fragment
 
-import android.animation.ValueAnimator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.AnimationUtils
-import android.view.animation.DecelerateInterpolator
 import android.view.animation.LayoutAnimationController
 import android.widget.LinearLayout
 import androidx.lifecycle.Observer
@@ -22,7 +19,7 @@ import kotlinx.android.synthetic.main.shop_fragment_shop.*
 import kotlinx.android.synthetic.main.shop_recycle_item_task.*
 
 class ShopFragment: BaseViewModelFragment<ShopViewModel>() {
-    private val goodsRvAdapter = ShopGoodAdapterPrimary(context)
+    private lateinit var goodsRvAdapter: ShopGoodAdapter
     //邮货title的位置
     private var stampStartPosition = 0
 
@@ -40,8 +37,8 @@ class ShopFragment: BaseViewModelFragment<ShopViewModel>() {
         initObserve()
     }
 
-
     private fun initRecycler(){
+        goodsRvAdapter = ShopGoodAdapter(context)
         val fakeDecoration = Decoration("title",15,"描述",233,666, MutableList(2){""})
         val fakeStampGood = StampGood("title",MutableList(2){""},15,233,"描述")
         val decorationData = MutableList(20){fakeDecoration}

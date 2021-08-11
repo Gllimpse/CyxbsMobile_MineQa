@@ -7,8 +7,9 @@ import android.view.View
 import android.widget.OverScroller
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.ViewCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.aefottt.module_shop.R
-import kotlin.math.abs
+import com.google.android.material.tabs.TabLayout
 
 class NestedContentBehavior(context: Context, attrs: AttributeSet):
     CoordinatorLayout.Behavior<View>(context, attrs) {
@@ -42,7 +43,7 @@ class NestedContentBehavior(context: Context, attrs: AttributeSet):
         // 让父布局按照标准方式解析
         parent.onLayoutChild(child, layoutDirection)
         // 获取Banner的高度
-        headerHeight = parent.findViewById<View>(R.id.shop_main_ll_banner).measuredHeight
+        headerHeight = parent.findViewById<View>(R.id.shop_main_cl_banner).measuredHeight
         // 设置contentView的Top值，让其排在HeaderView的下面
         ViewCompat.offsetTopAndBottom(child, headerHeight)
         return true // 表示我们自己完成了解析
@@ -70,6 +71,12 @@ class NestedContentBehavior(context: Context, attrs: AttributeSet):
         super.onNestedPreScroll(coordinatorLayout, child, target, dx, dy, consumed, type)
         // 防止在自动滑动期间用户再次滑动产生卡顿现象
         stopAutoScroll()
+        val arr: IntArray = intArrayOf(0, 0)
+        child.getLocationOnScreen(arr)
+//        Log.d("Tag","(NestedContentBehavior.kt:76)->${arr[0]} ${arr[1]}")
+        if (type == ViewCompat.TYPE_NON_TOUCH && arr[1] == 608){
+            if (target is RecyclerView) target.stopScroll()
+        }
         if (dy > 0){ // 只处理手指上滑
             val transY = child.translationY - dy
             if (transY >= -headerHeight){
