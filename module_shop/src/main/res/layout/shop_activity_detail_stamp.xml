@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#F2F3F8"
+    android:fitsSystemWindows="true">
     <TextView
         android:id="@+id/shop_detail_stamp_tv_title"
         android:layout_width="wrap_content"
@@ -42,8 +44,11 @@
         app:layout_constraintTop_toBottomOf="@+id/shop_detail_stamp_tv_line"
         app:tabGravity="fill"
         app:tabMode="fixed"
+        app:tabIndicatorColor="#F2F3F8"
+        android:background="#F2F3F8"
         app:tabSelectedTextColor="#5F75E4"
-        app:tabTextColor="#CC15315B" />
+        app:tabTextColor="#CC15315B"
+        app:tabRippleColor="@color/common_transparent_background"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/shop_detail_stamp_vp"

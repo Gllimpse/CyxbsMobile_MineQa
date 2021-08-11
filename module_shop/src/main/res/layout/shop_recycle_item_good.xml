@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="167dp"
-    android:layout_height="237dp">
+    android:layout_height="237dp"
+    android:background="@drawable/shop_bg_shop_good">
 
 
     <ImageView
@@ -15,7 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@drawable/shop_bg_recycle_item_image"
-        android:src="@color/purple_200"
+        android:src="@drawable/shop_ic_shop_good"
         android:transitionName="shop_iv_good_to_detail"/>
 
     <TextView

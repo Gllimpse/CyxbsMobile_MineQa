@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.shop_recycle_item_good.view.*
 import kotlinx.android.synthetic.main.shop_recycle_item_title_good.view.*
 import java.io.Serializable
 
-class ShopGoodAdapter(private val context: Context?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ShopGoodAdapterPrimary(private val context: Context?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var decorationList: List<Decoration>
     private lateinit var stampGoodList: List<StampGood>
     fun setDecorationData(decorationList: List<Decoration>){
