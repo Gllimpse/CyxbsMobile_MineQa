@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.shop_fragment_shop.*
 import okhttp3.internal.wait
 
 class ShopFragment: BaseViewModelFragment<ShopViewModel>() {
-    private val goodsRvAdapter = ShopGoodAdapter(context)
+    private lateinit var goodsRvAdapter: ShopGoodAdapter
     //邮货title的位置
     private var stampStartPosition = 0
 
@@ -38,6 +38,7 @@ class ShopFragment: BaseViewModelFragment<ShopViewModel>() {
     }
 
     private fun initRecycler(){
+        goodsRvAdapter = ShopGoodAdapter(context)
         val fakeDecoration = Decoration("title",15,"描述",233,666, MutableList(2){""})
         val fakeStampGood = StampGood("title",MutableList(2){""},15,233,"描述")
         val decorationData = MutableList(20){fakeDecoration}

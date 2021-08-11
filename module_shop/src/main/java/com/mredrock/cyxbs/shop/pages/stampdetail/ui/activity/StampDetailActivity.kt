@@ -27,6 +27,6 @@ class StampDetailActivity : BaseActivity() {
                 0 -> tab.text = "兑换记录"
                 1 -> tab.text = "获取记录"
             }
-        }
+        }.attach()
     }
 }

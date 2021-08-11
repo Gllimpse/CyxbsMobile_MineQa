@@ -1,14 +1,11 @@
 package com.mredrock.cyxbs.shop.pages.stampcenter.viewmodel
 
-import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.mredrock.cyxbs.common.viewmodel.BaseViewModel
 import com.mredrock.cyxbs.shop.bean.MoreTask
 import com.mredrock.cyxbs.shop.bean.TodayTask
 import com.mredrock.cyxbs.shop.config.ShopConfig
-import kotlin.math.log
 import kotlin.random.Random
 
 class TaskViewModel : BaseViewModel() {
@@ -17,7 +14,7 @@ class TaskViewModel : BaseViewModel() {
     val _moreTaskData = MutableLiveData<List<MoreTask>>()
 
 
-    fun getTitle(position: Int, type: Int) = if (type == ShopConfig.TASK_TYPE_TODAY) {
+    fun getTitle(position: Int, type: Int) = if (type == ShopConfig.SHOP_TASK_TYPE_TODAY) {
         Transformations.map(_todayTaskData) {
             it[position].taskName
         }
@@ -27,7 +24,7 @@ class TaskViewModel : BaseViewModel() {
         }
     }
 
-    fun getDesc(position: Int, type: Int) = if (type == ShopConfig.TASK_TYPE_TODAY) {
+    fun getDesc(position: Int, type: Int) = if (type == ShopConfig.SHOP_TASK_TYPE_TODAY) {
         Transformations.map(_todayTaskData) {
             it[position].describe
         }
@@ -37,7 +34,7 @@ class TaskViewModel : BaseViewModel() {
         }
     }
 
-    fun getDoneAmount(position: Int,type: Int) = if (type == ShopConfig.TASK_TYPE_TODAY){
+    fun getDoneAmount(position: Int,type: Int) = if (type == ShopConfig.SHOP_TASK_TYPE_TODAY){
         Transformations.map(_todayTaskData) {
             it[position].doneAmount
         }
@@ -47,7 +44,7 @@ class TaskViewModel : BaseViewModel() {
         }
     }
 
-    fun isFinished(position: Int,type: Int) = if (type == ShopConfig.TASK_TYPE_TODAY){
+    fun isFinished(position: Int,type: Int) = if (type == ShopConfig.SHOP_TASK_TYPE_TODAY){
         Transformations.map(_todayTaskData) {
             it[position].isFinished
         }
@@ -57,7 +54,7 @@ class TaskViewModel : BaseViewModel() {
         }
     }
 
-    fun isProgress(position: Int,type: Int) = if (type == ShopConfig.TASK_TYPE_TODAY){
+    fun isProgress(position: Int,type: Int) = if (type == ShopConfig.SHOP_TASK_TYPE_TODAY){
         Transformations.map(_todayTaskData) {
             it[position].isProgress
         }
@@ -67,7 +64,7 @@ class TaskViewModel : BaseViewModel() {
         }
     }
 
-    fun getRewardNum(position: Int,type: Int) = if (type == ShopConfig.TASK_TYPE_TODAY){
+    fun getRewardNum(position: Int,type: Int) = if (type == ShopConfig.SHOP_TASK_TYPE_TODAY){
         Transformations.map(_todayTaskData) {
             it[position].rewardNumber
         }
@@ -77,7 +74,7 @@ class TaskViewModel : BaseViewModel() {
         }
     }
 
-    fun getTotalAmount(position: Int,type: Int) = if (type == ShopConfig.TASK_TYPE_TODAY){
+    fun getTotalAmount(position: Int,type: Int) = if (type == ShopConfig.SHOP_TASK_TYPE_TODAY){
         Transformations.map(_todayTaskData) {
             it[position].totalAmount
         }
