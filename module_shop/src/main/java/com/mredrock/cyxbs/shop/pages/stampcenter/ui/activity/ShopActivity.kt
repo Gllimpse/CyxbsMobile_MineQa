@@ -111,5 +111,6 @@ class ShopActivity : BaseViewModelActivity<ShopViewModel>(){
         shop_main_tv_banner_detail.setOnSingleClickListener {
             startActivity(Intent(this,StampDetailActivity::class.java))
         }
+        shop_main_iv_back.setOnSingleClickListener { finish() }
     }
 }

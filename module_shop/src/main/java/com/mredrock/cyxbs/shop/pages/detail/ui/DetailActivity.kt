@@ -25,6 +25,7 @@ import com.google.android.material.transition.platform.MaterialContainerTransfor
 import com.mredrock.cyxbs.common.ui.BaseActivity
 import com.mredrock.cyxbs.common.ui.BaseViewModelActivity
 import com.mredrock.cyxbs.common.utils.extensions.dp2px
+import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
 import com.mredrock.cyxbs.common.utils.extensions.startActivityForResult
 import com.mredrock.cyxbs.shop.config.ShopConfig
 import com.mredrock.cyxbs.shop.config.ShopConfig.SHOP_TRANSITION_DETAIL_IMAGE
@@ -159,6 +160,8 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
                 lastPos = position
             }
         })
+
+        shop_detail_iv_back.setOnSingleClickListener { finishAfterTransition() }
     }
 
     /**
