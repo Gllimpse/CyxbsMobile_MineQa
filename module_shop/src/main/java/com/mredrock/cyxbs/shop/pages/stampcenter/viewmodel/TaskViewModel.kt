@@ -3,10 +3,7 @@ package com.mredrock.cyxbs.shop.pages.stampcenter.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.mredrock.cyxbs.common.viewmodel.BaseViewModel
-import com.mredrock.cyxbs.shop.bean.MoreTask
-import com.mredrock.cyxbs.shop.bean.TodayTask
 import com.mredrock.cyxbs.shop.config.ShopConfig
-import kotlin.random.Random
 
 class TaskViewModel : BaseViewModel() {
     /**

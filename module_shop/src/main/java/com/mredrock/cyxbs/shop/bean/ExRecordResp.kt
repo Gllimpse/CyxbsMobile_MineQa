@@ -1,28 +1,27 @@
 package com.mredrock.cyxbs.shop.bean
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
-/**
- * 获取记录
- */
 data class ExRecordResp(
-    @SerializedName("success")
-    val success: Boolean,
-    @SerializedName("data")
-    val data: List<ExRecord>
-)
-
-data class ExRecord(
-    @SerializedName("ware_name")
-    val name: String,
-    @SerializedName("cost_stamp")
-    val costStamp: Int,
-    @SerializedName("date")
-    val date: String,
-    @SerializedName("moment")
-    val moment: String,
-    @SerializedName("isCollected")
-    val isCollected: Boolean,
-    @SerializedName("order_id")
-    val orderId: String
-)
+        @SerializedName("data")
+        val data: List<SingleExRecord>,
+        @SerializedName("info")
+        val info: String,
+        @SerializedName("status")
+        val status: Int
+) : Serializable
+data class SingleExRecord(
+        @SerializedName("ware_name")
+        val wareName: String,
+        @SerializedName("cos_stamp")
+        val costStamp: Int,
+        @SerializedName("data")
+        val date: String,
+        @SerializedName("moment")
+        val moment: String,
+        @SerializedName("is_collected")
+        val isCollected: Boolean,
+        @SerializedName("order_id")
+        val orderId: String
+) : Serializable

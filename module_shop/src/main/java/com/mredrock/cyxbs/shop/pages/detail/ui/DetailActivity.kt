@@ -5,28 +5,20 @@ import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.Matrix
-import android.graphics.RectF
 import android.os.Bundle
-import android.os.Parcelable
-import android.util.Log
 import android.view.View
 import android.view.Window
 import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.aefottt.module_shop.R
 import com.aefottt.module_shop.databinding.ShopActivityDetailBinding
-import com.google.android.material.color.MaterialColors
 import com.google.android.material.transition.platform.MaterialContainerTransform
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
-import com.mredrock.cyxbs.common.ui.BaseActivity
 import com.mredrock.cyxbs.common.ui.BaseViewModelActivity
 import com.mredrock.cyxbs.common.utils.extensions.dp2px
 import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
-import com.mredrock.cyxbs.common.utils.extensions.startActivityForResult
 import com.mredrock.cyxbs.shop.config.ShopConfig
 import com.mredrock.cyxbs.shop.config.ShopConfig.SHOP_TRANSITION_DETAIL_IMAGE
 import com.mredrock.cyxbs.shop.pages.detail.adapter.BannerPagerAdapter
@@ -36,7 +28,13 @@ import kotlinx.android.synthetic.main.shop_activity_detail.*
 import kotlinx.android.synthetic.main.shop_dialog_detail_exchange.view.*
 
 class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
+
     private lateinit var binding: ShopActivityDetailBinding
+
+    /**
+     * 商品Id
+     */
+    private lateinit var id: String
 
     // Banner当前位置
     private var curPos = 0
@@ -45,12 +43,11 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
     private var lastPos = 1
 
     companion object {
-        fun activityStart(context: Context, title: String, type: Int, shareElement: View) {
+        fun activityStart(context: Context, id: String, shareElement: View) {
             context.startActivity(
                 Intent(context, DetailActivity::class.java)
                     .apply {
-                        putExtra("title", title)
-                        putExtra("type", type)
+                        putExtra("id", id)
                     }, ActivityOptions.makeSceneTransitionAnimation(
                     context as Activity, shareElement, ShopConfig.SHOP_TRANSITION_GOOD_TO_DETAIL
                 ).toBundle()
@@ -77,13 +74,11 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
         }
         super.onCreate(savedInstanceState)
         // 获取传入的数据
-        viewModel.type = intent.getIntExtra("type", 0) // 商品类型
-        val title = intent.getStringExtra("title") // 商品名称
+        id = intent.getStringExtra("id") // 商品ID
         // 初始化数据
-        viewModel.initGoodData(title)
+        viewModel.getGoodInfo(id)
         // 绑定布局
         binding = DataBindingUtil.setContentView(this, R.layout.shop_activity_detail)
-        binding.type = viewModel.type
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         initView()
@@ -97,20 +92,15 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
             val onDeny: (() -> Unit) = {}
             var onPositive: (() -> Unit)? = null
             when (it) {
-                ShopConfig.SHOP_DIALOG_TYPE_FIRST_SURE_STAMP -> {
+                ShopConfig.SHOP_DETAIL_DIALOG_FIRST_EXCHANGE -> {
                     content =
-                        "确认要用${viewModel.getPrice(ShopConfig.SHOP_GOOD_TYPE_STAMP_GOOD).value}邮票兑换PM名片吗"
-                    onPositive = { viewModel.exchangeGood(ShopConfig.SHOP_GOOD_TYPE_STAMP_GOOD) }
+                        "确认要用${viewModel.goodInfo.value?.price ?: 0}邮票兑换PM名片吗"
+                    onPositive = { viewModel.exchangeGood(id) }
                 }
-                ShopConfig.SHOP_DIALOG_TYPE_FIRST_SURE_DECORATION -> {
-                    content =
-                        "确认要用${viewModel.getPrice(ShopConfig.SHOP_GOOD_TYPE_DECORATION).value}邮票兑换PM名片吗"
-                    onPositive = { viewModel.exchangeGood(ShopConfig.SHOP_GOOD_TYPE_DECORATION) }
-                }
-                ShopConfig.SHOP_DIALOG_TYPE_STAMP_SHORTAGE -> content = "邮票数量不足！"
-                ShopConfig.SHOP_DIALOG_TYPE_FAIL -> content = "兑换失败！"
-                ShopConfig.SHOP_DIALOG_TYPE_COUNT_SHORTAGE -> content = "啊哦！手慢了！下次再来吧!"
-                ShopConfig.SHOP_DIALOG_TYPE_SUCCESS -> content = "兑换成功"
+                ShopConfig.SHOP_DETAIL_DIALOG_EXCHANGE_REQUEST_FAIL -> content = "网络请求失败!"
+                ShopConfig.SHOP_DETAIL_DIALOG_STAMP_SHORTAGE -> content = "邮票数量不足！"
+                ShopConfig.SHOP_DETAIL_DIALOG_EXCHANGE_FAIL -> content = viewModel.exGoodResp.value?.info ?: "兑换失败！"
+                ShopConfig.SHOP_DETAIL_DIALOG_EXCHANGE_SUCCESS -> content = "兑换成功"
             }
             ShopDialog.show(this, content, onDeny, onPositive)
         })
@@ -118,9 +108,9 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
 
     private fun initView() {
         // 获取邮货/装饰详情的图片地址
-        val picUrls = viewModel.getPicUrls()
+        val picUrls = viewModel.goodInfo.value?.urls ?: ArrayList()
         // 初始化Banner下方的圆点
-        initBannerDots(picUrls?.size ?: 0)
+        initBannerDots(picUrls.size)
         // 设置ViewPager
         shop_detail_vp_banner.adapter = BannerPagerAdapter(picUrls).apply {
             photoTapClick = {
@@ -129,7 +119,7 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
                     Intent(this@DetailActivity, ImageActivity::class.java)
                         .apply {
                             // 将图片地址和当前图片位置作为参数传入
-                            picUrls?.let {
+                            picUrls.let {
                                 val picUrlsArray = arrayOfNulls<String>(it.size)
                                 for ((i, url) in it.withIndex()) {
                                     picUrlsArray[i] = url

@@ -9,6 +9,7 @@ import com.mredrock.cyxbs.common.utils.extensions.safeSubscribeBy
 import com.mredrock.cyxbs.common.utils.extensions.setSchedulers
 import com.mredrock.cyxbs.common.viewmodel.BaseViewModel
 import com.mredrock.cyxbs.shop.bean.SingleExRecord
+import com.mredrock.cyxbs.shop.config.ShopConfig
 import com.mredrock.cyxbs.shop.network.ApiService
 
 class ExRecordViewModel : BaseViewModel() {
@@ -25,11 +26,6 @@ class ExRecordViewModel : BaseViewModel() {
         return exRecordData.value?.size ?:0
     }
 
-    fun initData(){
-//        getFakeData()
-        getExRecordData()
-    }
-
     fun getExRecordData(){
         ApiGenerator.getApiService(ApiService::class.java)
                 .getAllExRecord()
@@ -41,12 +37,13 @@ class ExRecordViewModel : BaseViewModel() {
                     toastEvent.value = R.string.shop_detail_toast_get_all_ex_record_error
                 }
                 .safeSubscribeBy {
-                    exRecordData.postValue(it)
+                    if (it.status == ShopConfig.SHOP_STATUS_GET_EXCHANGE_INFO_SUCCESS){
+                        // 请求成功
+                        exRecordData.value = it.data
+                    }else{
+                        toastEvent.value = R.string.shop_detail_toast_get_all_ex_record_error
+                    }
                 }
     }
 
-//    private fun getFakeData(){
-//        val testData = MutableList(10){"卷卷鼠标垫"}
-//        exRecordData.value = testData
-//    }
 }

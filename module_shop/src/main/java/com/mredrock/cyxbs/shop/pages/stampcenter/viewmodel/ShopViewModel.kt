@@ -4,14 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.aefottt.module_shop.R
 import com.mredrock.cyxbs.common.network.ApiGenerator
-import com.mredrock.cyxbs.common.utils.extensions.mapOrThrowApiException
-import com.mredrock.cyxbs.common.utils.extensions.safeSubscribeBy
-import com.mredrock.cyxbs.common.utils.extensions.setSchedulers
 import com.mredrock.cyxbs.common.viewmodel.BaseViewModel
-import com.mredrock.cyxbs.shop.bean.AllDecorationResp
-import com.mredrock.cyxbs.shop.bean.AllStampGoodResp
-import com.mredrock.cyxbs.shop.bean.Decoration
-import com.mredrock.cyxbs.shop.bean.StampGood
 import com.mredrock.cyxbs.shop.network.ApiService
 
 class ShopViewModel : BaseViewModel() {

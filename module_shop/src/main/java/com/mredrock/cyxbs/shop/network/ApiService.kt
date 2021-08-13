@@ -1,6 +1,5 @@
 package com.mredrock.cyxbs.shop.network
 
-import com.mredrock.cyxbs.common.bean.RedrockApiStatus
 import com.mredrock.cyxbs.common.bean.RedrockApiWrapper
 import com.mredrock.cyxbs.shop.bean.*
 import io.reactivex.Observable
@@ -12,26 +11,26 @@ interface ApiService {
      * 兑换商品
      */
     @FormUrlEncoded
-    @POST("")
-    fun exGood(@Field("id") goodId: String): Observable<RedrockApiWrapper<ExRecordRes>>
+    @POST("Integral/purchase")
+    fun exGood(@Field("id") goodId: String): Observable<RedrockApiWrapper<ExGoodResp>>
 
     /**
      * 获取单个商品详情
      */
-    @GET
+    @GET("Integral/getItemInfo")
     fun getSingleGoodData(@Query("id") goodId: String): Observable<RedrockApiWrapper<GoodResp>>
 
     /**
      * 获取所有兑换记录
      */
-    @GET
-    fun getAllExRecord(): Observable<RedrockApiWrapper<ExRecordRes>>
+    @GET("User/exchange")
+    fun getAllExRecord(): Observable<RedrockApiWrapper<ExRecordResp>>
 
     /**
-     * 获取所有兑换记录
+     * 获取所有获取记录
      */
-    @GET
-    fun getAllGetRecord(): Observable<RedrockApiWrapper<GetRecordRes>>
+    @GET("User/getRecord")
+    fun getAllGetRecord(): Observable<RedrockApiWrapper<GetRecordResp>>
 
     /**
      * 查询主页信息

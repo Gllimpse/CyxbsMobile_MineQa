@@ -3,7 +3,7 @@ package com.mredrock.cyxbs.shop.bean
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-data class GetRecordRes(
+data class GetRecordResp(
         @SerializedName("data")
         val data: List<SingleGetRecord>,
         @SerializedName("info")
@@ -13,10 +13,12 @@ data class GetRecordRes(
 ) : Serializable
 
 data class SingleGetRecord(
-        @SerializedName("gain_stamp")
-        val gain_stamp: Int,
         @SerializedName("red_id")
-        val red_id: String,
+        val redId: String,
+        @SerializedName("gain_stamp")
+        val gainStamp: Int,
         @SerializedName("task_name")
-        val task_name: String
+        val taskName: String,
+        @SerializedName("date")
+        val date: String
 ) : Serializable

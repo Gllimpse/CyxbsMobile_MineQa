@@ -9,8 +9,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.aefottt.module_shop.R
 import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
-import com.mredrock.cyxbs.shop.bean.Decoration
-import com.mredrock.cyxbs.shop.bean.StampGood
 import com.mredrock.cyxbs.shop.config.ShopConfig
 import com.mredrock.cyxbs.shop.pages.detail.ui.DetailActivity
 import kotlinx.android.synthetic.main.shop_recycle_item_good.view.*

@@ -5,36 +5,41 @@
     <data>
         <variable
             name="record"
-            type="com.mredrock.cyxbs.shop.bean.ExRecord" />
+            type="com.mredrock.cyxbs.shop.bean.SingleExRecord" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/shop_exchange_detail_iv_back"
+            android:layout_width="7dp"
+            android:layout_height="16dp"
+            android:src="@drawable/shop_ic_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="60dp"/>
+
         <TextView
             android:id="@+id/shop_exchange_detail_tv_title"
             android:layout_width="wrap_content"
             android:layout_height="32dp"
             android:layout_marginStart="13dp"
-            android:drawableStart="@drawable/shop_ic_back"
-            android:drawablePadding="13dp"
+            android:layout_marginTop="53dp"
             android:gravity="center"
             android:text="@string/shop_exchange_detail_title"
             android:textColor="#15315B"
             android:textSize="22sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.05"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.060000002" />
+            app:layout_constraintStart_toEndOf="@+id/shop_exchange_detail_iv_back"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/shop_exchange_detail_iv_bg_order"
             android:layout_width="match_parent"
             android:layout_height="108dp"
-            android:background="@drawable/shop_bg_exchange_detail_num_get"
+            android:background="@{record.isCollected ? @drawable/shop_bg_exchange_detail_num_get : @drawable/shop_bg_exchange_detail_num_not_get}"
             app:layout_constraintTop_toBottomOf="@+id/shop_exchange_detail_tv_title"
             android:layout_marginTop="48dp"
             android:layout_marginStart="16dp"
@@ -84,7 +89,7 @@
             android:layout_height="wrap_content"
             android:textColor="#15315B"
             android:textSize="14sp"
-            android:text="@{record.name}"
+            android:text="@{record.wareName}"
             app:layout_constraintStart_toEndOf="@+id/shop_exchange_detail_tv_title_good_name"
             app:layout_constraintTop_toBottomOf="@+id/shop_exchange_detail_tv_good_detail"
             android:layout_marginTop="20dp"

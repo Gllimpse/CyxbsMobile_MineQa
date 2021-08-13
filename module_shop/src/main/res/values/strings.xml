@@ -4,8 +4,7 @@
     <string name="shop_title_stamp_center">邮票中心</string>
     <string name="shop_main_banner_detail">明细</string>
 
-    <string name="shop_detail_toast_get_decor_info_error">获取装饰信息错误</string>
-    <string name="shop_detail_toast_get_stamp_good_info_error">获取邮货信息失败</string>
+    <string name="shop_detail_toast_get_good_info_error">获取商品信息失败</string>
 
     <string name="shop_good_toast_get_all_stamp_good_info_error">获取邮货信息失败</string>
     <string name="shop_good_toast_get_all_decoration_info_error">获取装饰信息失败</string>
@@ -44,5 +43,7 @@
     <string name="shop_main_tip_to_received">你还有待领取的商品，请尽快领取</string>
     <string name="shop_main_banner_my_stamps">我的邮票</string>
     <string name="shop_stampdetail_title">邮票明细</string>
+    <string name="shop_good_detail_not_collected">待领取</string>
+    <string name="shop_get_detail_tv_cost_plus">+</string>
 
 </resources>
