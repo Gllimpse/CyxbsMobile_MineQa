@@ -62,9 +62,6 @@ class ShopFragment: BaseViewModelFragment<ShopViewModel>() {
                     }
                 }
             }
-            layoutParams = LinearLayout.LayoutParams(layoutParams).apply {
-                marginStart = 30
-            }
             layoutAnimation = LayoutAnimationController(AnimationUtils.loadAnimation(context,R.anim.shop_loading_in_shop_rv))
 
         }

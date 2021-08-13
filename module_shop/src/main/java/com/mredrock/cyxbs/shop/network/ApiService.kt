@@ -7,20 +7,11 @@ import io.reactivex.Observable
 import retrofit2.http.*
 
 interface ApiService {
-    @FormUrlEncoded
-    @POST("")
-    fun exGood(@Field("title") title: String): Observable<RedrockApiWrapper<ExResp>>
 
-    @GET("")
-    fun getDecorationData(@Query("title") title: String): Observable<RedrockApiWrapper<DecorationResp>>
-
-    @GET("")
-    fun getStampGoodData(@Query("title") title: String): Observable<RedrockApiWrapper<StampGoodResp>>
-
-    @GET("")
-    fun getAllDecoration(): Observable<RedrockApiWrapper<AllDecorationResp>>
-
-    @GET("")
-    fun getAllStampGood(): Observable<RedrockApiWrapper<AllStampGoodResp>>
+    /**
+     * 查询主页信息
+     */
+    @GET("User/info")
+    fun getCenterData(): Observable<RedrockApiWrapper<CenterResp>>
 
 }

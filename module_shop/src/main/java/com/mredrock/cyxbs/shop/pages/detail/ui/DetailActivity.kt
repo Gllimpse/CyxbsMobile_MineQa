@@ -99,12 +99,12 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
             when (it) {
                 ShopConfig.SHOP_DIALOG_TYPE_FIRST_SURE_STAMP -> {
                     content =
-                        "确认要用${viewModel.getPrice(ShopConfig.SHOP_GOOD_TYPE_STAMP_GOOD)}邮票兑换PM名片吗"
+                        "确认要用${viewModel.getPrice(ShopConfig.SHOP_GOOD_TYPE_STAMP_GOOD).value}邮票兑换PM名片吗"
                     onPositive = { viewModel.exchangeGood(ShopConfig.SHOP_GOOD_TYPE_STAMP_GOOD) }
                 }
                 ShopConfig.SHOP_DIALOG_TYPE_FIRST_SURE_DECORATION -> {
                     content =
-                        "确认要用${viewModel.getPrice(ShopConfig.SHOP_GOOD_TYPE_DECORATION)}邮票兑换PM名片吗"
+                        "确认要用${viewModel.getPrice(ShopConfig.SHOP_GOOD_TYPE_DECORATION).value}邮票兑换PM名片吗"
                     onPositive = { viewModel.exchangeGood(ShopConfig.SHOP_GOOD_TYPE_DECORATION) }
                 }
                 ShopConfig.SHOP_DIALOG_TYPE_STAMP_SHORTAGE -> content = "邮票数量不足！"

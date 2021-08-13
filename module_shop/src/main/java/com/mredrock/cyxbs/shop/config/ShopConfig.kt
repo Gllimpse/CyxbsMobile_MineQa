@@ -63,4 +63,6 @@ object ShopConfig {
      * 任务Item
      */
     const val SHOP_TASK_ITEM_TYPE_TASK = 1
+
+    var SHOP_CHILD_TOP = 0
 }

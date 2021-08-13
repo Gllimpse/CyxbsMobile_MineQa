@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
+import android.util.Log
 import android.view.Window
 import com.aefottt.module_shop.R
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -17,6 +18,7 @@ import com.mredrock.cyxbs.common.utils.extensions.dp2px
 import com.mredrock.cyxbs.common.utils.extensions.editor
 import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
 import com.mredrock.cyxbs.common.utils.extensions.sharedPreferences
+import com.mredrock.cyxbs.shop.config.ShopConfig
 import com.mredrock.cyxbs.shop.pages.stampcenter.adapter.ShopPagerAdapter
 import com.mredrock.cyxbs.shop.pages.stampcenter.ui.fragment.ShopFragment
 import com.mredrock.cyxbs.shop.pages.stampcenter.ui.fragment.TaskFragment
@@ -26,8 +28,8 @@ import kotlinx.android.synthetic.main.shop_activity_main.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-@Route(path= SHOP_ENTRY)
-class ShopActivity : BaseViewModelActivity<ShopViewModel>(){
+@Route(path = SHOP_ENTRY)
+class ShopActivity : BaseViewModelActivity<ShopViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
         setExitSharedElementCallback(MaterialContainerTransformSharedElementCallback())
@@ -39,31 +41,31 @@ class ShopActivity : BaseViewModelActivity<ShopViewModel>(){
         initListener()
     }
 
-    private fun initView(){
+    private fun initView() {
         shop_main_vp.apply {
             adapter = ShopPagerAdapter(this@ShopActivity).apply {
                 addFragment(ShopFragment())
                 addFragment(TaskFragment())
             }
 
-            setPageTransformer{view, position ->
-                if (position < -1 || position > 1){
+            setPageTransformer { view, position ->
+                if (position < -1 || position > 1) {
                     view.alpha = 0f
-                }else if (position > 0){
+                } else if (position > 0) {
                     view.apply {
-                        scaleX = 0.4f * (position - 1/2f)*(position - 1/2f) +0.9f
-                        scaleY = 0.4f * (position - 1/2f)*(position - 1/2f) +0.9f
+                        scaleX = 0.4f * (position - 1 / 2f) * (position - 1 / 2f) + 0.9f
+                        scaleY = 0.4f * (position - 1 / 2f) * (position - 1 / 2f) + 0.9f
                     }
-                }else {
+                } else {
                     view.apply {
-                        scaleX = 0.4f * (-position - 1/2f)*(-position - 1/2f) +0.9f
-                        scaleY = 0.4f * (-position - 1/2f)*(-position - 1/2f) +0.9f
+                        scaleX = 0.4f * (-position - 1 / 2f) * (-position - 1 / 2f) + 0.9f
+                        scaleY = 0.4f * (-position - 1 / 2f) * (-position - 1 / 2f) + 0.9f
                     }
                 }
             }
         }
 
-        shop_main_tl.addOnTabSelectedListener(object :TabLayout.OnTabSelectedListener{
+        shop_main_tl.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 tab?.removeBadge()
             }
@@ -75,21 +77,31 @@ class ShopActivity : BaseViewModelActivity<ShopViewModel>(){
             }
         })
 
-        TabLayoutMediator(shop_main_tl,shop_main_vp){tab, position ->
-            when(position){
+        TabLayoutMediator(shop_main_tl, shop_main_vp) { tab, position ->
+            when (position) {
                 0 -> tab.text = "邮票小店"
                 1 -> tab.apply {
                     text = "邮票任务"
                     this@ShopActivity.sharedPreferences("tab_click_time").apply {
-                        val sdf = SimpleDateFormat("yyyy年MM月dd日",
-                                Locale.getDefault())
+                        val sdf = SimpleDateFormat(
+                            "yyyy年MM月dd日",
+                            Locale.getDefault()
+                        )
                         val todayTimeStamp = sdf.format(System.currentTimeMillis()).split("月")[1]
-                        if (this.getString("tab_time_stamp","") != todayTimeStamp){
+                        if (this.getString("tab_time_stamp", "") != todayTimeStamp) {
+                            val badge = orCreateBadge
+                            try {
+                                val field = badge.javaClass.getDeclaredField("badgeRadius")
+                                field.isAccessible = true
+                                field.set(badge, dp2px(3.5f))
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                            }
                             orCreateBadge.backgroundColor = Color.parseColor("#6D68FF")
-                            orCreateBadge.horizontalOffset =dp2px( -6f)
+                            orCreateBadge.horizontalOffset = dp2px(-6f)
                         }
                         editor {
-                            putString("tab_time_stamp",todayTimeStamp)
+                            putString("tab_time_stamp", todayTimeStamp)
                         }
                     }
                 }
@@ -104,12 +116,19 @@ class ShopActivity : BaseViewModelActivity<ShopViewModel>(){
             shop_main_tv_banner_number.startSlide(800)
         }
         // 设置字体
-        shop_main_tv_my_stamps.typeface = Typeface.createFromAsset(assets, "fonts/shop_font_price_number.otf")
+        shop_main_tv_my_stamps.typeface =
+            Typeface.createFromAsset(assets, "fonts/shop_font_price_number.otf")
+        val arr: IntArray = intArrayOf(0, 0)
+        shop_main_ll_bottom.post {
+            shop_main_ll_bottom.getLocationOnScreen(arr)
+            ShopConfig.SHOP_CHILD_TOP = arr[1]
+        }
     }
 
-    private fun initListener(){
+
+    private fun initListener() {
         shop_main_tv_banner_detail.setOnSingleClickListener {
-            startActivity(Intent(this,StampDetailActivity::class.java))
+            startActivity(Intent(this, StampDetailActivity::class.java))
         }
         shop_main_iv_back.setOnSingleClickListener { finish() }
     }
