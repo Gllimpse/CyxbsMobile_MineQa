@@ -13,6 +13,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.mredrock.cyxbs.common.ui.BaseActivity
 import com.mredrock.cyxbs.common.ui.BaseViewModelActivity
 import com.mredrock.cyxbs.common.utils.extensions.dp2px
+import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
 import com.mredrock.cyxbs.common.utils.extensions.sp
 import com.mredrock.cyxbs.shop.pages.stampdetail.adapter.StampPagerAdapter
 import com.mredrock.cyxbs.shop.pages.stampdetail.ui.fragment.ExRecordFragment
@@ -27,6 +28,7 @@ class StampDetailActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.shop_activity_detail_stamp)
         initPager()
+        initListener()
     }
 
     private fun initPager(){
@@ -108,5 +110,9 @@ class StampDetailActivity : BaseActivity() {
                 1 -> tab.text = "获取记录"
             }
         }.attach()
+    }
+
+    private fun initListener() {
+        shop_stampdetail_iv_back.setOnSingleClickListener { finish() }
     }
 }

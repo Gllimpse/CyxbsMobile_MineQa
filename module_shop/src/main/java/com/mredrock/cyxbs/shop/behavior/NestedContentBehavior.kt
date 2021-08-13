@@ -10,6 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.aefottt.module_shop.R
 import com.google.android.material.tabs.TabLayout
+import com.mredrock.cyxbs.shop.config.ShopConfig
 
 class NestedContentBehavior(context: Context, attrs: AttributeSet):
     CoordinatorLayout.Behavior<View>(context, attrs) {
@@ -73,8 +74,8 @@ class NestedContentBehavior(context: Context, attrs: AttributeSet):
         stopAutoScroll()
         val arr: IntArray = intArrayOf(0, 0)
         child.getLocationOnScreen(arr)
-//        Log.d("Tag","(NestedContentBehavior.kt:76)->${arr[0]} ${arr[1]}")
-        if (type == ViewCompat.TYPE_NON_TOUCH && arr[1] == 608){
+//        Log.d("Tag","(NestedContentBehavior.kt:77)->${arr[0]} ${arr[1]} ${ShopConfig.SHOP_CHILD_TOP}")
+        if (type == ViewCompat.TYPE_NON_TOUCH && arr[1] == ShopConfig.SHOP_CHILD_TOP){
             if (target is RecyclerView) target.stopScroll()
         }
         if (dy > 0){ // 只处理手指上滑

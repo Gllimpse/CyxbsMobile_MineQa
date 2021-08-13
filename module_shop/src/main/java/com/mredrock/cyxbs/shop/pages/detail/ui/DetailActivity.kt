@@ -25,6 +25,7 @@ import com.google.android.material.transition.platform.MaterialContainerTransfor
 import com.mredrock.cyxbs.common.ui.BaseActivity
 import com.mredrock.cyxbs.common.ui.BaseViewModelActivity
 import com.mredrock.cyxbs.common.utils.extensions.dp2px
+import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
 import com.mredrock.cyxbs.common.utils.extensions.startActivityForResult
 import com.mredrock.cyxbs.shop.config.ShopConfig
 import com.mredrock.cyxbs.shop.config.ShopConfig.SHOP_TRANSITION_DETAIL_IMAGE
@@ -98,12 +99,12 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
             when (it) {
                 ShopConfig.SHOP_DIALOG_TYPE_FIRST_SURE_STAMP -> {
                     content =
-                        "确认要用${viewModel.getPrice(ShopConfig.SHOP_GOOD_TYPE_STAMP_GOOD)}邮票兑换PM名片吗"
+                        "确认要用${viewModel.getPrice(ShopConfig.SHOP_GOOD_TYPE_STAMP_GOOD).value}邮票兑换PM名片吗"
                     onPositive = { viewModel.exchangeGood(ShopConfig.SHOP_GOOD_TYPE_STAMP_GOOD) }
                 }
                 ShopConfig.SHOP_DIALOG_TYPE_FIRST_SURE_DECORATION -> {
                     content =
-                        "确认要用${viewModel.getPrice(ShopConfig.SHOP_GOOD_TYPE_DECORATION)}邮票兑换PM名片吗"
+                        "确认要用${viewModel.getPrice(ShopConfig.SHOP_GOOD_TYPE_DECORATION).value}邮票兑换PM名片吗"
                     onPositive = { viewModel.exchangeGood(ShopConfig.SHOP_GOOD_TYPE_DECORATION) }
                 }
                 ShopConfig.SHOP_DIALOG_TYPE_STAMP_SHORTAGE -> content = "邮票数量不足！"
@@ -159,6 +160,8 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
                 lastPos = position
             }
         })
+
+        shop_detail_iv_back.setOnSingleClickListener { finishAfterTransition() }
     }
 
     /**

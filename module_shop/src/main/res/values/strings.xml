@@ -43,5 +43,6 @@
     <string name="shop_exchange_detail_good_status_not_collected">待领取</string>
     <string name="shop_main_tip_to_received">你还有待领取的商品，请尽快领取</string>
     <string name="shop_main_banner_my_stamps">我的邮票</string>
+    <string name="shop_stampdetail_title">邮票明细</string>
 
 </resources>

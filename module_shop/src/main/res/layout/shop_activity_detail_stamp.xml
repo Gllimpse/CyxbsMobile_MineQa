@@ -7,22 +7,28 @@
     android:background="#F2F3F8"
     android:fitsSystemWindows="true">
 
+    <ImageView
+        android:id="@+id/shop_stampdetail_iv_back"
+        android:layout_width="7dp"
+        android:layout_height="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="60dp"
+        android:layout_marginStart="17dp"
+        android:src="@drawable/shop_ic_back"/>
+
     <TextView
         android:id="@+id/shop_detail_stamp_tv_title"
         android:layout_width="wrap_content"
-        android:layout_height="31dp"
-        android:drawableStart="@drawable/shop_ic_back"
-        android:drawablePadding="13dp"
-        android:gravity="center_vertical"
-        android:text="邮票明细"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/shop_stampdetail_title"
         android:textColor="#15315B"
         android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.04000002" />
+        app:layout_constraintStart_toEndOf="@+id/shop_stampdetail_iv_back"
+        android:layout_marginTop="53dp"
+        android:layout_marginStart="13dp"/>
 
     <TextView
         android:id="@+id/shop_detail_stamp_tv_line"

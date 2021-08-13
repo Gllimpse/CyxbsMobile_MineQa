@@ -8,10 +8,10 @@ import retrofit2.http.*
 
 interface ApiService {
 
-    @FormUrlEncoded
     /**
      * 兑换商品
      */
+    @FormUrlEncoded
     @POST("")
     fun exGood(@Field("id") goodId: String): Observable<RedrockApiWrapper<ExRecordRes>>
 
@@ -33,5 +33,10 @@ interface ApiService {
     @GET
     fun getAllGetRecord(): Observable<RedrockApiWrapper<GetRecordRes>>
 
+    /**
+     * 查询主页信息
+     */
+    @GET("User/info")
+    fun getCenterData(): Observable<RedrockApiWrapper<CenterResp>>
 
 }

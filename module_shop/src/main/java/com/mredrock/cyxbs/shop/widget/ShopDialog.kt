@@ -13,7 +13,7 @@ object ShopDialog {
     fun show(context: Context, content: String, onDeny: (() -> Unit)? = null, onPositive: (() -> Unit)? ) {
         val dialog = Dialog(context, R.style.shop_transparent_dialog)
         dialog.setContentView(R.layout.shop_dialog_detail_exchange)
-        val view = LayoutInflater.from(context).inflate(R.layout.shop_dialog_detail_exchange, null, false)
+        val view = dialog.window.decorView
         view.shop_dialog_tv_content.text = content
         dialog.window?.attributes?.gravity = Gravity.CENTER
         dialog.show()
