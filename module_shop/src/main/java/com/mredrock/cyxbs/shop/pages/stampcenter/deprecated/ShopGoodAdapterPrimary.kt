@@ -1,4 +1,4 @@
-package com.mredrock.cyxbs.shop.pages.stampcenter.adapter
+package com.mredrock.cyxbs.shop.pages.stampcenter.deprecated
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -15,7 +15,6 @@ import com.mredrock.cyxbs.shop.config.ShopConfig
 import com.mredrock.cyxbs.shop.pages.detail.ui.DetailActivity
 import kotlinx.android.synthetic.main.shop_recycle_item_good.view.*
 import kotlinx.android.synthetic.main.shop_recycle_item_title_good.view.*
-import java.io.Serializable
 
 class ShopGoodAdapterPrimary(private val c: Context?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var decorationList: List<Decoration>

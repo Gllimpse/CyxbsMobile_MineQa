@@ -1,4 +1,4 @@
-package com.mredrock.cyxbs.shop.pages.stampcenter.adapter
+package com.mredrock.cyxbs.shop.pages.stampcenter.deprecated
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

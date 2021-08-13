@@ -6,7 +6,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.aefottt.module_shop.databinding.ShopRecycleItemDetailGetBinding
 import com.mredrock.cyxbs.common.viewmodel.BaseViewModel
-import com.mredrock.cyxbs.shop.pages.stampcenter.adapter.PrimaryDataBindingAdapter
+import com.mredrock.cyxbs.shop.pages.stampcenter.deprecated.PrimaryDataBindingAdapter
 import com.mredrock.cyxbs.shop.pages.stampdetail.viewmodel.GetRecordViewModel
 
 class GetRecordAdapterPrimary(lifecycleOwner: LifecycleOwner, private val viewModel: BaseViewModel, @LayoutRes resId: Int)

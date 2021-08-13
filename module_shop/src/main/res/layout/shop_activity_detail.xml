@@ -114,7 +114,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="69dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:gravity="center_vertical"
             android:text="@{viewModel.getDescription(type)}"
@@ -122,8 +122,9 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/shop_detail_vp_banner"
+            app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_name"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView

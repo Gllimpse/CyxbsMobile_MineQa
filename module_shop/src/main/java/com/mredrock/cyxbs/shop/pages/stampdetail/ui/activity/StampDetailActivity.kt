@@ -35,6 +35,8 @@ class StampDetailActivity : BaseActivity() {
                 addFragment(ExRecordFragment())
                 addFragment(GetRecordFragment())
             }
+
+            //viewpager切换动画
             setPageTransformer{view, position ->
                 if (position < -1 || position > 1){
                     view.alpha = 0f
@@ -52,7 +54,9 @@ class StampDetailActivity : BaseActivity() {
             }
         }
 
-
+        /**
+         * tab状态改变，字体大小动态变化
+         */
         shop_detail_stamp_tl.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab) {
                 val textView = if (tab.customView != null) {
@@ -97,12 +101,11 @@ class StampDetailActivity : BaseActivity() {
             }
 
         })
+
         TabLayoutMediator(shop_detail_stamp_tl,shop_detail_stamp_vp){tab,position ->
             when(position){
                 0 -> tab.text = "兑换记录"
-                1 -> tab.apply {
-                    text = "获取记录"
-                }
+                1 -> tab.text = "获取记录"
             }
         }.attach()
     }

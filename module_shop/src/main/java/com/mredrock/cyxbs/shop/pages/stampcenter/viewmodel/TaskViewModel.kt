@@ -12,23 +12,23 @@ class TaskViewModel : BaseViewModel() {
     /**
      * 每日任务的返回值
      */
-    val _todayTaskResp = MutableLiveData<List<TodayTask>>()
+    private val todayTaskResp = MutableLiveData<List<TodayTask>>()
 
     /**
      * 更多任务的返回值
      */
-    val _moreTaskResp = MutableLiveData<List<MoreTask>>()
+    private val moreTaskResp = MutableLiveData<List<MoreTask>>()
 
 
     /**
      * 获取任务名称
      */
     fun getTitle(position: Int, type: Int) = if (type == ShopConfig.SHOP_TASK_TYPE_TODAY) {
-        Transformations.map(_todayTaskResp) {
+        Transformations.map(todayTaskResp) {
             it[position].taskName
         }
     } else {
-        Transformations.map(_moreTaskResp) {
+        Transformations.map(moreTaskResp) {
             it[position].taskName
         }
     }
@@ -37,11 +37,11 @@ class TaskViewModel : BaseViewModel() {
      * 获取任务描述
      */
     fun getDesc(position: Int, type: Int) = if (type == ShopConfig.SHOP_TASK_TYPE_TODAY) {
-        Transformations.map(_todayTaskResp) {
+        Transformations.map(todayTaskResp) {
             it[position].describe
         }
     } else {
-        Transformations.map(_moreTaskResp) {
+        Transformations.map(moreTaskResp) {
             it[position].describe
         }
     }
@@ -50,11 +50,11 @@ class TaskViewModel : BaseViewModel() {
      * 获取完成进度
      */
     fun getDoneAmount(position: Int,type: Int) = if (type == ShopConfig.SHOP_TASK_TYPE_TODAY){
-        Transformations.map(_todayTaskResp) {
+        Transformations.map(todayTaskResp) {
             it[position].doneAmount
         }
     }else {
-        Transformations.map(_moreTaskResp) {
+        Transformations.map(moreTaskResp) {
             it[position].doneAmount
         }
     }
@@ -63,24 +63,24 @@ class TaskViewModel : BaseViewModel() {
      * 获取是否已完成
      */
     fun isFinished(position: Int,type: Int) = if (type == ShopConfig.SHOP_TASK_TYPE_TODAY){
-        Transformations.map(_todayTaskResp) {
+        Transformations.map(todayTaskResp) {
             it[position].isFinished
         }
     }else {
-        Transformations.map(_moreTaskResp) {
+        Transformations.map(moreTaskResp) {
             it[position].isFinished
         }
     }
 
     /**
-     *
+     * 是否需要进度条
      */
     fun isProgress(position: Int,type: Int) = if (type == ShopConfig.SHOP_TASK_TYPE_TODAY){
-        Transformations.map(_todayTaskResp) {
+        Transformations.map(todayTaskResp) {
             it[position].isProgress
         }
     }else {
-        Transformations.map(_moreTaskResp) {
+        Transformations.map(moreTaskResp) {
             it[position].isProgress
         }
     }
@@ -89,11 +89,11 @@ class TaskViewModel : BaseViewModel() {
      * 获取奖励邮票数量
      */
     fun getRewardNum(position: Int,type: Int) = if (type == ShopConfig.SHOP_TASK_TYPE_TODAY){
-        Transformations.map(_todayTaskResp) {
+        Transformations.map(todayTaskResp) {
             it[position].rewardNumber
         }
     }else {
-        Transformations.map(_moreTaskResp) {
+        Transformations.map(moreTaskResp) {
             it[position].rewardNumber
         }
     }
@@ -102,30 +102,42 @@ class TaskViewModel : BaseViewModel() {
      * 获取总进度
      */
     fun getTotalAmount(position: Int,type: Int) = if (type == ShopConfig.SHOP_TASK_TYPE_TODAY){
-        Transformations.map(_todayTaskResp) {
+        Transformations.map(todayTaskResp) {
             it[position].totalAmount
         }
     }else {
-        Transformations.map(_moreTaskResp) {
+        Transformations.map(moreTaskResp) {
             it[position].totalAmount
         }
     }
 
     /**
-     * 获取任务数量
+     * 获取每日任务数量
      */
-    fun getTodayTaskSize() = _todayTaskResp.value?.size ?: 0
-    fun getMoreTaskSize() = _moreTaskResp.value?.size ?:0
+    fun getTodayTaskSize() = todayTaskResp.value?.size ?: 0
 
-    fun getTodayTaskData(){}
-    fun getMoreTaskData(){}
+    /**
+     * 获取更多任务数量
+     */
+    fun getMoreTaskSize() = moreTaskResp.value?.size ?:0
 
-    fun test(){
-        val todayTask = TodayTask(Random(System.currentTimeMillis()).nextInt().toString(),5,false,true,10,"233",1)
-        val todayList = MutableList(20){todayTask}
-        _todayTaskResp.value = todayList
-        val moreTask = MoreTask(Random(System.currentTimeMillis()).nextInt().toString(),5,false,true,10,"233",1)
-        val moreList = MutableList(20){moreTask}
-        _moreTaskResp.value = moreList
+    /**
+     * 初始化数据
+     */
+    fun initData(){
+        getFakeData()
+    }
+
+    /**
+     * 假数据
+     */
+    fun getFakeData(){
+        val todayTask = TodayTask("每日签到  ",4,false,true,10,"每日打卡",5)
+        val todayList = MutableList(5){todayTask}
+        todayTaskResp.value = todayList
+
+        val moreTask = MoreTask("浏览5条动态  ",4,false,true,10,"逛逛邮问",5)
+        val moreList = MutableList(5){moreTask}
+        moreTaskResp.value = moreList
     }
 }

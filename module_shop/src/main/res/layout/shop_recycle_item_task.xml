@@ -22,10 +22,10 @@
 
         <TextView
             android:id="@+id/shop_item_task_tv_title"
-            android:layout_width="50dp"
+            android:layout_width="wrap_content"
             android:layout_height="22dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:gravity="center_vertical"
             android:text="@{viewModel.getTitle(position,type)}"
             android:textColor="#15315B"
@@ -35,12 +35,12 @@
 
         <TextView
             android:id="@+id/shop_item_task_tv_desc"
-            android:layout_width="50dp"
+            android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
             android:gravity="center_vertical"
-            android:text='@{viewModel.getDesc(position,type)+"   "+viewModel.getRewardNum(position,type)}'
+            android:text='@{viewModel.getDesc(position,type)+"   +"+viewModel.getRewardNum(position,type)}'
             android:textColor="#6615315B"
             android:textSize="14dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +51,7 @@
             android:layout_width="66dp"
             android:layout_height="28dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="28dp"
+            android:layout_marginEnd="24dp"
             android:background="@drawable/shop_bg_recycle_item_btn_go"
             android:gravity="center"
             android:text="去完成"
@@ -70,7 +70,7 @@
             app:indicatorColor="#7D8AFF"
             app:trackColor="#E5E5E5"
             android:interpolator="@android:anim/decelerate_interpolator"
-            android:progress="50"
+            android:progress="80"
             android:max="100"
             app:trackThickness="8dp"
             app:trackCornerRadius="18dp"

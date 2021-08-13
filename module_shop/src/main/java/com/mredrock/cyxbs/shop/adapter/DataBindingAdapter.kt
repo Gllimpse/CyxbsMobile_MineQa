@@ -1,4 +1,4 @@
-package com.mredrock.cyxbs.shop.pages.stampcenter.adapter
+package com.mredrock.cyxbs.shop.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -23,7 +23,7 @@ class DataBindingAdapter (
     /**
      * <Item展示顺序 —— Item>哈希表
      */
-     private val orderInnerMap = HashMap<Int,UpClass>()
+     private val orderInnerMap = HashMap<Int, UpClass>()
 
     /**
      * <Item展示顺序 —— 该种Item数量>哈希表
@@ -77,7 +77,7 @@ class DataBindingAdapter (
         return sum
     }
 
-    class DataBindingViewHolder(private val inner: UpClass?,private val dataBinding: ViewDataBinding?)
+    class DataBindingViewHolder(private val inner: UpClass?, private val dataBinding: ViewDataBinding?)
         : RecyclerView.ViewHolder(dataBinding?.root ?: throw NullPointerException("databinding is null")){
         fun bindData(position: Int, viewModel: BaseViewModel){
             inner?.bindFunc(position,dataBinding,viewModel)

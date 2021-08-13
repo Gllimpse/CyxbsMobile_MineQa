@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.aefottt.module_shop.R
 import com.aefottt.module_shop.databinding.ShopRecycleItemDetailGetBinding
 import com.mredrock.cyxbs.common.ui.BaseViewModelFragment
-import com.mredrock.cyxbs.shop.pages.stampcenter.adapter.DataBindingAdapter
+import com.mredrock.cyxbs.shop.adapter.DataBindingAdapter
 import com.mredrock.cyxbs.shop.pages.stampdetail.viewmodel.GetRecordViewModel
 import kotlinx.android.synthetic.main.shop_fragment_get.*
 
@@ -29,8 +29,7 @@ class GetRecordFragment : BaseViewModelFragment<GetRecordViewModel>(){
     }
 
     private fun initData(){
-        val testData = MutableList(10){"浏览任务"}
-        viewModel._GetRecordData.value = testData
+        viewModel.initData()
     }
 
     private fun initRecycler() {

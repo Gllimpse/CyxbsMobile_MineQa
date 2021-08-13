@@ -46,6 +46,7 @@ class ShopActivity : BaseViewModelActivity<ShopViewModel>(){
                 addFragment(TaskFragment())
             }
 
+            //viewpager切换动画
             setPageTransformer{view, position ->
                 if (position < -1 || position > 1){
                     view.alpha = 0f
@@ -80,6 +81,10 @@ class ShopActivity : BaseViewModelActivity<ShopViewModel>(){
                 0 -> tab.text = "邮票小店"
                 1 -> tab.apply {
                     text = "邮票任务"
+
+                    /**
+                     * 设置右上角badge样式，当天隐藏后不再显示
+                     */
                     this@ShopActivity.sharedPreferences("tab_click_time").apply {
                         val sdf = SimpleDateFormat("yyyy年MM月dd日",
                                 Locale.getDefault())
@@ -95,14 +100,17 @@ class ShopActivity : BaseViewModelActivity<ShopViewModel>(){
                 }
             }
         }.attach()
+
         // 卡券动画
         shop_main_iv_coupon.animate().setDuration(600)
             .translationY(0f).alpha(1f).start()
+
         // 开启数字动画
         shop_main_tv_banner_number.post {
-            shop_main_tv_banner_number.setText("526321")
-            shop_main_tv_banner_number.startSlide(800)
+            shop_main_tv_banner_number.setCurrNum(526321)
+            shop_main_tv_banner_number.setDuration(900)
         }
+
         // 设置字体
         shop_main_tv_my_stamps.typeface = Typeface.createFromAsset(assets, "fonts/shop_font_price_number.otf")
     }

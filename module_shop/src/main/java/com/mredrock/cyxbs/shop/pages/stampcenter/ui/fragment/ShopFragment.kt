@@ -11,13 +11,12 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.aefottt.module_shop.R
 import com.mredrock.cyxbs.common.ui.BaseViewModelFragment
-import com.mredrock.cyxbs.shop.bean.Decoration
-import com.mredrock.cyxbs.shop.bean.StampGood
-import com.mredrock.cyxbs.shop.pages.stampcenter.adapter.ShopGoodAdapterPrimary
+import com.mredrock.cyxbs.shop.pages.stampcenter.deprecated.ShopGoodAdapterPrimary
 import com.mredrock.cyxbs.shop.pages.stampcenter.viewmodel.ShopViewModel
 import kotlinx.android.synthetic.main.shop_fragment_shop.*
 
 class ShopFragment: BaseViewModelFragment<ShopViewModel>() {
+    //Adapter
     private lateinit var goodsRvAdapter: ShopGoodAdapterPrimary
     //邮货title的位置
     private var stampStartPosition = 0
@@ -32,26 +31,24 @@ class ShopFragment: BaseViewModelFragment<ShopViewModel>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initRecycler()
+        iniData()
         initObserve()
+        initView()
     }
 
-    private fun initRecycler(){
+    private fun iniData(){
+        viewModel.initData()
+    }
+
+    private fun initView(){
+
         goodsRvAdapter = ShopGoodAdapterPrimary(context)
-        val fakeDecoration = Decoration("title",15,"描述",233,666, MutableList(2){""})
-        val fakeStampGood = StampGood("title",MutableList(2){""},15,233,"描述")
-        val decorationData = MutableList(20){fakeDecoration}
-        val stampGoodData = MutableList(20){fakeStampGood}
-        stampStartPosition = stampGoodData.size
-//        viewModel.apply {
-//            getAllDecoration()
-//            getAllStampGood()
-//        }
+
+        stampStartPosition = viewModel.getDecorationCount() + 1
+
         shop_shop_rv_goods.apply {
-            adapter = goodsRvAdapter.apply {
-                setDecorationData(decorationData)
-                setStampGoodData(stampGoodData)
-            }
+            adapter = goodsRvAdapter
+
             layoutManager = GridLayoutManager(this.context,2).also {
                 it.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                     override fun getSpanSize(position: Int): Int {
@@ -62,9 +59,11 @@ class ShopFragment: BaseViewModelFragment<ShopViewModel>() {
                     }
                 }
             }
+
             layoutParams = LinearLayout.LayoutParams(layoutParams).apply {
                 marginStart = 30
             }
+
             layoutAnimation = LayoutAnimationController(AnimationUtils.loadAnimation(context,R.anim.shop_loading_in_shop_rv))
 
         }
@@ -84,4 +83,5 @@ class ShopFragment: BaseViewModelFragment<ShopViewModel>() {
             stampStartPosition = it.allDecoration.size
         })
     }
+
 }

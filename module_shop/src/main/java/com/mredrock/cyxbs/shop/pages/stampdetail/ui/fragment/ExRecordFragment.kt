@@ -11,7 +11,7 @@ import com.aefottt.module_shop.R
 import com.aefottt.module_shop.databinding.ShopRecycleItemDetailGoodBinding
 import com.aefottt.module_shop.databinding.ShopTestItemBinding
 import com.mredrock.cyxbs.common.ui.BaseViewModelFragment
-import com.mredrock.cyxbs.shop.pages.stampcenter.adapter.DataBindingAdapter
+import com.mredrock.cyxbs.shop.adapter.DataBindingAdapter
 import com.mredrock.cyxbs.shop.pages.stampdetail.viewmodel.ExRecordViewModel
 import kotlinx.android.synthetic.main.shop_fragment_exchange.*
 
@@ -30,14 +30,11 @@ class ExRecordFragment : BaseViewModelFragment<ExRecordViewModel>() {
     }
 
     private fun initData(){
-        val testData = MutableList(10){"卷卷鼠标垫"}
-        viewModel._ExRecordData.value = testData
-
+        viewModel.initData()
     }
 
     private fun initRecycler(){
         shop_exchange_rv.apply {
-//            adapter = ExRecordAdapter(viewLifecycleOwner,viewModel,R.layout.shop_recycle_item_detail_good)
             adapter = DataBindingAdapter(viewLifecycleOwner,viewModel)
                     .addDataBinding(DataBindingAdapter.MyDataBinding<ShopRecycleItemDetailGoodBinding>(
                             R.layout.shop_recycle_item_detail_good, 0,viewModel.exRecordDataSize()) { position, dataBinding, viewModel ->
