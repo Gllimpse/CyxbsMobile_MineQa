@@ -13,18 +13,18 @@ data class GoodResp(
 )  : Serializable
 
 data class GoodInfo(
+        @SerializedName("title")
+        val title: String,
+        @SerializedName("price")
+        val price: Int,
         @SerializedName("amount")
         val amount: Int,
+        @SerializedName("type")
+        val type: Int,
         @SerializedName("description")
         val description: String,
         @SerializedName("life")
         val life: Int,
-        @SerializedName("price")
-        val price: Int,
-        @SerializedName("title")
-        val title: String,
-        @SerializedName("type")
-        val type: Int,
         @SerializedName("urls")
-        val urls: List<String>
+        val urls: ArrayList<String>
 ) : Serializable

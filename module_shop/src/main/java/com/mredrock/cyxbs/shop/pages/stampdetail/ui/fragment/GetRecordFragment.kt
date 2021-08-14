@@ -24,11 +24,11 @@ class GetRecordFragment : BaseViewModelFragment<GetRecordViewModel>(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.initData()
-        initRecycler()
+        initView()
     }
 
-    private fun initRecycler() {
+    private fun initView() {
+        viewModel.getExRecordData()
         shop_get_rv.apply {
             adapter = DataBindingAdapter(viewLifecycleOwner, viewModel)
                     .addDataBinding(DataBindingAdapter.MyDataBinding<ShopRecycleItemDetailGetBinding>(

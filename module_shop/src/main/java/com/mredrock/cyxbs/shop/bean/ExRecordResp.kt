@@ -3,7 +3,7 @@ package com.mredrock.cyxbs.shop.bean
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-data class ExRecordRes(
+data class ExRecordResp(
         @SerializedName("data")
         val data: List<SingleExRecord>,
         @SerializedName("info")
@@ -12,14 +12,14 @@ data class ExRecordRes(
         val status: Int
 ) : Serializable
 data class SingleExRecord(
-        @SerializedName("cos_stamp")
-        val cos_stamp: Int,
+        @SerializedName("goods_name")
+        val goodsName: String,
+        @SerializedName("goods_price")
+        val goodsPrice: Int,
         @SerializedName("data")
         val date: Long,
-        @SerializedName("is_collected")
-        val is_collected: Boolean,
+        @SerializedName("is_received")
+        val isReceived: Boolean,
         @SerializedName("order_id")
-        val order_id: String,
-        @SerializedName("ware_name")
-        val ware_name: String
+        val orderId: String
 ) : Serializable

@@ -21,39 +21,35 @@ object ShopConfig {
 
     // Dialog类型
     /**
-     * 点击邮货详情界面的兑换按钮
+     * 第一次点击邮货详情界面的兑换按钮
      */
-    const val SHOP_DIALOG_TYPE_FIRST_SURE_STAMP = 0
+    const val SHOP_DETAIL_DIALOG_FIRST_EXCHANGE = 0
     /**
-     * 点击装饰详情界面的兑换按钮
+     * 兑换成功
      */
-    const val SHOP_DIALOG_TYPE_FIRST_SURE_DECORATION = 1
+    const val SHOP_DETAIL_DIALOG_EXCHANGE_SUCCESS = 1
     /**
-     * 兑换请求成功
+     * 兑换失败
      */
-    const val SHOP_DIALOG_TYPE_SUCCESS = 2
+    const val SHOP_DETAIL_DIALOG_EXCHANGE_FAIL = 2
     /**
-     * 兑换请求结果 -- 邮票不足
+     * 兑换请求失败
      */
-    const val SHOP_DIALOG_TYPE_STAMP_SHORTAGE = 3
-    /**
-     * 兑换请求结果 -- 货存不足
-     */
-    const val SHOP_DIALOG_TYPE_COUNT_SHORTAGE = 4
+    const val SHOP_DETAIL_DIALOG_EXCHANGE_REQUEST_FAIL = 3
     /**
      * 兑换请求结果 -- 兑换失败
      */
-    const val SHOP_DIALOG_TYPE_FAIL = 5
+    const val SHOP_DETAIL_DIALOG_STAMP_SHORTAGE = 5
 
     // 任务类型
     /**
      * 每日任务
      */
-    const val SHOP_TASK_TYPE_TODAY = 0
+    const val SHOP_TASK_TYPE_TODAY = "base"
     /**
      * 更多任务
      */
-    const val SHOP_TASK_TYPE_MORE = 1
+    const val SHOP_TASK_TYPE_MORE = "more"
     // 任务界面RecyclerItem类型
     /**
      * 标题Item
@@ -65,4 +61,8 @@ object ShopConfig {
     const val SHOP_TASK_ITEM_TYPE_TASK = 1
 
     var SHOP_CHILD_TOP = 0
+
+    // 状态码Status
+    const val SHOP_STATUS_GET_EXCHANGE_INFO_SUCCESS = 10000
+    const val SHOP_STATUS_GET_GET_INFO_SUCCESS = 10000
 }

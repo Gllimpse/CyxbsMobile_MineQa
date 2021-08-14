@@ -8,8 +8,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.aefottt.module_shop.R
 import com.github.chrisbanes.photoview.PhotoView
+import com.mredrock.cyxbs.common.utils.extensions.setImageFromUrl
 
-class BannerPagerAdapter(private val picUrls: List<String>?) :
+class BannerPagerAdapter(private val picUrls: ArrayList<String>?) :
     RecyclerView.Adapter<BannerPagerAdapter.BannerVpAdapter>() {
 
     // 单击图片的事件
@@ -24,8 +25,7 @@ class BannerPagerAdapter(private val picUrls: List<String>?) :
         val url = picUrls?.get(position)
         val pv : PhotoView = holder.itemView as PhotoView
         pv.apply {
-//            setImageFromUrl(url)
-            setImageResource(R.drawable.shop_bg_detail_goods)
+            setImageFromUrl(url)
             setOnPhotoTapListener{ _, _, _ ->
                 photoTapClick?.invoke()
             }
