@@ -6,6 +6,8 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.aefottt.module_shop.R
 import com.mredrock.cyxbs.shop.config.ShopConfig
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * 根据商品类型设置标题
@@ -30,4 +32,16 @@ fun detailRightTipsByType(tv: TextView, type: Int){
 @BindingAdapter("app:goodsDetailGetVisible")
 fun goodsDetailGetVisible(tv: TextView, isCollected: Boolean){
     tv.visibility = if (isCollected) View.GONE else View.VISIBLE
+}
+
+@BindingAdapter("app:stampDetailTime")
+fun stampDetailTime(tv: TextView, time: Long){
+    val format = SimpleDateFormat("yyyy.MM.dd", Locale.CHINA)
+    tv.text = format.format(Date(time))
+}
+
+@BindingAdapter("app:exchangeDetailTime")
+fun exchangeDetailTime(tv: TextView, time: Long){
+    val format = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA)
+    tv.text = format.format(Date(time))
 }

@@ -12,16 +12,14 @@ data class ExRecordResp(
         val status: Int
 ) : Serializable
 data class SingleExRecord(
-        @SerializedName("ware_name")
-        val wareName: String,
-        @SerializedName("cos_stamp")
-        val costStamp: Int,
+        @SerializedName("goods_name")
+        val goodsName: String,
+        @SerializedName("goods_price")
+        val goodsPrice: Int,
         @SerializedName("data")
-        val date: String,
-        @SerializedName("moment")
-        val moment: String,
-        @SerializedName("is_collected")
-        val isCollected: Boolean,
+        val date: Long,
+        @SerializedName("is_received")
+        val isReceived: Boolean,
         @SerializedName("order_id")
         val orderId: String
 ) : Serializable

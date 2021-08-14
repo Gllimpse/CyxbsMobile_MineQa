@@ -81,7 +81,7 @@
             android:layout_width="48dp"
             android:layout_height="26dp"
             android:layout_marginEnd="12dp"
-            android:background="@drawable/shop_bg_detail_btn_exchange"
+            android:background="@drawable/shop_bg_center_good_item_btn_exchange"
             android:gravity="center"
             android:text="@string/shop_good_recycler_item_exchange"
             android:textColor="@color/shop_white"

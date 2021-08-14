@@ -30,7 +30,6 @@
             android:id="@+id/shop_detail_tv_title"
             android:layout_width="wrap_content"
             android:layout_height="31dp"
-            android:drawablePadding="13dp"
             android:gravity="center_vertical"
             app:detailTitleByType="@{viewModel.goodInfo.type}"
             android:textColor="#15315B"
@@ -56,12 +55,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_line"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_line" />
 
         <LinearLayout
             android:id="@+id/shop_detail_ll_banner_dots"
@@ -85,12 +80,8 @@
             android:textColor="#15315B"
             android:textSize="18sp"
             android:text="@{viewModel.goodInfo.title}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/shop_detail_vp_banner"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/shop_detail_vp_banner" />
 
         <TextView
             android:id="@+id/shop_detail_tv_left_count"
@@ -103,8 +94,7 @@
             android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="@+id/shop_detail_tv_name"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/shop_detail_tv_name"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toTopOf="@+id/shop_detail_tv_name" />
 
         <TextView
             android:id="@+id/shop_detail_tv_description"
@@ -117,12 +107,9 @@
             android:text="@{viewModel.goodInfo.description}"
             android:textColor="#CC15315B"
             android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_name"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_name" />
 
         <TextView
             android:id="@+id/shop_detail_tv_valid_time"
@@ -131,21 +118,9 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:gravity="center_vertical"
-            android:text='@{@string/shop_detail_valid_time + String.valueOf(viewModel.goodInfo.life)}'
+            android:text='@{@string/shop_detail_valid_time + String.valueOf(viewModel.goodInfo.life) + @string/shop_detail_valid_time_suffix}'
             android:textColor="#CC15315B"
             android:textSize="13sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_description" />
-
-        <TextView
-            android:id="@+id/shop_detail_tv_right_tips"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="94dp"
-            android:layout_marginEnd="15dp"
-            app:detailRightTipsByType="@{viewModel.goodInfo.type}"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_description" />
 
@@ -154,12 +129,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="17dp"
-            android:layout_marginTop="62dp"
+            android:layout_marginTop="8dp"
             android:text="@string/shop_detail_equity_desc_title"
             android:textColor="#CC15315B"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_description" />
+            app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_valid_time" />
+
+        <TextView
+            android:id="@+id/shop_detail_tv_right_tips"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="15dp"
+            app:detailRightTipsByType="@{viewModel.goodInfo.type}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_right" />
 
         <TextView
             android:id="@+id/shop_detail_tv_line2"
@@ -169,13 +156,12 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_right_tips"
-            app:layout_constraintVertical_bias="0.75" />
+            android:layout_marginBottom="72dp" />
 
         <ImageView
             android:id="@+id/shop_detail_iv_my_stamp"
-            android:layout_width="21dp"
-            android:layout_height="21dp"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="11dp"
             app:layout_constraintStart_toStartOf="parent"

@@ -45,11 +45,11 @@ object ShopConfig {
     /**
      * 每日任务
      */
-    const val SHOP_TASK_TYPE_TODAY = 0
+    const val SHOP_TASK_TYPE_TODAY = "base"
     /**
      * 更多任务
      */
-    const val SHOP_TASK_TYPE_MORE = 1
+    const val SHOP_TASK_TYPE_MORE = "more"
     // 任务界面RecyclerItem类型
     /**
      * 标题Item

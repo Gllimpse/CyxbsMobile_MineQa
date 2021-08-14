@@ -13,12 +13,10 @@ data class GetRecordResp(
 ) : Serializable
 
 data class SingleGetRecord(
-        @SerializedName("red_id")
-        val redId: String,
-        @SerializedName("gain_stamp")
-        val gainStamp: Int,
-        @SerializedName("task_name")
-        val taskName: String,
         @SerializedName("date")
-        val date: String
+        val date: Long,
+        @SerializedName("task_income")
+        val taskIncome: Int,
+        @SerializedName("task_name")
+        val taskName: String
 ) : Serializable

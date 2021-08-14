@@ -27,6 +27,7 @@
 
     <string name="shop_detail_left_counts">库存量：</string>
     <string name="shop_detail_valid_time">有效期：</string>
+    <string name="shop_detail_valid_time_suffix">天</string>
     <string name="shop_detail_stamp_count">余额：</string>
     <string name="shop_good_recycler_item_exchange">兑换</string>
 
