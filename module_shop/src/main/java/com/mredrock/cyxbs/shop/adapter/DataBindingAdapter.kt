@@ -3,6 +3,7 @@ package com.mredrock.cyxbs.shop.adapter
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.Nullable
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
@@ -40,7 +41,11 @@ class DataBindingAdapter (
         val dataBinding = inner?.createDataBinding(parent,viewType).apply {
             this?.lifecycleOwner = lifecycleOwner
         }
-        return DataBindingViewHolder(inner,dataBinding)
+        val holder = DataBindingViewHolder(inner,dataBinding)
+        holder.itemView.setOnClickListener {
+            inner?.onItemClick(holder.layoutPosition,dataBinding)
+        }
+        return holder
     }
 
 
@@ -78,9 +83,9 @@ class DataBindingAdapter (
     }
 
     class DataBindingViewHolder(private val inner: UpClass?, private val dataBinding: ViewDataBinding?)
-        : RecyclerView.ViewHolder(dataBinding?.root ?: throw NullPointerException("databinding is null")){
+        : RecyclerView.ViewHolder(dataBinding?.root ?: throw NullPointerException("dataBinding is null !")){
         fun bindData(position: Int, viewModel: BaseViewModel){
-            inner?.bindFunc(position,dataBinding,viewModel)
+            inner?.bindFunc(position,dataBinding)
         }
     }
 
@@ -89,25 +94,30 @@ class DataBindingAdapter (
      * 首先要知道，一个对象能只能储存一个泛型，一个泛型的作用域也只在这个对象中。因为我们只会创建一个adapter对象，
      * 所以只能储存一个泛型，这不满足我们的需求，所以不可以在Adapter类处直接声明泛型。
      * 因此我们需要新建一个类，在实例化这个类的对象时指定泛型，并指定所有与该泛型相关的操作，比如通过DataBindingUtil实例化dataBinding，
-     * dataBinding绑定数据（也就是给XML中声明的属性赋值），操作具体控件等。这些对象就储存在orderInner哈希表中
+     * dataBinding绑定数据（也就是给XML中声明的属性赋值），操作具体控件,点击事件等。这些对象就储存在orderInner哈希表中，
      */
     class MyDataBinding<T : ViewDataBinding>(@androidx.annotation.LayoutRes private val resId: Int,
-                                             itemOrder: Int, val itemSize: Int, private val bindData: (Int, T?, BaseViewModel) -> Unit) : UpClass() {
+                                             itemOrder: Int, val itemSize: Int,
+                                             private val bindData: ((Int, T?) -> Unit)? = null,
+                                             private val onItemClick: ((Int,T?) -> Unit)? = null) : UpClass() {
 
         override val order = itemOrder
-        override fun bindFunc(position: Int, dataBinding: ViewDataBinding?, viewModel: BaseViewModel) = bindData(position,dataBinding as T,viewModel)
+        override fun bindFunc(position: Int, dataBinding: ViewDataBinding?) =
+                bindData?.invoke(position, dataBinding as T?) ?: Unit
         override fun createDataBinding(parent: ViewGroup,viewType: Int): T =
                 DataBindingUtil.inflate(LayoutInflater.from(parent.context),resId,parent,false)
+        override fun onItemClick(position: Int,dataBinding: ViewDataBinding?) = onItemClick?.invoke(position, dataBinding as T?) ?: Unit
     }
 
     /**
      * 因为实例化哈希表时要指明类型和泛型，但是我们的对象储存了多个泛型，不能指明单个泛型，声明为ViewDataBinding就会导致泛型擦除，也不可以。
-     * 因此我们给我们对象所在的类创建一个父类，将这个父类作为哈希表声明的类型就能避开泛型擦除。
+     * 因此我们给我们对象所在的类创建一个父类，将这个父类作为哈希表声明的类型（对象存储的类型）就能避开泛型擦除。
      */
     abstract class UpClass{
         abstract val order: Int
-        abstract fun bindFunc(position: Int,dataBinding: ViewDataBinding?,viewModel: BaseViewModel)
+        abstract fun bindFunc(position: Int,dataBinding: ViewDataBinding?)
         abstract fun createDataBinding(parent: ViewGroup,viewType: Int): ViewDataBinding
+        abstract fun onItemClick(position: Int,dataBinding: ViewDataBinding?)
 
     }
 

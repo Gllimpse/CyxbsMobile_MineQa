@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="viewModel"
-            type="com.mredrock.cyxbs.shop.pages.stampcenter.viewmodel.TaskViewModel" />
+            name="view_model"
+            type="com.mredrock.cyxbs.shop.pages.stampcenter.viewmodel.ShopViewModel" />
         <variable
             name="position"
             type="Integer" />
@@ -27,7 +27,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:gravity="center_vertical"
-            android:text="@{viewModel.getTitle(position,type)}"
+            android:text="@{view_model.getTaskData(type,position).title}"
             android:textColor="#15315B"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +40,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
             android:gravity="center_vertical"
-            android:text='@{viewModel.getDesc(position,type)+"   +"+viewModel.getRewardNum(position,type)}'
+            android:text='@{view_model.getTaskData(type,position).desc + "   +" + view_model.getTaskData(type,position).gainStamp}'
             android:textColor="#6615315B"
             android:textSize="14dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -86,7 +86,7 @@
             android:textSize="12sp"
             android:textColor="#7D8AFF"
             android:gravity="center"
-            android:text='@{viewModel.getDoneAmount(position,type)+"/"+viewModel.getTotalAmount(position,type)}'
+            android:text='@{view_model.getTaskData(type,position).curProgress + "/" + view_model.getTaskData(type,position).maxProgress}'
             app:layout_constraintBottom_toBottomOf="@+id/shop_item_task_progressbar"
             app:layout_constraintStart_toEndOf="@+id/shop_item_task_progressbar"
             app:layout_constraintTop_toTopOf="@+id/shop_item_task_progressbar" />

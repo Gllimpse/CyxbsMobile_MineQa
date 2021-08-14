@@ -8,7 +8,6 @@ import com.mredrock.cyxbs.common.utils.extensions.mapOrThrowApiException
 import com.mredrock.cyxbs.common.utils.extensions.safeSubscribeBy
 import com.mredrock.cyxbs.common.utils.extensions.setSchedulers
 import com.mredrock.cyxbs.common.viewmodel.BaseViewModel
-import com.mredrock.cyxbs.shop.bean.GetRecordRes
 import com.mredrock.cyxbs.shop.bean.SingleGetRecord
 import com.mredrock.cyxbs.shop.network.ApiService
 

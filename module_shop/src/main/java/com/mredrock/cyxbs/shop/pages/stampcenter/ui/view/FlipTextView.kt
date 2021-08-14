@@ -10,7 +10,6 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import com.mredrock.cyxbs.common.utils.extensions.sp
-import java.time.Duration
 
 /**
  * @class FlipTextView

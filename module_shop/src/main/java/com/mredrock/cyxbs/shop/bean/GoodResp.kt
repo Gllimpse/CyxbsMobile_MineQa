@@ -26,10 +26,5 @@ data class GoodInfo(
         @SerializedName("type")
         val type: Int,
         @SerializedName("urls")
-        val urls: List<Url>
+        val urls: List<String>
 ) : Serializable
-
-data class Url(
-        @SerializedName("url")
-        val url: String
-)

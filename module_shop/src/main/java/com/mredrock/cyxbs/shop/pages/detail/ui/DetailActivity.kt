@@ -129,7 +129,7 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
                     Intent(this@DetailActivity, ImageActivity::class.java)
                         .apply {
                             // 将图片地址和当前图片位置作为参数传入
-                            picUrls?.let {
+                            picUrls {
                                 val picUrlsArray = arrayOfNulls<String>(it.size)
                                 for ((i, url) in it.withIndex()) {
                                     picUrlsArray[i] = url

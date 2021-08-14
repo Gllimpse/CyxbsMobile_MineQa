@@ -38,7 +38,9 @@ data class CenterTask(
     @SerializedName("description")
     val desc: String, // 任务详情
     @SerializedName("type")
-    val type: String // 任务类型
+    val type: String, // 任务类型
+    @SerializedName("gain_stamp")
+    val gainStamp: Int
 ) : Serializable
 
 data class CenterShop(

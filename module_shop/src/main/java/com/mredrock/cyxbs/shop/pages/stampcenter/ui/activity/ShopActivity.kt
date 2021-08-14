@@ -7,7 +7,10 @@ import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.view.Window
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.observe
 import com.aefottt.module_shop.R
+import com.aefottt.module_shop.databinding.ShopActivityMainBinding
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -30,6 +33,7 @@ import java.util.*
 
 @Route(path = SHOP_ENTRY)
 class ShopActivity : BaseViewModelActivity<ShopViewModel>() {
+    private lateinit var binding : ShopActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
         setExitSharedElementCallback(MaterialContainerTransformSharedElementCallback())
@@ -37,8 +41,23 @@ class ShopActivity : BaseViewModelActivity<ShopViewModel>() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.shop_activity_main)
         setTheme(R.style.Theme_MaterialComponents)
+        // 绑定布局,数据
+        binding = DataBindingUtil.setContentView(this, R.layout.shop_activity_main)
+        binding.apply {
+            lifecycleOwner = this@ShopActivity
+            this.viewModel = viewModel
+        }
+
+        viewModel.initData()
+        initObserve()
         initView()
         initListener()
+    }
+
+    private fun initObserve(){
+        viewModel.stampCount.observe(this) {
+            shop_main_tv_banner_number.setCurrNum(it)
+        }
     }
 
     private fun initView() {
@@ -48,11 +67,9 @@ class ShopActivity : BaseViewModelActivity<ShopViewModel>() {
                 addFragment(TaskFragment())
             }
 
+            //viewpager切换动画
             setPageTransformer { view, position ->
                 if (position < -1 || position > 1) {
-            //viewpager切换动画
-            setPageTransformer{view, position ->
-                if (position < -1 || position > 1){
                     view.alpha = 0f
                 } else if (position > 0) {
                     view.apply {
@@ -91,8 +108,8 @@ class ShopActivity : BaseViewModelActivity<ShopViewModel>() {
                      */
                     this@ShopActivity.sharedPreferences("tab_click_time").apply {
                         val sdf = SimpleDateFormat(
-                            "yyyy年MM月dd日",
-                            Locale.getDefault()
+                                "yyyy年MM月dd日",
+                                Locale.getDefault()
                         )
                         val todayTimeStamp = sdf.format(System.currentTimeMillis()).split("月")[1]
                         if (this.getString("tab_time_stamp", "") != todayTimeStamp) {
@@ -114,18 +131,20 @@ class ShopActivity : BaseViewModelActivity<ShopViewModel>() {
                 }
             }
         }.attach()
+
         // 卡券动画
         shop_main_iv_coupon.animate().setDuration(600)
-            .translationY(0f).alpha(1f).start()
+                .translationY(0f).alpha(1f).start()
+
         // 开启数字动画
         shop_main_tv_banner_number.post {
-            shop_main_tv_banner_number.setCurrNum(526321)
+            shop_main_tv_banner_number.setCurrNum(viewModel.stampCount.value ?:0)
             shop_main_tv_banner_number.setDuration(900)
         }
 
         // 设置字体
         shop_main_tv_my_stamps.typeface =
-            Typeface.createFromAsset(assets, "fonts/shop_font_price_number.otf")
+                Typeface.createFromAsset(assets, "fonts/shop_font_price_number.otf")
         val arr: IntArray = intArrayOf(0, 0)
         shop_main_ll_bottom.post {
             shop_main_ll_bottom.getLocationOnScreen(arr)
@@ -137,6 +156,11 @@ class ShopActivity : BaseViewModelActivity<ShopViewModel>() {
         shop_main_tv_banner_detail.setOnSingleClickListener {
             startActivity(Intent(this, StampDetailActivity::class.java))
         }
-        shop_main_iv_back.setOnSingleClickListener { finish() }
+        shop_main_iv_back.setOnSingleClickListener {
+            finish()
+        }
     }
 }
+
+
+

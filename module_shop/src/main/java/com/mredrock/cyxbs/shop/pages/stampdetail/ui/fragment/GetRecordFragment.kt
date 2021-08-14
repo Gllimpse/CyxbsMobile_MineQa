@@ -24,25 +24,24 @@ class GetRecordFragment : BaseViewModelFragment<GetRecordViewModel>(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initData()
-        initRecycler()
-    }
-
-    private fun initData(){
         viewModel.initData()
+        initRecycler()
     }
 
     private fun initRecycler() {
         shop_get_rv.apply {
             adapter = DataBindingAdapter(viewLifecycleOwner, viewModel)
                     .addDataBinding(DataBindingAdapter.MyDataBinding<ShopRecycleItemDetailGetBinding>(
-                            R.layout.shop_recycle_item_detail_get, 0,viewModel.getRecordDataSize()) { position, dataBinding, viewModel ->
-                        dataBinding?.apply {
-                            this.viewModel = viewModel as GetRecordViewModel
+                            R.layout.shop_recycle_item_detail_get, 0,viewModel.getRecordDataSize(),
+                    bindData = {
+                        position, dataBinding -> dataBinding?.apply {
+                            this.viewModel = viewModel
                             this.position = position
                         }
-                    })
+                    }))
+
             layoutManager = LinearLayoutManager(this.context)
+
             layoutAnimation = LayoutAnimationController(AnimationUtils.loadAnimation(context,R.anim.shop_loding_in_stamp_detail_rv))
         }
     }

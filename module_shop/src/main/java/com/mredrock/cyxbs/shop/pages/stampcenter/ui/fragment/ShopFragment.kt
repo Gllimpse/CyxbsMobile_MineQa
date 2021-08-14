@@ -6,18 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.view.animation.LayoutAnimationController
-import android.widget.LinearLayout
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.aefottt.module_shop.R
+import com.aefottt.module_shop.databinding.ShopRecycleItemGoodBinding
+import com.aefottt.module_shop.databinding.ShopRecycleItemTitleGoodBinding
+import com.bumptech.glide.Glide
 import com.mredrock.cyxbs.common.ui.BaseViewModelFragment
-import com.mredrock.cyxbs.shop.pages.stampcenter.deprecated.ShopGoodAdapterPrimary
+import com.mredrock.cyxbs.shop.adapter.DataBindingAdapter
+import com.mredrock.cyxbs.shop.config.ShopConfig
+import com.mredrock.cyxbs.shop.pages.detail.ui.DetailActivity
 import com.mredrock.cyxbs.shop.pages.stampcenter.viewmodel.ShopViewModel
 import kotlinx.android.synthetic.main.shop_fragment_shop.*
+import kotlinx.android.synthetic.main.shop_recycle_item_good.*
 
 class ShopFragment: BaseViewModelFragment<ShopViewModel>() {
-    //Adapter
-    private lateinit var goodsRvAdapter: ShopGoodAdapterPrimary
+    private lateinit var goodsRvAdapter: DataBindingAdapter
     //邮货title的位置
     private var stampStartPosition = 0
 
@@ -32,7 +35,6 @@ class ShopFragment: BaseViewModelFragment<ShopViewModel>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         iniData()
-        initObserve()
         initView()
     }
 
@@ -42,7 +44,55 @@ class ShopFragment: BaseViewModelFragment<ShopViewModel>() {
 
     private fun initView(){
 
-        goodsRvAdapter = ShopGoodAdapterPrimary(context)
+        goodsRvAdapter = DataBindingAdapter(viewLifecycleOwner,viewModel)
+                .addDataBinding(DataBindingAdapter.MyDataBinding<ShopRecycleItemTitleGoodBinding>(
+                        R.layout.shop_recycle_item_title_good,0,1,
+                        bindData = { _, binding ->
+                            binding?.title = "装饰"
+                        }))
+                .addDataBinding(DataBindingAdapter.MyDataBinding<ShopRecycleItemGoodBinding>(
+                        R.layout.shop_recycle_item_good,1,viewModel.getDecorationCount(),
+                        bindData = { position, binding ->
+                            binding?.apply {
+                                this.viewModel = viewModel
+                                this.position = position - 1
+                                this.type = ShopConfig.SHOP_GOOD_TYPE_DECORATION
+                                Glide.with(this@ShopFragment).load(viewModel.getGoodData(type).value?.get(position - 1)?.imgUrl)
+                                        .into(shop_item_iv_desc)
+                            }
+                        },
+                        onItemClick = { _, binding ->
+                            context?.let { it1 ->
+                                binding?.let {
+                                    DetailActivity.activityStart(it1, binding.shopItemTvTitle.text.toString(),
+                                            ShopConfig.SHOP_GOOD_TYPE_DECORATION, binding.shopItemIvDesc)
+                                }
+                            }
+                        }))
+                .addDataBinding(DataBindingAdapter.MyDataBinding<ShopRecycleItemTitleGoodBinding>(
+                        R.layout.shop_recycle_item_title_good,2,1,
+                        bindData = { _, binding ->
+                            binding?.title = "邮货"
+                        }))
+                .addDataBinding(DataBindingAdapter.MyDataBinding<ShopRecycleItemGoodBinding>(
+                        R.layout.shop_recycle_item_good,3,viewModel.getStampGoodCount(),
+                        bindData = {
+                            position,binding -> binding?.apply {
+                        this.viewModel = viewModel
+                        this.position = position - viewModel.getDecorationCount() - 2
+                        this.type = ShopConfig.SHOP_GOOD_TYPE_STAMP_GOOD
+                        Glide.with(this@ShopFragment).load(viewModel.getGoodData(type).value?.get(position - viewModel.getDecorationCount() - 2)?.imgUrl)
+                                .into(shop_item_iv_desc)
+                            }
+                        },
+                        onItemClick = { _, binding ->
+                            context?.let { it1 ->
+                                binding?.let {
+                                    DetailActivity.activityStart(it1, binding.shopItemTvTitle.text.toString(),
+                                            ShopConfig.SHOP_GOOD_TYPE_STAMP_GOOD, binding.shopItemIvDesc)
+                                }
+                            }
+                        }))
 
         stampStartPosition = viewModel.getDecorationCount() + 1
 
@@ -60,28 +110,8 @@ class ShopFragment: BaseViewModelFragment<ShopViewModel>() {
                 }
             }
 
-            layoutParams = LinearLayout.LayoutParams(layoutParams).apply {
-                marginStart = 30
-            }
-
             layoutAnimation = LayoutAnimationController(AnimationUtils.loadAnimation(context,R.anim.shop_loading_in_shop_rv))
 
         }
     }
-
-    private fun initObserve(){
-        viewModel.allStampGoodData.observe(viewLifecycleOwner, Observer {
-            if (it.status) {
-                goodsRvAdapter.setStampGoodData(it.allStampGoodResp)
-            }
-        })
-
-        viewModel.allDecorationData.observe(viewLifecycleOwner, Observer {
-            if (it.status) {
-                goodsRvAdapter.setDecorationData(it.allDecoration)
-            }
-            stampStartPosition = it.allDecoration.size
-        })
-    }
-
 }

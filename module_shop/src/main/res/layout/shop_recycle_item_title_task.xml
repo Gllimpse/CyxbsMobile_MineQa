@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+
+    </data>
+
     <TextView
         android:id="@+id/shop_item_title_task_title"
         android:layout_width="wrap_content"
@@ -12,6 +13,5 @@
         android:gravity="center"
         android:textColor="#15315B"
         android:layout_marginTop="37dp"
-        android:layout_marginStart="17dp"/>
-
-</LinearLayout>
+        android:layout_marginStart="17dp" />
+</layout>

@@ -4,17 +4,12 @@ import android.animation.ObjectAnimator
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
 import com.aefottt.module_shop.R
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mredrock.cyxbs.common.ui.BaseActivity
-import com.mredrock.cyxbs.common.ui.BaseViewModelActivity
-import com.mredrock.cyxbs.common.utils.extensions.dp2px
 import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
-import com.mredrock.cyxbs.common.utils.extensions.sp
 import com.mredrock.cyxbs.shop.pages.stampdetail.adapter.StampPagerAdapter
 import com.mredrock.cyxbs.shop.pages.stampdetail.ui.fragment.ExRecordFragment
 import com.mredrock.cyxbs.shop.pages.stampdetail.ui.fragment.GetRecordFragment

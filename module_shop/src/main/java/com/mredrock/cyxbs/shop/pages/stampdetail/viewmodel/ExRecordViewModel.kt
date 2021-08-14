@@ -26,7 +26,6 @@ class ExRecordViewModel : BaseViewModel() {
     }
 
     fun initData(){
-//        getFakeData()
         getExRecordData()
     }
 
@@ -41,12 +40,7 @@ class ExRecordViewModel : BaseViewModel() {
                     toastEvent.value = R.string.shop_detail_toast_get_all_ex_record_error
                 }
                 .safeSubscribeBy {
-                    exRecordData.postValue(it)
+                    exRecordData.postValue(it.data)
                 }
     }
-
-//    private fun getFakeData(){
-//        val testData = MutableList(10){"卷卷鼠标垫"}
-//        exRecordData.value = testData
-//    }
 }
