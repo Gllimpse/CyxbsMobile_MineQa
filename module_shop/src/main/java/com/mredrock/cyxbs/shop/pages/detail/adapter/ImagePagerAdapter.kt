@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.aefottt.module_shop.R
 import com.github.chrisbanes.photoview.PhotoView
+import com.mredrock.cyxbs.common.utils.extensions.setImageFromUrl
 
 class ImagePagerAdapter(private val picUrls: List<String>?) : RecyclerView.Adapter<ImagePagerAdapter.ImageVpHolder>() {
 
@@ -25,8 +26,7 @@ class ImagePagerAdapter(private val picUrls: List<String>?) : RecyclerView.Adapt
         val url = picUrls?.get(position)
         val pv : PhotoView = holder.itemView as PhotoView
         pv.apply {
-//            setImageFromUrl(url)
-            setImageResource(R.drawable.shop_bg_detail_goods)
+            setImageFromUrl(url)
             setOnLongClickListener {
                 val drawable = this.drawable
                 if (drawable is BitmapDrawable){

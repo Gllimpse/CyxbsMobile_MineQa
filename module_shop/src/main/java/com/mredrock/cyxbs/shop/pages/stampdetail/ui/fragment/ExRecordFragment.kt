@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.view.animation.LayoutAnimationController
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aefottt.module_shop.R
 import com.aefottt.module_shop.databinding.ShopRecycleItemDetailGoodBinding
@@ -30,25 +31,26 @@ class ExRecordFragment : BaseViewModelFragment<ExRecordViewModel>() {
 
     private fun initView(){
         viewModel.getExRecordData()
-        shop_exchange_rv.apply {
-            adapter = DataBindingAdapter(viewLifecycleOwner,viewModel)
-                    .addDataBinding(DataBindingAdapter.MyDataBinding<ShopRecycleItemDetailGoodBinding>(
-                            R.layout.shop_recycle_item_detail_good, 0,viewModel.exRecordDataSize(),
-                            bindData = {
-                                position, dataBinding -> dataBinding?.apply {
-                                    this.viewModel = viewModel as ExRecordViewModel
-                                    this.position = position
+        viewModel.isSuccess.observe(viewLifecycleOwner, Observer {
+            shop_exchange_rv.apply {
+                adapter = DataBindingAdapter(viewLifecycleOwner,viewModel)
+                        .addDataBinding(DataBindingAdapter.MyDataBinding<ShopRecycleItemDetailGoodBinding>(
+                                R.layout.shop_recycle_item_detail_good, 0,viewModel.exRecordDataSize(),
+                                bindData = {
+                                    position, dataBinding -> dataBinding?.let {
+                                    it.viewModel = viewModel
+                                    it.position = position
                                 }
-                            },
-                            onItemClick = { position, _ ->
-                                viewModel.getExRecordData(position).value?.let {
-                                    ExDetailActivity.activityStart(context, it)
-                                }
-                            }))
+                                },
+                                onItemClick = { position, _ ->
+                                    viewModel.getExRecordData(position).value?.let {
+                                        ExDetailActivity.activityStart(context, it)
+                                    }
+                                }))
 
-            layoutManager = LinearLayoutManager(this.context)
+                layoutManager = LinearLayoutManager(this.context)
 
-            layoutAnimation = LayoutAnimationController(AnimationUtils.loadAnimation(context,R.anim.shop_loding_in_stamp_detail_rv))
-        }
+                layoutAnimation = LayoutAnimationController(AnimationUtils.loadAnimation(context,R.anim.shop_loding_in_stamp_detail_rv))
+        }})
     }
 }

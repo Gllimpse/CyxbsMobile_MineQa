@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.widget.LinearLayout
@@ -34,16 +35,16 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
     /**
      * 商品Id
      */
-    private lateinit var id: String
+    private var id: Int = 0
 
     // Banner当前位置
     private var curPos = 0
 
     // Banner上一个指示器的位置指示器
-    private var lastPos = 1
+    private var lastPos = 0
 
     companion object {
-        fun activityStart(context: Context, id: String, shareElement: View) {
+        fun activityStart(context: Context, id: Int, shareElement: View) {
             context.startActivity(
                 Intent(context, DetailActivity::class.java)
                     .apply {
@@ -74,14 +75,14 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
         }
         super.onCreate(savedInstanceState)
         // 获取传入的数据
-        id = intent.getStringExtra("id") // 商品ID
+        id = intent.getIntExtra("id",0) // 商品ID
         // 初始化数据
         viewModel.getGoodInfo(id)
         // 绑定布局
         binding = DataBindingUtil.setContentView(this, R.layout.shop_activity_detail)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-        initView()
+        shop_detail_iv_back.setOnSingleClickListener { finishAfterTransition() }
         initObserve()
     }
 
@@ -104,11 +105,15 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
             }
             ShopDialog.show(this, content, onDeny, onPositive)
         })
+        viewModel.goodInfo.observe({lifecycle},{
+            initVp()
+        })
     }
 
-    private fun initView() {
+    private fun initVp() {
         // 获取邮货/装饰详情的图片地址
         val picUrls = viewModel.goodInfo.value?.urls ?: ArrayList()
+        Log.d("TAG","(DetailActivity.kt:113)->======${picUrls.size}")
         // 初始化Banner下方的圆点
         initBannerDots(picUrls.size)
         // 设置ViewPager
@@ -145,13 +150,13 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
                 curPos = position
                 shop_detail_ll_banner_dots.getChildAt(position)
                     .setBackgroundResource(R.drawable.shop_shape_banner_dots_selected)
+                Log.d("TAG","(DetailActivity.kt:153)->$curPos $lastPos")
                 shop_detail_ll_banner_dots.getChildAt(lastPos)
                     .setBackgroundResource(R.drawable.shop_shape_banner_dots)
                 lastPos = position
             }
         })
 
-        shop_detail_iv_back.setOnSingleClickListener { finishAfterTransition() }
     }
 
     /**

@@ -39,7 +39,9 @@ class DataBindingAdapter (
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBindingViewHolder {
         val inner = orderInnerMap[viewType]
         val dataBinding = inner?.createDataBinding(parent,viewType).apply {
-            this?.lifecycleOwner = lifecycleOwner
+
+                this?.lifecycleOwner = lifecycleOwner
+
         }
         val holder = DataBindingViewHolder(inner,dataBinding)
         holder.itemView.setOnClickListener {
@@ -54,7 +56,7 @@ class DataBindingAdapter (
         for (order in 0 until maxOrder) {
             if (position < sum + (orderSizeMap[order]
                             ?: throw Exception("can not find key in the orderSizeMap"))) {
-                holder.bindData(position - sum, viewModel)
+                holder.bindData(position - sum)
             }else sum += (orderSizeMap[order]
                     ?: throw Exception("can not find key in the orderSizeMap"))
         }
@@ -66,7 +68,7 @@ class DataBindingAdapter (
     override fun getItemViewType(position: Int): Int {
         var sum = 0
         for (order in 0 until maxOrder){
-            if (position <= sum + (orderSizeMap[order] ?: throw Exception("can not find key in the orderSizeMap"))){
+            if (position < sum + (orderSizeMap[order] ?: throw Exception("can not find key in the orderSizeMap"))){
                 return order
             }else sum += orderSizeMap[order] ?:0
         }
@@ -83,8 +85,9 @@ class DataBindingAdapter (
     }
 
     class DataBindingViewHolder(private val inner: UpClass?, private val dataBinding: ViewDataBinding?)
-        : RecyclerView.ViewHolder(dataBinding?.root ?: throw NullPointerException("dataBinding is null !")){
-        fun bindData(position: Int, viewModel: BaseViewModel){
+        : RecyclerView.ViewHolder(dataBinding?.root ?: throw NullPointerException("dataBinding is null !")) {
+        val mDataBinding = dataBinding
+        fun bindData(position: Int){
             inner?.bindFunc(position,dataBinding)
         }
     }

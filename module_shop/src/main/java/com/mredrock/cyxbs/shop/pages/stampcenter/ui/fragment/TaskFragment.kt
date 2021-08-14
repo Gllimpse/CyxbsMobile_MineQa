@@ -1,11 +1,15 @@
 package com.mredrock.cyxbs.shop.pages.stampcenter.ui.fragment
 
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.view.animation.LayoutAnimationController
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aefottt.module_shop.R
 import com.aefottt.module_shop.databinding.ShopRecycleItemTaskBinding
@@ -35,36 +39,53 @@ class TaskFragment: BaseViewModelFragment<ShopViewModel>() {
 
     private fun initView() {
 
-        taskAdapter = DataBindingAdapter(viewLifecycleOwner,viewModel)
-                .addDataBinding(DataBindingAdapter.MyDataBinding<ShopRecycleItemTaskBinding>(
-                        R.layout.shop_recycle_item_task,0,viewModel.getTodayTaskCount(),
-                        bindData = { position,binding ->
-                            binding?.apply {
-                                this.viewModel = viewModel
-                                this.position = position
-                                this.type = ShopConfig.SHOP_TASK_TYPE_TODAY
-                            }
-                        }))
-                .addDataBinding(DataBindingAdapter.MyDataBinding<ShopRecycleItemTitleTaskBinding>(
-                        R.layout.shop_recycle_item_title_task,1,1))
-                .addDataBinding(DataBindingAdapter.MyDataBinding<ShopRecycleItemTaskBinding>(
-                        R.layout.shop_recycle_item_task,2,viewModel.getMoreTaskCount(),
-                        bindData = { position,binding ->
-                            binding?.apply {
-                                this.viewModel = viewModel
-                                this.position = position - viewModel.getTodayTaskCount() - 1
-                                this.type = ShopConfig.SHOP_TASK_TYPE_TODAY
-                            }
-                        }))
+        viewModel.isSuccess.observe(viewLifecycleOwner, Observer {isSuccess ->
+            Log.d("TAG","(TaskFragment.kt:41)->${viewModel.getTodayTaskCount()},${viewModel.getMoreTaskCount()}")
+            if (isSuccess) {
+                taskAdapter = DataBindingAdapter(viewLifecycleOwner, viewModel)
+                        .addDataBinding(DataBindingAdapter.MyDataBinding<ShopRecycleItemTaskBinding>(
+                                R.layout.shop_recycle_item_task, 0, viewModel.getTodayTaskCount(),
+                                bindData = { position, binding ->
+                                    binding?.let {
+                                        it.viewModel = viewModel
+                                        it.position = position
+                                        it.type = ShopConfig.SHOP_TASK_TYPE_TODAY
+                                        it.shopItemTaskProgressbar.apply {
+                                            post {
+                                                setProgressCompat(viewModel.getTaskData(ShopConfig.SHOP_TASK_TYPE_TODAY,position).curProgress,true)
+                                            }
+                                        }
+                                    }
+                                }))
+                        .addDataBinding(DataBindingAdapter.MyDataBinding<ShopRecycleItemTitleTaskBinding>(
+                                R.layout.shop_recycle_item_title_task, 1, 1))
+                        .addDataBinding(DataBindingAdapter.MyDataBinding<ShopRecycleItemTaskBinding>(
+                                R.layout.shop_recycle_item_task, 2, viewModel.getMoreTaskCount(),
+                                bindData = { position, binding ->
+                                    binding?.let {
+                                        it.viewModel = viewModel
+                                        it.position = position
+                                        it.type = ShopConfig.SHOP_TASK_TYPE_MORE
+                                        val currProgress = binding.shopItemTaskProgressbar.progress
+                                        ValueAnimator.ofInt(0,1)
+                                                .apply {
+                                                    addUpdateListener {
+                                                        binding.shopItemTaskProgressbar.progress =
+                                                                currProgress * (animatedValue as Int)
+                                                    }
+                                                    duration = 500
+                                                    start()
+                                                }
+                                    }
+                                }))
+                shop_task_rv_tasks.apply {
 
-        shop_task_rv_tasks.apply {
+                    adapter = taskAdapter
 
-            adapter = taskAdapter
+                    layoutManager = LinearLayoutManager(context)
 
-            layoutManager = LinearLayoutManager(context)
-
-            layoutAnimation = LayoutAnimationController(AnimationUtils.loadAnimation(context,R.anim.shop_loading_in_shop_rv))
-        }
+                    layoutAnimation = LayoutAnimationController(AnimationUtils.loadAnimation(context, R.anim.shop_loading_in_shop_rv))
+                }
+            }})
     }
-
 }

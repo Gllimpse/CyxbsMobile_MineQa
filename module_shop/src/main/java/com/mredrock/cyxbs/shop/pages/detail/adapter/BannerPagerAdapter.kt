@@ -2,6 +2,7 @@ package com.mredrock.cyxbs.shop.pages.detail.adapter
 
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,6 +27,7 @@ class BannerPagerAdapter(private val picUrls: ArrayList<String>?) :
         val pv : PhotoView = holder.itemView as PhotoView
         pv.apply {
             setImageFromUrl(url)
+            Log.d("TAG","(BannerPagerAdapter.kt:30)->url${url}")
             setOnPhotoTapListener{ _, _, _ ->
                 photoTapClick?.invoke()
             }

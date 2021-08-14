@@ -12,7 +12,7 @@
             type="Integer" />
         <variable
             name="type"
-            type="Integer" />
+            type="String" />
 
     </data>
 
@@ -70,8 +70,8 @@
             app:indicatorColor="#7D8AFF"
             app:trackColor="#E5E5E5"
             android:interpolator="@android:anim/decelerate_interpolator"
-            android:progress="80"
-            android:max="100"
+            android:progress="0"
+            android:max="@{view_model.getTaskData(type,position).maxProgress}"
             app:trackThickness="8dp"
             app:trackCornerRadius="18dp"
             app:showAnimationBehavior="outward"

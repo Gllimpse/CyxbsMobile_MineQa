@@ -1,11 +1,13 @@
 package com.mredrock.cyxbs.shop.pages.stampdetail.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.view.animation.LayoutAnimationController
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aefottt.module_shop.R
 import com.aefottt.module_shop.databinding.ShopRecycleItemDetailGetBinding
@@ -28,21 +30,24 @@ class GetRecordFragment : BaseViewModelFragment<GetRecordViewModel>(){
     }
 
     private fun initView() {
-        viewModel.getExRecordData()
-        shop_get_rv.apply {
-            adapter = DataBindingAdapter(viewLifecycleOwner, viewModel)
-                    .addDataBinding(DataBindingAdapter.MyDataBinding<ShopRecycleItemDetailGetBinding>(
-                            R.layout.shop_recycle_item_detail_get, 0,viewModel.getRecordDataSize(),
-                    bindData = {
-                        position, dataBinding -> dataBinding?.apply {
-                            this.viewModel = viewModel
-                            this.position = position
-                        }
-                    }))
+        viewModel.getGetRecordData(1,10)
+        viewModel.isSuccess.observe(viewLifecycleOwner, Observer {
+            Log.d("TAG","(GetRecordFragment.kt:43)->123321#${viewModel.getRecordDataSize()}")
+            shop_get_rv.apply {
+                    adapter = DataBindingAdapter(viewLifecycleOwner, viewModel)
+                            .addDataBinding(DataBindingAdapter.MyDataBinding<ShopRecycleItemDetailGetBinding>(
+                                    R.layout.shop_recycle_item_detail_get, 0, viewModel.getRecordDataSize(),
+                                    bindData = { position, dataBinding ->
+                                        dataBinding?.let {
+                                            it.viewModel = viewModel
+                                            it.position = position
+                                        }
+                                    }))
 
-            layoutManager = LinearLayoutManager(this.context)
+                    layoutManager = LinearLayoutManager(this.context)
 
-            layoutAnimation = LayoutAnimationController(AnimationUtils.loadAnimation(context,R.anim.shop_loding_in_stamp_detail_rv))
-        }
+                    layoutAnimation = LayoutAnimationController(AnimationUtils.loadAnimation(context, R.anim.shop_loding_in_stamp_detail_rv))
+                }
+        })
     }
 }

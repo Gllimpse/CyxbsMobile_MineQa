@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Typeface
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import android.view.animation.DecelerateInterpolator
 import com.mredrock.cyxbs.common.utils.extensions.sp
@@ -88,7 +89,11 @@ class FlipTextView(context: Context, attributes: AttributeSet) : View(context,at
         /**
          * 根据数字获取字符数组
          */
-        val textArray = currNum.toString().toCharArray()
+        var preText = currNum.toString()
+        repeat(6-preText.length){
+            preText= "0$preText"
+        }
+        val textArray = preText.toCharArray()
         repeat(6){
 
             /**
@@ -115,4 +120,5 @@ class FlipTextView(context: Context, attributes: AttributeSet) : View(context,at
     fun setDuration(duration: Int){
         flipDuration = duration
     }
+
 }

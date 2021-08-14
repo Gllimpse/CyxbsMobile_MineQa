@@ -1,5 +1,6 @@
 package com.mredrock.cyxbs.shop.pages.stampcenter.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.aefottt.module_shop.R
@@ -8,12 +9,18 @@ import com.mredrock.cyxbs.common.utils.extensions.mapOrThrowApiException
 import com.mredrock.cyxbs.common.utils.extensions.safeSubscribeBy
 import com.mredrock.cyxbs.common.utils.extensions.setSchedulers
 import com.mredrock.cyxbs.common.viewmodel.BaseViewModel
+import com.mredrock.cyxbs.mine.TestRetrofit
+import com.mredrock.cyxbs.shop.bean.CenterResp
 import com.mredrock.cyxbs.shop.bean.CenterShop
 import com.mredrock.cyxbs.shop.bean.CenterTask
 import com.mredrock.cyxbs.shop.config.ShopConfig
 import com.mredrock.cyxbs.shop.network.ApiService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ShopViewModel : BaseViewModel() {
+    val isSuccess = MutableLiveData<Boolean>()
     /**
      * 所有装饰商品数据
      */
@@ -37,62 +44,101 @@ class ShopViewModel : BaseViewModel() {
     /**
      * 用户邮票数量
      */
-    private val _stampCount =MutableLiveData<Int>()
-    val stampCount : LiveData<Int>
-    get() = _stampCount
+    val stampCount =MutableLiveData<Int>()
+//    val stampCount : LiveData<Int>
+//    get() = _stampCount
 
     /**
      * 是否有未领取商品
      */
     private val isUnGet = MutableLiveData<Boolean>()
 
-
     /**
      * 网络请求，获取邮票中心数据
      */
     fun getCenterData(){
-        ApiGenerator.getCommonApiService(ApiService::class.java)
+        TestRetrofit.testRetrofit.create(ApiService::class.java)
                 .getCenterData()
-                .mapOrThrowApiException()
-                .setSchedulers()
-                .doOnSubscribe {
-                }
-                .doOnError {
-                    toastEvent.value = R.string.shop_good_toast_get_all_decoration_info_error
-                }
-                .safeSubscribeBy {
-                    val decorArray = ArrayList<CenterShop>()
-                    val stampArray = ArrayList<CenterShop>()
-                    val todayArray = ArrayList<CenterTask>()
-                    val moreArray = ArrayList<CenterTask>()
+                .enqueue(object :Callback<CenterResp>{
+                    override fun onResponse(call: Call<CenterResp>, response: Response<CenterResp>) {
+//                        Log.d("TAG","(ShopViewModel.kt:61)->${response.body().toString()}")
+                        val decorArray = ArrayList<CenterShop>()
+                        val stampArray = ArrayList<CenterShop>()
+                        val todayArray = ArrayList<CenterTask>()
+                        val moreArray = ArrayList<CenterTask>()
+                        response.body()?.let {
+                            if (it.status == 10000) {
+                                it.data.apply {
+                                    repeat(shop.size) { index ->
+                                        when (shop[index].type) {
+                                            ShopConfig.SHOP_GOOD_TYPE_DECORATION -> decorArray.add(shop[index])
+                                            ShopConfig.SHOP_GOOD_TYPE_STAMP_GOOD -> stampArray.add(shop[index])
+                                        }
+                                    }
+                                    decorationData.value = decorArray
+                                    stampGoodData.value = stampArray
 
-                    if (it.status == 10000) {
-                        it.data.apply {
-                            repeat(shop.size) { index ->
-                                when (shop[index].type) {
-                                    ShopConfig.SHOP_GOOD_TYPE_DECORATION -> decorArray.add(shop[index])
-                                    ShopConfig.SHOP_GOOD_TYPE_STAMP_GOOD -> stampArray.add(shop[index])
+                                    repeat(task.size) { index ->
+                                        when (task[index].type) {
+                                            "base" -> todayArray.add(task[index])
+                                            "more" -> moreArray.add(task[index])
+                                        }
+                                    }
+                                    todayTaskData.value = todayArray
+                                    moreTaskData.value = moreArray
+
+                                    Log.d("TAG","(ShopViewModel.kt:90)->tsize${todayArray.size}mSize${moreArray.size}")
+                                    stampCount.value = userAmount
+                                    isUnGet.value = unGotGood
+                                    isSuccess.value = true
                                 }
+                            } else {
+                                toastEvent.value = R.string.shop_good_toast_get_all_decoration_info_error
                             }
-                            decorationData.postValue(decorArray)
-                            stampGoodData.postValue(stampArray)
-
-                            repeat(task.size) { index ->
-                                when (task[index].type) {
-                                    "base" -> todayArray.add(task[index])
-                                    "more" -> moreArray.add(task[index])
-                                }
-                            }
-                            todayTaskData.postValue(todayArray)
-                            moreTaskData.postValue(moreArray)
-
-                            _stampCount.postValue(userAmount)
-                            isUnGet.postValue(unGotGood)
                         }
-                    } else {
-                        toastEvent.value = R.string.shop_good_toast_get_all_decoration_info_error
                     }
-                }
+
+                    override fun onFailure(call: Call<CenterResp>, t: Throwable) {
+                    }
+
+                })
+        Log.d("TAG","(ShopViewModel.kt:103)->decorCount${getDecorationCount()}taskcount${getTodayTaskCount()}")
+//                .mapOrThrowApiException()
+//                .setSchedulers()
+//                .safeSubscribeBy {
+//                    Log.d("TAG","(ShopViewModel.kt:61)->$it")
+//                    val decorArray = ArrayList<CenterShop>()
+//                    val stampArray = ArrayList<CenterShop>()
+//                    val todayArray = ArrayList<CenterTask>()
+//                    val moreArray = ArrayList<CenterTask>()
+//
+//                    if (it.status == 10000) {
+//                        it.data.apply {
+//                            repeat(shop.size) { index ->
+//                                when (shop[index].type) {
+//                                    ShopConfig.SHOP_GOOD_TYPE_DECORATION -> decorArray.add(shop[index])
+//                                    ShopConfig.SHOP_GOOD_TYPE_STAMP_GOOD -> stampArray.add(shop[index])
+//                                }
+//                            }
+//                            decorationData.postValue(decorArray)
+//                            stampGoodData.postValue(stampArray)
+//
+//                            repeat(task.size) { index ->
+//                                when (task[index].type) {
+//                                    "base" -> todayArray.add(task[index])
+//                                    "more" -> moreArray.add(task[index])
+//                                }
+//                            }
+//                            todayTaskData.postValue(todayArray)
+//                            moreTaskData.postValue(moreArray)
+//
+//                            _stampCount.postValue(userAmount)
+//                            isUnGet.postValue(unGotGood)
+//                        }
+//                    } else {
+//                        toastEvent.value = R.string.shop_good_toast_get_all_decoration_info_error
+//                    }
+//                }
     }
 
     /**
@@ -100,10 +146,12 @@ class ShopViewModel : BaseViewModel() {
      */
     fun getGoodData(type: Int,position: Int) : CenterShop {
         return if (type == ShopConfig.SHOP_GOOD_TYPE_DECORATION){
-            decorationData.value?.get(position) ?: CenterShop("","","",0,0,ShopConfig.SHOP_GOOD_TYPE_DECORATION)
+            Log.d("TAG","(ShopViewModel.kt:147)->====${decorationData.value?.get(position).toString()}")
+            decorationData.value?.get(position) ?: CenterShop(0,"","",0,0,ShopConfig.SHOP_GOOD_TYPE_DECORATION)
         }
+
         else {
-            stampGoodData.value?.get(position) ?: CenterShop("","","",0,0,ShopConfig.SHOP_GOOD_TYPE_STAMP_GOOD)
+            stampGoodData.value?.get(position) ?: CenterShop(0,"","",0,0,ShopConfig.SHOP_GOOD_TYPE_STAMP_GOOD)
         }
     }
 
@@ -116,7 +164,7 @@ class ShopViewModel : BaseViewModel() {
     /**
      * 根据type获取任务数据
      */
-    fun getTaskData(type: Int,position: Int) : CenterTask {
+    fun getTaskData(type: String,position: Int) : CenterTask {
         return if (type == ShopConfig.SHOP_TASK_TYPE_TODAY) {
             todayTaskData.value?.get(position) ?: CenterTask("",0,0,"",ShopConfig.SHOP_TASK_TYPE_TODAY,0)
         } else {
@@ -150,5 +198,5 @@ class ShopViewModel : BaseViewModel() {
     /**
      * 获取更多任务数量
      */
-    fun getMoreTaskCount(): Int = decorationData.value?.size ?:0
+    fun getMoreTaskCount(): Int = moreTaskData.value?.size ?:0
 }

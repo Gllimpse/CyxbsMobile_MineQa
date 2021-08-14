@@ -39,13 +39,11 @@ class ShopActivity : BaseViewModelActivity<ShopViewModel>() {
         setExitSharedElementCallback(MaterialContainerTransformSharedElementCallback())
         window.sharedElementsUseOverlay = false
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.shop_activity_main)
-        setTheme(R.style.Theme_MaterialComponents)
         // 绑定布局,数据
         binding = DataBindingUtil.setContentView(this, R.layout.shop_activity_main)
-        binding.apply {
-            lifecycleOwner = this@ShopActivity
-            this.viewModel = viewModel
+        binding.let {
+            it.lifecycleOwner = this@ShopActivity
+            it.viewModel = viewModel
         }
 
         viewModel.initData()
@@ -56,6 +54,7 @@ class ShopActivity : BaseViewModelActivity<ShopViewModel>() {
 
     private fun initObserve(){
         viewModel.stampCount.observe(this) {
+            Log.d("TAG","(ShopActivity.kt:57)->stamp======$it")
             shop_main_tv_banner_number.setCurrNum(it)
         }
     }
@@ -113,6 +112,7 @@ class ShopActivity : BaseViewModelActivity<ShopViewModel>() {
                         )
                         val todayTimeStamp = sdf.format(System.currentTimeMillis()).split("月")[1]
                         if (this.getString("tab_time_stamp", "") != todayTimeStamp) {
+                            setTheme(R.style.Theme_MaterialComponents)
                             val badge = orCreateBadge
                             try {
                                 val field = badge.javaClass.getDeclaredField("badgeRadius")
@@ -139,7 +139,7 @@ class ShopActivity : BaseViewModelActivity<ShopViewModel>() {
         // 开启数字动画
         shop_main_tv_banner_number.post {
             shop_main_tv_banner_number.setCurrNum(viewModel.stampCount.value ?:0)
-            shop_main_tv_banner_number.setDuration(900)
+            shop_main_tv_banner_number.setDuration(800)
         }
 
         // 设置字体

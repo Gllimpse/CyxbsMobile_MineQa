@@ -6,9 +6,9 @@ import java.io.Serializable
 data class GoodResp(
         @SerializedName("data")
         val data: GoodInfo,
-        @SerializedName("data")
+        @SerializedName("info")
         val info: String,
-        @SerializedName("data")
+        @SerializedName("status")
         val status: Int
 )  : Serializable
 

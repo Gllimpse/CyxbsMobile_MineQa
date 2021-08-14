@@ -63,7 +63,7 @@
             android:layout_height="22dp"
             android:layout_marginStart="4dp"
             android:layout_marginTop="57dp"
-            android:text="@{view_model.stampCount}"
+            android:text="@{String.valueOf(view_model.stampCount)}"
             android:textColor="#E9F2FB"
             android:textSize="17sp"
             app:layout_constraintStart_toEndOf="@+id/shop_main_iv_my_stamps"

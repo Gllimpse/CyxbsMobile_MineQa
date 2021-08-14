@@ -38,7 +38,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="145dp"
                     android:scaleType="centerCrop"
-                    android:src="@{}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:background="@drawable/shop_bg_main_item_test"
@@ -52,7 +51,7 @@
                     android:gravity="center_vertical"
                     android:textColor="#15315B"
                     android:textSize="14sp"
-                    android:text="@{view_model.getGoodData(type)[position].title}"
+                    android:text="@{view_model.getGoodData(type,position).title}"
                     app:layout_constraintEnd_toEndOf="@+id/shop_item_iv_desc"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/shop_item_iv_desc" />
@@ -64,7 +63,7 @@
                     android:gravity="center_vertical"
                     android:textColor="#B315315B"
                     android:textSize="11sp"
-                    android:text='@{"库存量："+view_model.getGoodData(type)[position].amount}'
+                    android:text='@{"库存量："+view_model.getGoodData(type,position).amount}'
                     app:layout_constraintEnd_toEndOf="@+id/shop_item_tv_title"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/shop_item_tv_title"
@@ -90,7 +89,7 @@
                     android:gravity="center_vertical"
                     android:textColor="#5177FF"
                     android:textSize="14sp"
-                    android:text="@{view_model.getGoodData(type)[position].price}"
+                    android:text="@{String.valueOf(view_model.getGoodData(type,position).price)}"
                     app:layout_constraintBottom_toBottomOf="@+id/shop_item_iv_stamp"
                     app:layout_constraintStart_toEndOf="@+id/shop_item_iv_stamp"
                     app:layout_constraintTop_toTopOf="@+id/shop_item_iv_stamp" />
