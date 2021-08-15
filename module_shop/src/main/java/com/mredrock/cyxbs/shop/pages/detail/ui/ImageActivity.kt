@@ -81,12 +81,8 @@ class ImageActivity : BaseActivity() {
                 super.onPageSelected(position)
                 curPos = position
                 shop_image_tv.text = "${curPos + 1} / ${picUrls.size}"
+                DetailActivity.changePos = curPos
             }
         })
-    }
-
-    override fun finish() {
-        setResult(RESULT_OK, Intent().apply { putExtra("pos", curPos) })
-        super.finish()
     }
 }

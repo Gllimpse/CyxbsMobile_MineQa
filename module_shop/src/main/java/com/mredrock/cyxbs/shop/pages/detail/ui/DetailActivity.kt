@@ -46,6 +46,7 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
     private var lastPos = 0
 
     companion object {
+        var changePos = 0
         fun activityStart(activity: ShopActivity , id: Int, count: Int, shareElement: View) {
             activity.startActivityForResult(
                 Intent(activity, DetailActivity::class.java)
@@ -122,14 +123,13 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
     private fun initVp() {
         // 获取邮货/装饰详情的图片地址
         val picUrls = viewModel.goodInfo.value?.urls ?: ArrayList()
-        Log.d("TAG","(DetailActivity.kt:113)->======${picUrls.size}")
         // 初始化Banner下方的圆点
         initBannerDots(picUrls.size)
         // 设置ViewPager
         shop_detail_vp_banner.adapter = BannerPagerAdapter(picUrls).apply {
             photoTapClick = {
                 // 共享元素跳转
-                this@DetailActivity.startActivityForResult(
+                this@DetailActivity.startActivity(
                     Intent(this@DetailActivity, ImageActivity::class.java)
                         .apply {
                             // 将图片地址和当前图片位置作为参数传入
@@ -141,7 +141,7 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
                                 putExtra("picUrls", picUrlsArray)
                                 putExtra("pos", curPos)
                             }
-                        }, 1,
+                        },
                     ActivityOptions.makeSceneTransitionAnimation(
                         this@DetailActivity,
                         shop_detail_vp_banner,
@@ -156,13 +156,12 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
             ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                curPos = position
-                shop_detail_ll_banner_dots.getChildAt(position)
-                    .setBackgroundResource(R.drawable.shop_shape_banner_dots_selected)
-                Log.d("TAG","(DetailActivity.kt:153)->$curPos $lastPos")
                 shop_detail_ll_banner_dots.getChildAt(lastPos)
                     .setBackgroundResource(R.drawable.shop_shape_banner_dots)
                 lastPos = position
+                curPos = position
+                shop_detail_ll_banner_dots.getChildAt(position)
+                    .setBackgroundResource(R.drawable.shop_shape_banner_dots_selected)
             }
         })
 
@@ -192,12 +191,9 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 1 && resultCode == RESULT_OK) {
-            curPos = data?.getIntExtra("pos", 0) ?: 0
-            shop_detail_vp_banner.setCurrentItem(curPos, false)
-        }
+    override fun onRestart() {
+        super.onRestart()
+        shop_detail_vp_banner.setCurrentItem(changePos, false)
     }
 
 }

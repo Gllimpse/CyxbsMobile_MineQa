@@ -27,7 +27,7 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="0dp"
             android:layout_gravity="center"
-            app:cardBackgroundColor="@color/shop_white">
+            app:cardBackgroundColor="@color/shop_center_recycler_good_card_bg_color">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
