@@ -69,17 +69,6 @@ class DetailViewModel : BaseViewModel() {
     }
 
     /**
-     * 兑换按钮点击事件
-     */
-    fun onExchangeClick(v: View) {
-        // 单击判断
-        v.setOnSingleClickListener {
-            // 第一次点击，弹出是否确认兑换对话框
-            dialogEvent.value = ShopConfig.SHOP_DETAIL_DIALOG_FIRST_EXCHANGE
-        }
-    }
-
-    /**
      * 兑换商品 网络请求判断并将请求结果回馈到Activity
      */
     fun exchangeGood(id: Int) {

@@ -44,6 +44,8 @@
             android:layout_marginTop="55dp"
             android:layout_marginEnd="16dp"
             android:padding="2dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
             android:background="@drawable/shop_shape_tv_stamp_counts"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -68,12 +70,12 @@
 
         <View
             android:id="@+id/shop_main_bg_mask"
-            android:layout_width="120dp"
+            android:layout_width="140dp"
             android:layout_height="27dp"
             android:layout_marginTop="55dp"
             android:layout_marginEnd="16dp"
             android:background="@color/shop_activity_bg_color"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/shop_main_ll_my_stamps"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout

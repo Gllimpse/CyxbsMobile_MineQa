@@ -89,6 +89,9 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         shop_detail_iv_back.setOnSingleClickListener { finishAfterTransition() }
+        shop_detail_tv_exchange.setOnClickListener {
+            viewModel.dialogEvent.value = ShopConfig.SHOP_DETAIL_DIALOG_FIRST_EXCHANGE
+        }
         initObserve()
     }
 
