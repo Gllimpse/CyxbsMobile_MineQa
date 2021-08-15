@@ -42,7 +42,7 @@ class DataBindingAdapter (private val lifecycleOwner: LifecycleOwner) : Recycler
         }
         val holder = DataBindingViewHolder(binding,dataBinding)
         holder.itemView.setOnClickListener {
-            binding?.onItemClick(holder.layoutPosition,dataBinding)
+            binding?.onItemClick(getIndex(holder.layoutPosition),dataBinding)
         }
         return holder
     }
@@ -52,15 +52,21 @@ class DataBindingAdapter (private val lifecycleOwner: LifecycleOwner) : Recycler
      * 根据position获取当前order对应数据源的索引值
      */
     override fun onBindViewHolder(holder: DataBindingViewHolder, position: Int) {
+        holder.bindData(getIndex(position))
+    }
+
+    private fun getIndex(position: Int): Int{
         var sum = 0
+        var index  = 0
         for (order in 0 until maxOrder) {
             if (position < sum + (orderSizeMap[order]
                             ?: throw Exception("can not find key in the orderSizeMap"))) {
-                holder.bindData(position - sum)
+                index = position - sum
                 break
             } else sum += (orderSizeMap[order]
                     ?: throw Exception("can not find key in the orderSizeMap"))
         }
+        return index
     }
 
     /**

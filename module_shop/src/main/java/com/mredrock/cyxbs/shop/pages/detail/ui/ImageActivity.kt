@@ -82,6 +82,7 @@ class ImageActivity : BaseActivity() {
                 curPos = position
                 shop_image_tv.text = "${curPos + 1} / ${picUrls.size}"
                 DetailActivity.changePos = curPos
+                Log.d("TAG","(ImageActivity.kt:85)->$curPos")
             }
         })
     }

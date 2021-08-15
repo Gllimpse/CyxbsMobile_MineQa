@@ -129,7 +129,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="17dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="36dp"
             android:text="@string/shop_detail_equity_desc_title"
             android:textColor="@color/shop_detail_right_color"
             android:textSize="14sp"

@@ -161,6 +161,7 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
                     .setBackgroundResource(R.drawable.shop_shape_banner_dots)
                 lastPos = position
                 curPos = position
+                changePos = position
                 shop_detail_ll_banner_dots.getChildAt(position)
                     .setBackgroundResource(R.drawable.shop_shape_banner_dots_selected)
             }
@@ -194,6 +195,7 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
 
     override fun onRestart() {
         super.onRestart()
+        Log.d("TAG","(DetailActivity.kt:197)->$changePos")
         shop_detail_vp_banner.setCurrentItem(changePos, false)
     }
 
