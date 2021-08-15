@@ -44,7 +44,7 @@ class ShopViewModel : BaseViewModel() {
     /**
      * 是否有未领取商品
      */
-    private val isUnGet = MutableLiveData<Boolean>()
+    val bannerData = MutableLiveData<String>()
 
     /**
      * 网络请求，获取邮票中心数据
@@ -81,7 +81,12 @@ class ShopViewModel : BaseViewModel() {
                                     moreTaskData.value = moreArray
 
                                     stampCount.value = userAmount
-                                    isUnGet.value = unGotGood
+                                    bannerData.value = if (unGotGood) {
+                                        "你还有待领取的商品，请尽快领取"
+                                    }else {
+                                        ""
+                                    }
+                                    Log.d("TAG","(ShopViewModel.kt:85)->$unGotGood")
                                     isSuccess.value = true
                                 }
                             } else {
@@ -108,12 +113,6 @@ class ShopViewModel : BaseViewModel() {
             stampGoodData.value?.get(position) ?: CenterShop(0,"","",0,0,ShopConfig.SHOP_GOOD_TYPE_STAMP_GOOD)
         }
     }
-
-    /**
-     * 获取未领取商品提示语
-     */
-    fun getBannerData() : String = if (isUnGet.value == true) "你还有待领取的商品，请尽快领取"
-            else ""
 
     /**
      * 根据type获取任务数据
