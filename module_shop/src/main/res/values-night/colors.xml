@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- 商品点击共享元素跳转动画的背景颜色 -->
+    <color name="shop_shared_element_start_bg_color">#000000</color>
     <!-- 邮票中心Activity背景颜色 -->
     <color name="shop_activity_bg_color">#000000</color>
     <!-- 邮票中心标题 -->
@@ -26,6 +28,10 @@
     <color name="shop_center_recycler_task_desc_color">#66F0F0F2</color>
     <!-- 邮票中心任务列表更多任务标题 -->
     <color name="shop_center_recycler_more_task_color">#F0F0F2</color>
+    <!-- 邮票中心任务已完成文字颜色 -->
+    <color name="shop_center_recycler_task_finished_text_color">#000101</color>
+    <!-- 邮票中心进度条背景颜色 -->
+    <color name="shop_center_task_progress_color">#33E5E5E5</color>
 
     <!-- 邮票详情名称颜色 -->
     <color name="shop_detail_name_color">#F0F0F2</color>
@@ -54,9 +60,9 @@
     <!-- 兑换详情背景颜色 -->
     <color name="shop_exchange_detail_bg_color">#000000</color>
     <!-- 兑换详情商品详情颜色 -->
-    <color name="shop_exchange_detail_good_detail_color">#F0F0F2</color>
+    <color name="shop_exchange_detail_good_detail_color">#FFFFFF</color>
     <!-- 兑换详情描述文字颜色 -->
-    <color name="shop_exchange_detail_desc_color">#F0F0F2</color>
+    <color name="shop_exchange_detail_desc_color">#BFF0F0F2</color>
 
     <!-- Dialog背景颜色 -->
     <color name="shop_dialog_bg_color">#1C1C1C</color>

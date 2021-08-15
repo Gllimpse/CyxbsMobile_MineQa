@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.View
 import android.view.Window
 import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.viewpager2.widget.ViewPager2
@@ -69,13 +70,13 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
             addTarget(android.R.id.content)
             fadeMode = MaterialContainerTransform.FADE_MODE_THROUGH
             duration = 300L
-            setAllContainerColors(Color.WHITE)
+            setAllContainerColors(ContextCompat.getColor(this@DetailActivity, R.color.shop_shared_element_start_bg_color))
         }
         window.sharedElementExitTransition = MaterialContainerTransform().apply {
             addTarget(android.R.id.content)
             fadeMode = MaterialContainerTransform.FADE_MODE_THROUGH
             duration = 250L
-            setAllContainerColors(Color.WHITE)
+            setAllContainerColors(ContextCompat.getColor(this@DetailActivity, R.color.shop_shared_element_start_bg_color))
         }
         super.onCreate(savedInstanceState)
         // 获取传入的数据

@@ -62,7 +62,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="9dp"
             app:indicatorColor="#7D8AFF"
-            app:trackColor="#E5E5E5"
+            app:trackColor="@color/shop_center_task_progress_color"
             android:interpolator="@android:anim/decelerate_interpolator"
             android:progress="@{task.curProgress}"
             android:max="@{task.maxProgress}"
