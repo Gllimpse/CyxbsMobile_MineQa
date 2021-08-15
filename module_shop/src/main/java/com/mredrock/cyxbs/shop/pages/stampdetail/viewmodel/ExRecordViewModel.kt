@@ -27,9 +27,7 @@ class ExRecordViewModel : BaseViewModel() {
 
     val isSuccess = MutableLiveData<Boolean>()
 
-    fun getExRecordData(position: Int) = Transformations.map(exRecordData) {
-            it[position]
-    }
+    fun getExRecordData(position: Int) = exRecordData.value?.get(position)
 
     fun exRecordDataSize(): Int{
         return exRecordData.value?.size ?:0
@@ -44,18 +42,18 @@ class ExRecordViewModel : BaseViewModel() {
                     }
 
                     override fun onResponse(call: Call<ExRecordResp>, response: Response<ExRecordResp>) {
-                        Log.d("TAG","(ExRecordViewModel.kt:44)->${response.body().toString()}")
                         response.body()?.let {
                             if (it.status == ShopConfig.SHOP_STATUS_GET_EXCHANGE_INFO_SUCCESS){
                                 // 请求成功
                                 exRecordData.value = it.data
+                                Log.d("TAG","(ExRecordViewModel.kt:52)->${exRecordData.value}")
                                 isSuccess.value = true
                             }else{
                                 toastEvent.value = R.string.shop_detail_toast_get_all_ex_record_error
+                                isSuccess.value = false
                             }
                         }
                     }
                 })
     }
-
 }

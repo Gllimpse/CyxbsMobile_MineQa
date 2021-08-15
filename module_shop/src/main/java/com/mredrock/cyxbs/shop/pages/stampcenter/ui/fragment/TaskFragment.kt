@@ -1,7 +1,6 @@
 package com.mredrock.cyxbs.shop.pages.stampcenter.ui.fragment
 
-import android.animation.ObjectAnimator
-import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -37,6 +36,7 @@ class TaskFragment: BaseViewModelFragment<ShopViewModel>() {
         initView()
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private fun initView() {
 
         viewModel.isSuccess.observe(viewLifecycleOwner, Observer {isSuccess ->
@@ -47,14 +47,25 @@ class TaskFragment: BaseViewModelFragment<ShopViewModel>() {
                                 R.layout.shop_recycle_item_task, 0, viewModel.getTodayTaskCount(),
                                 bindData = { position, binding ->
                                     binding?.let {
-                                        it.viewModel = viewModel
                                         it.position = position
                                         it.type = ShopConfig.SHOP_TASK_TYPE_TODAY
+                                        it.viewModel = viewModel
+                                        it.shopItemTaskTvGo.apply {
+                                            if (viewModel.getTaskData(ShopConfig.SHOP_TASK_TYPE_TODAY,position).curProgress == viewModel.getTaskData(ShopConfig.SHOP_TASK_TYPE_TODAY,position).maxProgress){
+                                                text = "已完成"
+                                                background = context.getDrawable(R.drawable.shop_bg_recycle_item_btn_go_finished)
+                                                isClickable = false
+                                            }
+                                        }
+
+
                                         it.shopItemTaskProgressbar.apply {
                                             post {
                                                 setProgressCompat(viewModel.getTaskData(ShopConfig.SHOP_TASK_TYPE_TODAY,position).curProgress,true)
                                             }
+                                            progress = viewModel.getTaskData(ShopConfig.SHOP_TASK_TYPE_TODAY,position).curProgress
                                         }
+
                                     }
                                 }))
                         .addDataBinding(DataBindingAdapter.MyDataBinding<ShopRecycleItemTitleTaskBinding>(
@@ -66,16 +77,18 @@ class TaskFragment: BaseViewModelFragment<ShopViewModel>() {
                                         it.viewModel = viewModel
                                         it.position = position
                                         it.type = ShopConfig.SHOP_TASK_TYPE_MORE
-                                        val currProgress = binding.shopItemTaskProgressbar.progress
-                                        ValueAnimator.ofInt(0,1)
-                                                .apply {
-                                                    addUpdateListener {
-                                                        binding.shopItemTaskProgressbar.progress =
-                                                                currProgress * (animatedValue as Int)
-                                                    }
-                                                    duration = 500
-                                                    start()
-                                                }
+                                        it.shopItemTaskTvGo.apply {
+                                            if (viewModel.getTaskData(ShopConfig.SHOP_TASK_TYPE_MORE,position).curProgress == viewModel.getTaskData(ShopConfig.SHOP_TASK_TYPE_MORE,position).maxProgress){
+                                                text = "已完成"
+                                                background = context.getDrawable(R.drawable.shop_bg_recycle_item_btn_go_finished)
+                                                isClickable = false
+                                            }
+                                        }
+                                        it.shopItemTaskProgressbar.apply {
+                                            post {
+                                                setProgressCompat(viewModel.getTaskData(ShopConfig.SHOP_TASK_TYPE_MORE,position).curProgress,true)
+                                            }
+                                        }
                                     }
                                 }))
                 shop_task_rv_tasks.apply {

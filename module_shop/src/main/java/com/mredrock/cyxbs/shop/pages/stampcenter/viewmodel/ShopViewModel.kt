@@ -70,6 +70,7 @@ class ShopViewModel : BaseViewModel() {
                             if (it.status == 10000) {
                                 it.data.apply {
                                     repeat(shop.size) { index ->
+                                        Log.d("TAG","(ShopViewModel.kt:73)->======${shop[index].title}")
                                         when (shop[index].type) {
                                             ShopConfig.SHOP_GOOD_TYPE_DECORATION -> decorArray.add(shop[index])
                                             ShopConfig.SHOP_GOOD_TYPE_STAMP_GOOD -> stampArray.add(shop[index])
@@ -87,7 +88,6 @@ class ShopViewModel : BaseViewModel() {
                                     todayTaskData.value = todayArray
                                     moreTaskData.value = moreArray
 
-                                    Log.d("TAG","(ShopViewModel.kt:90)->tsize${todayArray.size}mSize${moreArray.size}")
                                     stampCount.value = userAmount
                                     isUnGet.value = unGotGood
                                     isSuccess.value = true
@@ -97,48 +97,9 @@ class ShopViewModel : BaseViewModel() {
                             }
                         }
                     }
-
                     override fun onFailure(call: Call<CenterResp>, t: Throwable) {
                     }
-
                 })
-        Log.d("TAG","(ShopViewModel.kt:103)->decorCount${getDecorationCount()}taskcount${getTodayTaskCount()}")
-//                .mapOrThrowApiException()
-//                .setSchedulers()
-//                .safeSubscribeBy {
-//                    Log.d("TAG","(ShopViewModel.kt:61)->$it")
-//                    val decorArray = ArrayList<CenterShop>()
-//                    val stampArray = ArrayList<CenterShop>()
-//                    val todayArray = ArrayList<CenterTask>()
-//                    val moreArray = ArrayList<CenterTask>()
-//
-//                    if (it.status == 10000) {
-//                        it.data.apply {
-//                            repeat(shop.size) { index ->
-//                                when (shop[index].type) {
-//                                    ShopConfig.SHOP_GOOD_TYPE_DECORATION -> decorArray.add(shop[index])
-//                                    ShopConfig.SHOP_GOOD_TYPE_STAMP_GOOD -> stampArray.add(shop[index])
-//                                }
-//                            }
-//                            decorationData.postValue(decorArray)
-//                            stampGoodData.postValue(stampArray)
-//
-//                            repeat(task.size) { index ->
-//                                when (task[index].type) {
-//                                    "base" -> todayArray.add(task[index])
-//                                    "more" -> moreArray.add(task[index])
-//                                }
-//                            }
-//                            todayTaskData.postValue(todayArray)
-//                            moreTaskData.postValue(moreArray)
-//
-//                            _stampCount.postValue(userAmount)
-//                            isUnGet.postValue(unGotGood)
-//                        }
-//                    } else {
-//                        toastEvent.value = R.string.shop_good_toast_get_all_decoration_info_error
-//                    }
-//                }
     }
 
     /**
@@ -146,10 +107,8 @@ class ShopViewModel : BaseViewModel() {
      */
     fun getGoodData(type: Int,position: Int) : CenterShop {
         return if (type == ShopConfig.SHOP_GOOD_TYPE_DECORATION){
-            Log.d("TAG","(ShopViewModel.kt:147)->====${decorationData.value?.get(position).toString()}")
             decorationData.value?.get(position) ?: CenterShop(0,"","",0,0,ShopConfig.SHOP_GOOD_TYPE_DECORATION)
         }
-
         else {
             stampGoodData.value?.get(position) ?: CenterShop(0,"","",0,0,ShopConfig.SHOP_GOOD_TYPE_STAMP_GOOD)
         }
@@ -199,4 +158,6 @@ class ShopViewModel : BaseViewModel() {
      * 获取更多任务数量
      */
     fun getMoreTaskCount(): Int = moreTaskData.value?.size ?:0
+
+
 }

@@ -46,7 +46,7 @@ data class CenterTask(
 data class CenterShop(
     @SerializedName("id")
     val id: Int, // 商品id
-    @SerializedName("shop")
+    @SerializedName("title")
     val title: String, // 商品名称
     @SerializedName("url")
     val imgUrl: String, // 商品图片地址

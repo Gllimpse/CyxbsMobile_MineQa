@@ -7,6 +7,7 @@
         <activity android:name="com.mredrock.cyxbs.shop.pages.detail.ui.DetailActivity"/>
         <activity android:name="com.mredrock.cyxbs.shop.pages.stampdetail.ui.activity.StampDetailActivity" />
         <activity android:name="com.mredrock.cyxbs.shop.pages.detail.ui.ImageActivity" />
+        <activity android:name="com.mredrock.cyxbs.shop.pages.stampdetail.ui.activity.ExDetailActivity"/>
     </application>
 
 </manifest>
