@@ -62,6 +62,7 @@ class ShopViewModel : BaseViewModel() {
                             if (it.status == 10000) {
                                 it.data.apply {
                                     repeat(shop.size) { index ->
+                                        Log.d("TAG","(ShopViewModel.kt:73)->======${shop[index].title}")
                                         when (shop[index].type) {
                                             ShopConfig.SHOP_GOOD_TYPE_DECORATION -> decorArray.add(shop[index])
                                             ShopConfig.SHOP_GOOD_TYPE_STAMP_GOOD -> stampArray.add(shop[index])
@@ -79,7 +80,6 @@ class ShopViewModel : BaseViewModel() {
                                     todayTaskData.value = todayArray
                                     moreTaskData.value = moreArray
 
-                                    Log.d("TAG","(ShopViewModel.kt:90)->tsize${todayArray.size}mSize${moreArray.size}")
                                     stampCount.value = userAmount
                                     isUnGet.value = unGotGood
                                     isSuccess.value = true
@@ -90,12 +90,10 @@ class ShopViewModel : BaseViewModel() {
                             }
                         }
                     }
-
                     override fun onFailure(call: Call<CenterResp>, t: Throwable) {
                         toastEvent.value = R.string.shop_good_toast_get_all_decoration_info_error
                         isSuccess.value = false
                     }
-
                 })
     }
 
@@ -106,7 +104,6 @@ class ShopViewModel : BaseViewModel() {
         return if (type == ShopConfig.SHOP_GOOD_TYPE_DECORATION){
             decorationData.value?.get(position) ?: CenterShop(0,"","",0,0,ShopConfig.SHOP_GOOD_TYPE_DECORATION)
         }
-
         else {
             stampGoodData.value?.get(position) ?: CenterShop(0,"","",0,0,ShopConfig.SHOP_GOOD_TYPE_STAMP_GOOD)
         }
@@ -156,4 +153,6 @@ class ShopViewModel : BaseViewModel() {
      * 获取更多任务数量
      */
     fun getMoreTaskCount(): Int = moreTaskData.value?.size ?:0
+
+
 }

@@ -15,6 +15,7 @@ import com.mredrock.cyxbs.common.ui.BaseViewModelFragment
 import com.mredrock.cyxbs.shop.adapter.DataBindingAdapter
 import com.mredrock.cyxbs.shop.config.ShopConfig
 import com.mredrock.cyxbs.shop.pages.detail.ui.DetailActivity
+import com.mredrock.cyxbs.shop.pages.stampcenter.ui.activity.ShopActivity
 import com.mredrock.cyxbs.shop.pages.stampcenter.viewmodel.ShopViewModel
 import kotlinx.android.synthetic.main.shop_fragment_shop.*
 
@@ -59,10 +60,10 @@ class ShopFragment: BaseViewModelFragment<ShopViewModel>() {
                                     }
                                 },
                                 onItemClick = { _, binding ->
-                                    context?.let { it1 ->
+                                    (activity as ShopActivity).let { it1 ->
                                         binding?.let {
                                             DetailActivity.activityStart(it1,
-                                                    viewModel.getGoodData(it.type ?: ShopConfig.SHOP_GOOD_TYPE_DECORATION,it.position ?:0).id , it.shopItemIvDesc)
+                                                    viewModel.getGoodData(it.type ?: ShopConfig.SHOP_GOOD_TYPE_DECORATION,it.position ?:0).id ,viewModel.stampCount.value ?:0, it.shopItemIvDesc)
                                         }
                                     }
                                 }))
@@ -85,10 +86,10 @@ class ShopFragment: BaseViewModelFragment<ShopViewModel>() {
                                     }
                                 },
                                 onItemClick = { _, binding ->
-                                    context?.let { it1 ->
+                                    (activity as ShopActivity).let { it1 ->
                                         binding?.let {
                                             DetailActivity.activityStart(it1,
-                                                    viewModel.getGoodData(it.type ?:ShopConfig.SHOP_GOOD_TYPE_STAMP_GOOD,it.position ?:0).id, it.shopItemIvDesc)
+                                                    viewModel.getGoodData(it.type ?:ShopConfig.SHOP_GOOD_TYPE_STAMP_GOOD,it.position ?:0).id,viewModel.stampCount.value ?:0, it.shopItemIvDesc)
                                         }
                                     }
                                 }))

@@ -184,6 +184,13 @@ class ShopActivity : BaseViewModelActivity<ShopViewModel>() {
             finish()
         }
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1 && resultCode == 2){
+            viewModel.stampCount.value = data?.getIntExtra("user_amount",viewModel.stampCount.value ?:0)
+        }
+    }
 }
 
 

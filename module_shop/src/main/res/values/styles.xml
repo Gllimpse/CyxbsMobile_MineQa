@@ -6,7 +6,7 @@
     </style>
 
     <style name="shop_tab_size">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
 </resources>

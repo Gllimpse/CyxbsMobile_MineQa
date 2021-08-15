@@ -1,6 +1,7 @@
 package com.mredrock.cyxbs.shop.pages.stampdetail.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,24 +34,25 @@ class ExRecordFragment : BaseViewModelFragment<ExRecordViewModel>() {
         viewModel.getExRecordData()
         viewModel.isSuccess.observe(viewLifecycleOwner, Observer {
             shop_exchange_rv.apply {
-                adapter = DataBindingAdapter(viewLifecycleOwner,viewModel)
+                adapter = DataBindingAdapter(viewLifecycleOwner, viewModel)
                         .addDataBinding(DataBindingAdapter.MyDataBinding<ShopRecycleItemDetailGoodBinding>(
-                                R.layout.shop_recycle_item_detail_good, 0,viewModel.exRecordDataSize(),
-                                bindData = {
-                                    position, dataBinding -> dataBinding?.let {
-                                    it.viewModel = viewModel
-                                    it.position = position
-                                }
+                                R.layout.shop_recycle_item_detail_good, 0, viewModel.exRecordDataSize(),
+                                bindData = { position, dataBinding ->
+                                    dataBinding?.let {
+                                        it.viewModel = viewModel
+                                        it.position = position
+                                    }
                                 },
                                 onItemClick = { position, _ ->
-                                    viewModel.getExRecordData(position).value?.let {
+                                    viewModel.getExRecordData(position)?.let {
                                         ExDetailActivity.activityStart(context, it)
                                     }
                                 }))
 
                 layoutManager = LinearLayoutManager(this.context)
 
-                layoutAnimation = LayoutAnimationController(AnimationUtils.loadAnimation(context,R.anim.shop_loding_in_stamp_detail_rv))
-        }})
+                layoutAnimation = LayoutAnimationController(AnimationUtils.loadAnimation(context, R.anim.shop_loding_in_stamp_detail_rv))
+
+            }})
     }
 }

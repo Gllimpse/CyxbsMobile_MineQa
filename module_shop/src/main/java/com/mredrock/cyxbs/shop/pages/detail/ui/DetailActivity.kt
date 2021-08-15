@@ -20,10 +20,12 @@ import com.google.android.material.transition.platform.MaterialContainerTransfor
 import com.mredrock.cyxbs.common.ui.BaseViewModelActivity
 import com.mredrock.cyxbs.common.utils.extensions.dp2px
 import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
+import com.mredrock.cyxbs.common.utils.extensions.startActivityForResult
 import com.mredrock.cyxbs.shop.config.ShopConfig
 import com.mredrock.cyxbs.shop.config.ShopConfig.SHOP_TRANSITION_DETAIL_IMAGE
 import com.mredrock.cyxbs.shop.pages.detail.adapter.BannerPagerAdapter
 import com.mredrock.cyxbs.shop.pages.detail.viewmodel.DetailViewModel
+import com.mredrock.cyxbs.shop.pages.stampcenter.ui.activity.ShopActivity
 import com.mredrock.cyxbs.shop.widget.ShopDialog
 import kotlinx.android.synthetic.main.shop_activity_detail.*
 import kotlinx.android.synthetic.main.shop_dialog_detail_exchange.view.*
@@ -44,13 +46,14 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
     private var lastPos = 0
 
     companion object {
-        fun activityStart(context: Context, id: Int, shareElement: View) {
-            context.startActivity(
-                Intent(context, DetailActivity::class.java)
+        fun activityStart(activity: ShopActivity , id: Int, count: Int, shareElement: View) {
+            activity.startActivityForResult(
+                Intent(activity, DetailActivity::class.java)
                     .apply {
                         putExtra("id", id)
-                    }, ActivityOptions.makeSceneTransitionAnimation(
-                    context as Activity, shareElement, ShopConfig.SHOP_TRANSITION_GOOD_TO_DETAIL
+                        putExtra("user_amount",count)
+                    }, 1,ActivityOptions.makeSceneTransitionAnimation(
+                    activity, shareElement, ShopConfig.SHOP_TRANSITION_GOOD_TO_DETAIL
                 ).toBundle()
             )
         }
@@ -78,6 +81,7 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
         id = intent.getIntExtra("id",0) // 商品ID
         // 初始化数据
         viewModel.getGoodInfo(id)
+        viewModel.myStamps.value = intent.getIntExtra("user_amount",0)
         // 绑定布局
         binding = DataBindingUtil.setContentView(this, R.layout.shop_activity_detail)
         binding.lifecycleOwner = this
@@ -101,7 +105,12 @@ class DetailActivity : BaseViewModelActivity<DetailViewModel>() {
                 ShopConfig.SHOP_DETAIL_DIALOG_EXCHANGE_REQUEST_FAIL -> content = "网络请求失败!"
                 ShopConfig.SHOP_DETAIL_DIALOG_STAMP_SHORTAGE -> content = "邮票数量不足！"
                 ShopConfig.SHOP_DETAIL_DIALOG_EXCHANGE_FAIL -> content = viewModel.exGoodResp.value?.info ?: "兑换失败！"
-                ShopConfig.SHOP_DETAIL_DIALOG_EXCHANGE_SUCCESS -> content = "兑换成功"
+                ShopConfig.SHOP_DETAIL_DIALOG_EXCHANGE_SUCCESS -> {
+                    content = "兑换成功"
+                    viewModel.myStamps.value = (viewModel.myStamps.value ?:0) - (viewModel.goodInfo.value?.price ?: 0)
+                    val intent = Intent().putExtra("user_amount",viewModel.myStamps.value ?:0)
+                    setResult(2,intent)
+                }
             }
             ShopDialog.show(this, content, onDeny, onPositive)
         })

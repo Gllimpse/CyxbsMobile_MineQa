@@ -57,7 +57,8 @@ class DataBindingAdapter (
             if (position < sum + (orderSizeMap[order]
                             ?: throw Exception("can not find key in the orderSizeMap"))) {
                 holder.bindData(position - sum)
-            }else sum += (orderSizeMap[order]
+                break
+            } else sum += (orderSizeMap[order]
                     ?: throw Exception("can not find key in the orderSizeMap"))
         }
     }
