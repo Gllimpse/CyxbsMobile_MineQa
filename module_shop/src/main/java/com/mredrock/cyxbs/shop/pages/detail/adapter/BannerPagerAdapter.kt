@@ -27,7 +27,6 @@ class BannerPagerAdapter(private val picUrls: ArrayList<String>?) :
         val pv : PhotoView = holder.itemView as PhotoView
         pv.apply {
             setImageFromUrl(url)
-            Log.d("TAG","(BannerPagerAdapter.kt:30)->url${url}")
             setOnPhotoTapListener{ _, _, _ ->
                 photoTapClick?.invoke()
             }

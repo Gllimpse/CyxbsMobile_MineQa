@@ -34,13 +34,14 @@ class ExRecordFragment : BaseViewModelFragment<ExRecordViewModel>() {
         viewModel.getExRecordData()
         viewModel.isSuccess.observe(viewLifecycleOwner, Observer {
             shop_exchange_rv.apply {
-                adapter = DataBindingAdapter(viewLifecycleOwner, viewModel)
+                adapter = DataBindingAdapter(viewLifecycleOwner)
                         .addDataBinding(DataBindingAdapter.MyDataBinding<ShopRecycleItemDetailGoodBinding>(
-                                R.layout.shop_recycle_item_detail_good, 0, viewModel.exRecordDataSize(),
+                                resId = R.layout.shop_recycle_item_detail_good,
+                                itemOrder = 0,
+                                itemSize = viewModel.exRecordDataSize(),
                                 bindData = { position, dataBinding ->
                                     dataBinding?.let {
-                                        it.viewModel = viewModel
-                                        it.position = position
+                                        it.exData = viewModel.getExRecordData(position)
                                     }
                                 },
                                 onItemClick = { position, _ ->

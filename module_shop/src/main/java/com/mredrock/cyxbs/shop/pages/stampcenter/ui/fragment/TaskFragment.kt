@@ -40,16 +40,15 @@ class TaskFragment: BaseViewModelFragment<ShopViewModel>() {
     private fun initView() {
 
         viewModel.isSuccess.observe(viewLifecycleOwner, Observer {isSuccess ->
-            Log.d("TAG","(TaskFragment.kt:41)->${viewModel.getTodayTaskCount()},${viewModel.getMoreTaskCount()}")
             if (isSuccess) {
-                taskAdapter = DataBindingAdapter(viewLifecycleOwner, viewModel)
+                taskAdapter = DataBindingAdapter(viewLifecycleOwner)
                         .addDataBinding(DataBindingAdapter.MyDataBinding<ShopRecycleItemTaskBinding>(
-                                R.layout.shop_recycle_item_task, 0, viewModel.getTodayTaskCount(),
+                                resId = R.layout.shop_recycle_item_task,
+                                itemOrder = 0,
+                                itemSize = viewModel.getTodayTaskCount(),
                                 bindData = { position, binding ->
                                     binding?.let {
-                                        it.position = position
-                                        it.type = ShopConfig.SHOP_TASK_TYPE_TODAY
-                                        it.viewModel = viewModel
+                                        it.task = viewModel.getTaskData(ShopConfig.SHOP_TASK_TYPE_TODAY,position)
                                         it.shopItemTaskTvGo.apply {
                                             if (viewModel.getTaskData(ShopConfig.SHOP_TASK_TYPE_TODAY,position).curProgress == viewModel.getTaskData(ShopConfig.SHOP_TASK_TYPE_TODAY,position).maxProgress){
                                                 text = "已完成"
@@ -57,28 +56,28 @@ class TaskFragment: BaseViewModelFragment<ShopViewModel>() {
                                                 isClickable = false
                                             }
                                         }
-
-
                                         it.shopItemTaskProgressbar.apply {
                                             post {
                                                 setProgressCompat(viewModel.getTaskData(ShopConfig.SHOP_TASK_TYPE_TODAY,position).curProgress,true)
                                             }
                                             progress = viewModel.getTaskData(ShopConfig.SHOP_TASK_TYPE_TODAY,position).curProgress
                                         }
-
                                     }
                                 }))
                         .addDataBinding(DataBindingAdapter.MyDataBinding<ShopRecycleItemTitleTaskBinding>(
-                                R.layout.shop_recycle_item_title_task, 1, 1))
+                                resId = R.layout.shop_recycle_item_title_task,
+                                itemOrder = 1,
+                                itemSize = 1))
                         .addDataBinding(DataBindingAdapter.MyDataBinding<ShopRecycleItemTaskBinding>(
-                                R.layout.shop_recycle_item_task, 2, viewModel.getMoreTaskCount(),
+                                resId = R.layout.shop_recycle_item_task,
+                                itemOrder = 2,
+                                itemSize = viewModel.getMoreTaskCount(),
                                 bindData = { position, binding ->
                                     binding?.let {
-                                        it.viewModel = viewModel
-                                        it.position = position
-                                        it.type = ShopConfig.SHOP_TASK_TYPE_MORE
+                                        val taskData = viewModel.getTaskData(ShopConfig.SHOP_TASK_TYPE_MORE,position)
+                                        it.task = taskData
                                         it.shopItemTaskTvGo.apply {
-                                            if (viewModel.getTaskData(ShopConfig.SHOP_TASK_TYPE_MORE,position).curProgress == viewModel.getTaskData(ShopConfig.SHOP_TASK_TYPE_MORE,position).maxProgress){
+                                            if (taskData.curProgress == taskData.maxProgress){
                                                 text = "已完成"
                                                 background = context.getDrawable(R.drawable.shop_bg_recycle_item_btn_go_finished)
                                                 isClickable = false

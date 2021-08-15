@@ -41,55 +41,57 @@ class ShopFragment: BaseViewModelFragment<ShopViewModel>() {
     private fun initView(){
         viewModel.isSuccess.observe(viewLifecycleOwner, Observer { it ->
             if (it){
-                goodsRvAdapter = DataBindingAdapter(viewLifecycleOwner,viewModel)
+                goodsRvAdapter = DataBindingAdapter(viewLifecycleOwner)
                         .addDataBinding(DataBindingAdapter.MyDataBinding<ShopRecycleItemTitleGoodBinding>(
-                                R.layout.shop_recycle_item_title_good,0,1,
-                                { _,binding ->
+                                resId = R.layout.shop_recycle_item_title_good,
+                                itemOrder = 0,
+                                itemSize = 1,
+                                bindData = { _,binding ->
                                     binding?.title = "装饰"
                                 }))
                         .addDataBinding(DataBindingAdapter.MyDataBinding<ShopRecycleItemGoodBinding>(
                                 R.layout.shop_recycle_item_good,1,viewModel.getDecorationCount(),
                                 bindData = { position, binding ->
                                     binding?.let {
-                                        it.viewModel = viewModel
-                                        it.position = position
-                                        it.type = ShopConfig.SHOP_GOOD_TYPE_DECORATION
+                                        it.good = viewModel.getGoodData(ShopConfig.SHOP_GOOD_TYPE_DECORATION,position)
                                         Glide.with(this@ShopFragment).load(viewModel.getGoodData(ShopConfig.SHOP_GOOD_TYPE_DECORATION,position).imgUrl)
                                                 .error(R.drawable.shop_ic_shop_good)
                                                 .into(it.shopItemIvDesc)
                                     }
                                 },
-                                onItemClick = { _, binding ->
+                                onItemClick = { position, binding ->
                                     (activity as ShopActivity).let { it1 ->
                                         binding?.let {
                                             DetailActivity.activityStart(it1,
-                                                    viewModel.getGoodData(it.type ?: ShopConfig.SHOP_GOOD_TYPE_DECORATION,it.position ?:0).id ,viewModel.stampCount.value ?:0, it.shopItemIvDesc)
+                                                    viewModel.getGoodData(ShopConfig.SHOP_GOOD_TYPE_DECORATION,position).id ,viewModel.stampCount.value ?:0, it.shopItemIvDesc)
                                         }
                                     }
                                 }))
                         .addDataBinding(DataBindingAdapter.MyDataBinding<ShopRecycleItemTitleGoodBinding>(
-                                R.layout.shop_recycle_item_title_good,2,1,
-                                {
+                                resId = R.layout.shop_recycle_item_title_good,
+                                itemOrder = 2,
+                                itemSize = 1,
+                                bindData = {
                                     _,binding ->
                                         binding?.title = "邮货"
                                 }))
                         .addDataBinding(DataBindingAdapter.MyDataBinding<ShopRecycleItemGoodBinding>(
-                                R.layout.shop_recycle_item_good,3,viewModel.getStampGoodCount(),
+                                resId = R.layout.shop_recycle_item_good,
+                                itemOrder = 3,
+                                itemSize = viewModel.getStampGoodCount(),
                                 bindData = { position, binding ->
                                     binding?.let {
-                                        it.viewModel = this.viewModel
-                                        it.position = position
-                                        it.type = ShopConfig.SHOP_GOOD_TYPE_STAMP_GOOD
+                                        it.good = viewModel.getGoodData(ShopConfig.SHOP_GOOD_TYPE_STAMP_GOOD,position)
                                         Glide.with(this@ShopFragment).load(viewModel.getGoodData(ShopConfig.SHOP_GOOD_TYPE_STAMP_GOOD, position).imgUrl)
                                                 .error(R.drawable.shop_ic_shop_good)
                                                 .into(it.shopItemIvDesc)
                                     }
                                 },
-                                onItemClick = { _, binding ->
+                                onItemClick = { position, binding ->
                                     (activity as ShopActivity).let { it1 ->
                                         binding?.let {
                                             DetailActivity.activityStart(it1,
-                                                    viewModel.getGoodData(it.type ?:ShopConfig.SHOP_GOOD_TYPE_STAMP_GOOD,it.position ?:0).id,viewModel.stampCount.value ?:0, it.shopItemIvDesc)
+                                                    viewModel.getGoodData(ShopConfig.SHOP_GOOD_TYPE_STAMP_GOOD,position).id,viewModel.stampCount.value ?:0, it.shopItemIvDesc)
                                         }
                                     }
                                 }))

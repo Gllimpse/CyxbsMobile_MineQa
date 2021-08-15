@@ -5,14 +5,8 @@
 
     <data>
         <variable
-            name="view_model"
-            type="com.mredrock.cyxbs.shop.pages.stampcenter.viewmodel.ShopViewModel" />
-        <variable
-            name="position"
-            type="Integer" />
-        <variable
-            name="type"
-            type="Integer" />
+            name="good"
+            type="com.mredrock.cyxbs.shop.bean.CenterShop" />
 
     </data>
 
@@ -51,7 +45,7 @@
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="10dp"
                     android:gravity="center_vertical"
-                    android:text="@{view_model.getGoodData(type,position).title}"
+                    android:text="@{good.title}"
                     android:textColor="@color/shop_center_recycler_good_title_color"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -59,12 +53,12 @@
 
                 <TextView
                     android:id="@+id/shop_item_tv_left_count"
-                    android:layout_width="47dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="15dp"
                     android:layout_marginStart="12dp"
                     android:layout_marginTop="8dp"
                     android:gravity="center_vertical"
-                    android:text='@{"库存量："+view_model.getGoodData(type,position).amount}'
+                    android:text='@{String.valueOf(good.amount)}'
                     android:textColor="@color/shop_center_recycler_good_left_counts_color"
                     android:textSize="11sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -89,7 +83,7 @@
                     android:gravity="center_vertical"
                     android:textColor="@color/shop_center_recycler_good_price_color"
                     android:textSize="14sp"
-                    android:text="@{String.valueOf(view_model.getGoodData(type,position).price)}"
+                    android:text="@{String.valueOf(good.price)}"
                     app:layout_constraintBottom_toBottomOf="@+id/shop_item_iv_stamp"
                     app:layout_constraintStart_toEndOf="@+id/shop_item_iv_stamp"
                     app:layout_constraintTop_toTopOf="@+id/shop_item_iv_stamp" />

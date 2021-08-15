@@ -32,15 +32,15 @@ class GetRecordFragment : BaseViewModelFragment<GetRecordViewModel>(){
     private fun initView() {
         viewModel.getGetRecordData(1,10)
         viewModel.isSuccess.observe(viewLifecycleOwner, Observer {
-            Log.d("TAG","(GetRecordFragment.kt:43)->123321#${viewModel.getRecordDataSize()}")
             shop_get_rv.apply {
-                    adapter = DataBindingAdapter(viewLifecycleOwner, viewModel)
+                    adapter = DataBindingAdapter(viewLifecycleOwner)
                             .addDataBinding(DataBindingAdapter.MyDataBinding<ShopRecycleItemDetailGetBinding>(
-                                    R.layout.shop_recycle_item_detail_get, 0, viewModel.getRecordDataSize(),
+                                    resId = R.layout.shop_recycle_item_detail_get,
+                                    itemOrder = 0,
+                                    itemSize = viewModel.getRecordDataSize(),
                                     bindData = { position, dataBinding ->
                                         dataBinding?.let {
-                                            it.viewModel = viewModel
-                                            it.position = position
+                                            it.getData = viewModel.getGetRecordData(position)
                                         }
                                     }))
 

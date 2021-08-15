@@ -5,14 +5,8 @@
 
     <data>
         <variable
-            name="view_model"
-            type="com.mredrock.cyxbs.shop.pages.stampcenter.viewmodel.ShopViewModel" />
-        <variable
-            name="position"
-            type="Integer" />
-        <variable
-            name="type"
-            type="String" />
+            name="task"
+            type="com.mredrock.cyxbs.shop.bean.CenterTask" />
 
     </data>
 
@@ -27,7 +21,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:gravity="center_vertical"
-            android:text="@{view_model.getTaskData(type,position).title}"
+            android:text="@{task.title}"
             android:textColor="@color/shop_center_recycler_task_title_color"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +34,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
             android:gravity="center_vertical"
-            android:text='@{view_model.getTaskData(type,position).desc + "   +" + view_model.getTaskData(type,position).gainStamp}'
+            android:text='@{task.desc + "   +" + task.gainStamp}'
             android:textColor="@color/shop_center_recycler_task_desc_color"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -70,8 +64,8 @@
             app:indicatorColor="#7D8AFF"
             app:trackColor="#E5E5E5"
             android:interpolator="@android:anim/decelerate_interpolator"
-            android:progress="@{view_model.getTaskData(type,position).curProgress}"
-            android:max="@{view_model.getTaskData(type,position).maxProgress}"
+            android:progress="@{task.curProgress}"
+            android:max="@{task.maxProgress}"
             app:trackThickness="8dp"
             app:trackCornerRadius="18dp"
             app:showAnimationBehavior="outward"
@@ -86,7 +80,7 @@
             android:textSize="12sp"
             android:textColor="#7D8AFF"
             android:gravity="center"
-            android:text='@{view_model.getTaskData(type,position).curProgress + "/" + view_model.getTaskData(type,position).maxProgress}'
+            android:text='@{task.curProgress + "/" + task.maxProgress}'
             app:layout_constraintBottom_toBottomOf="@+id/shop_item_task_progressbar"
             app:layout_constraintStart_toEndOf="@+id/shop_item_task_progressbar"
             app:layout_constraintTop_toTopOf="@+id/shop_item_task_progressbar" />

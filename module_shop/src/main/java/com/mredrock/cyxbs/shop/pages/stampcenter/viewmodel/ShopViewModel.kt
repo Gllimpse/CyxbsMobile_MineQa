@@ -62,7 +62,7 @@ class ShopViewModel : BaseViewModel() {
                             if (it.status == 10000) {
                                 it.data.apply {
                                     repeat(shop.size) { index ->
-                                        Log.d("TAG","(ShopViewModel.kt:73)->======${shop[index].title}")
+//                                        Log.d("TAG","(ShopViewModel.kt:73)->======${shop[index].title}")
                                         when (shop[index].type) {
                                             ShopConfig.SHOP_GOOD_TYPE_DECORATION -> decorArray.add(shop[index])
                                             ShopConfig.SHOP_GOOD_TYPE_STAMP_GOOD -> stampArray.add(shop[index])

@@ -3,12 +3,10 @@ package com.mredrock.cyxbs.shop.adapter
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.Nullable
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
-import com.mredrock.cyxbs.common.viewmodel.BaseViewModel
 import java.lang.Exception
 import java.lang.IndexOutOfBoundsException
 import java.lang.NullPointerException
@@ -17,14 +15,12 @@ import java.lang.NullPointerException
  * 基于RecyclerView多ViewHolder需求且实现起来很麻烦的现状和现有架构统一使用了DataBinding的情况，封装了一个结合DataBinding，viewModel/LiveData的Adapter
  * 简化多ViewHolder场景Adapter的使用
  */
-class DataBindingAdapter (
-        private val lifecycleOwner: LifecycleOwner,
-        private val viewModel: BaseViewModel ) : RecyclerView.Adapter<DataBindingAdapter.DataBindingViewHolder>(){
+class DataBindingAdapter (private val lifecycleOwner: LifecycleOwner) : RecyclerView.Adapter<DataBindingAdapter.DataBindingViewHolder>(){
 
     /**
-     * <Item展示顺序 —— Item>哈希表
+     * <Item展示顺序 —— MyDataBinding对象>哈希表
      */
-     private val orderInnerMap = HashMap<Int, UpClass>()
+     private val orderBindingMap = HashMap<Int, UpClass>()
 
     /**
      * <Item展示顺序 —— 该种Item数量>哈希表
@@ -32,25 +28,29 @@ class DataBindingAdapter (
      private val orderSizeMap = HashMap<Int,Int>()
 
     /**
-     * Item种数，从0开始
+     * Item种类数
      */
      var maxOrder = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataBindingViewHolder {
-        val inner = orderInnerMap[viewType]
-        val dataBinding = inner?.createDataBinding(parent,viewType).apply {
-
-                this?.lifecycleOwner = lifecycleOwner
-
+        /**
+         * 根据viewType获取对应对象来创建dataBinding实例和viewHolder，设置点击事件
+         */
+        val binding = orderBindingMap[viewType]
+        val dataBinding = binding?.createDataBinding(parent,viewType).apply {
+//                this?.lifecycleOwner = lifecycleOwner
         }
-        val holder = DataBindingViewHolder(inner,dataBinding)
+        val holder = DataBindingViewHolder(binding,dataBinding)
         holder.itemView.setOnClickListener {
-            inner?.onItemClick(holder.layoutPosition,dataBinding)
+            binding?.onItemClick(holder.layoutPosition,dataBinding)
         }
         return holder
     }
 
 
+    /**
+     * 根据position获取当前order对应数据源的索引值
+     */
     override fun onBindViewHolder(holder: DataBindingViewHolder, position: Int) {
         var sum = 0
         for (order in 0 until maxOrder) {
@@ -64,7 +64,7 @@ class DataBindingAdapter (
     }
 
     /**
-     * viewType对应order，判断当前position属于哪种Item
+     * 根据position获取该position的item类型order，viewType对应order，在onCreateViewHolder通过viewType获取orderBindingMap的对应子类，
      */
     override fun getItemViewType(position: Int): Int {
         var sum = 0
@@ -87,7 +87,6 @@ class DataBindingAdapter (
 
     class DataBindingViewHolder(private val inner: UpClass?, private val dataBinding: ViewDataBinding?)
         : RecyclerView.ViewHolder(dataBinding?.root ?: throw NullPointerException("dataBinding is null !")) {
-        val mDataBinding = dataBinding
         fun bindData(position: Int){
             inner?.bindFunc(position,dataBinding)
         }
@@ -95,10 +94,11 @@ class DataBindingAdapter (
 
     /**
      * 因为要使用多种Item，对应就要使用多个DataBinding，而通过DataBindingUtil创建具体的dataBinding需要对应的泛型。
-     * 首先要知道，一个对象能只能储存一个泛型，一个泛型的作用域也只在这个对象中。因为我们只会创建一个adapter对象，
-     * 所以只能储存一个泛型，这不满足我们的需求，所以不可以在Adapter类处直接声明泛型。
-     * 因此我们需要新建一个类，在实例化这个类的对象时指定泛型，并指定所有与该泛型相关的操作，比如通过DataBindingUtil实例化dataBinding，
-     * dataBinding绑定数据（也就是给XML中声明的属性赋值），操作具体控件,点击事件等。这些对象就储存在orderInner哈希表中，
+     * 首先要知道，一个对象能且只能储存一个泛型，一个泛型的作用域也只在这个对象中。因为我们只会创建一个adapter对象，
+     * 如果在Adapter类处声明泛型，只能储存一个泛型，这不满足我们的需求，所以不可以在Adapter类处直接声明泛型。
+     * 因此我们需要新建一个类，在实例化这个类的对象时指定泛型，因为作用域，只能在类中指定所有与该泛型相关的操作（结果是把
+     * adapter的大部分操作转移到Activity/Fragment中，可能有违DataBinding给view层解耦的初衷，需要优化）
+     * 比如onCreateViewHolder/onBindViewHolder中的操作，操作具体控件,点击事件等。这些对象就储存在orderBinding哈希表中，
      */
     class MyDataBinding<T : ViewDataBinding>(@androidx.annotation.LayoutRes private val resId: Int,
                                              itemOrder: Int, val itemSize: Int,
@@ -126,10 +126,10 @@ class DataBindingAdapter (
     }
 
     /**
-     * 增加一种Item只需要实例化MyDataBinding对象，然后调用该方法添加，该方法返回this，实现简单的链式调用
+     * 增加一种Item只需要实例化一个MyDataBinding对象，然后调用该方法添加，该方法返回this，实现简单的链式调用
      */
     fun addDataBinding(binding: UpClass): DataBindingAdapter {
-        orderInnerMap[binding.order] = binding
+        orderBindingMap[binding.order] = binding
         orderSizeMap[binding.order] = (binding as MyDataBinding<*>).itemSize
         maxOrder++
         return this

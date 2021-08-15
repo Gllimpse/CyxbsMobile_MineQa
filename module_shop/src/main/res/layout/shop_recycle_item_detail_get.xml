@@ -5,11 +5,8 @@
 
     <data>
         <variable
-            name="view_model"
-            type="com.mredrock.cyxbs.shop.pages.stampdetail.viewmodel.GetRecordViewModel" />
-        <variable
-            name="position"
-            type="Integer" />
+            name="getData"
+            type="com.mredrock.cyxbs.shop.bean.SingleGetRecord" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,7 +19,7 @@
             android:layout_height="22dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
-            android:text="@{view_model.getGetRecordData(position).taskName}"
+            android:text="@{getData.taskName}"
             android:textColor="@color/shop_stamp_detail_recycler_title_color"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +31,7 @@
             android:layout_height="17dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="6dp"
-            app:stampDetailTime="@{view_model.getGetRecordData(position).date}"
+            app:stampDetailTime="@{getData.date}"
             android:textSize="12sp"
             android:textColor="@color/shop_stamp_detail_recycler_time_color"
             android:gravity="center"
@@ -47,7 +44,7 @@
             android:layout_height="0dp"
             android:layout_marginEnd="31dp"
             android:gravity="center_vertical"
-            android:text="@{@string/shop_get_detail_tv_cost_plus + String.valueOf(view_model.getGetRecordData(position).taskIncome)}"
+            android:text="@{@string/shop_get_detail_tv_cost_plus + String.valueOf(getData.taskIncome)}"
             android:textColor="#FFA92F"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"

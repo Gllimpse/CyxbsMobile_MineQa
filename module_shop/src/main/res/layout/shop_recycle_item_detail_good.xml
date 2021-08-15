@@ -5,11 +5,8 @@
 
     <data>
         <variable
-            name="view_model"
-            type="com.mredrock.cyxbs.shop.pages.stampdetail.viewmodel.ExRecordViewModel" />
-        <variable
-            name="position"
-            type="Integer" />
+            name="exData"
+            type="com.mredrock.cyxbs.shop.bean.SingleExRecord" />
 
     </data>
 
@@ -23,7 +20,7 @@
             android:layout_height="22dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
-            android:text="@{view_model.getExRecordData(position).goodsName}"
+            android:text="@{exData.goodsName}"
             android:textColor="@color/shop_stamp_detail_recycler_title_color"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +34,7 @@
             android:textColor="#94A6C4"
             android:textSize="11sp"
             android:layout_marginStart="5dp"
-            app:goodsDetailGetVisible="@{view_model.getExRecordData(position).received}"
+            app:goodsDetailGetVisible="@{exData.received}"
             android:background="@drawable/shop_shape_good_detail_tv_collected"
             android:layout_marginTop="15dp"
             android:paddingTop="3dp"
@@ -53,7 +50,7 @@
             android:layout_height="17dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="6dp"
-            app:stampDetailTime="@{view_model.getExRecordData(position).date}"
+            app:stampDetailTime="@{exData.date}"
             android:textSize="12sp"
             android:textColor="@color/shop_stamp_detail_recycler_time_color"
             android:gravity="center"
@@ -76,7 +73,7 @@
             android:layout_height="19dp"
             android:layout_marginEnd="9dp"
             android:gravity="center_vertical"
-            android:text="@{String.valueOf(view_model.getExRecordData(position).goodsPrice)}"
+            android:text="@{String.valueOf(exData.goodsPrice)}"
             android:textColor="#4B66F0"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/shop_good_detail_iv_enter"

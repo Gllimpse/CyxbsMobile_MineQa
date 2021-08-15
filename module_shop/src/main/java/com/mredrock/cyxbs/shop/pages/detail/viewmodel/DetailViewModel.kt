@@ -1,5 +1,6 @@
 package com.mredrock.cyxbs.shop.pages.detail.viewmodel
 
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.aefottt.module_shop.R
@@ -93,12 +94,12 @@ class DetailViewModel : BaseViewModel() {
                             override fun onResponse(call: Call<ExGoodResp>, response: Response<ExGoodResp>) {
                                 _exGoodResp.value = response.body()
                                 // 判断请求结果
-                                if (_exGoodResp.value?.status == 400) {
+                                if (_exGoodResp.value?.status == 10000) {
                                     // 兑换失败
-                                    dialogEvent.value = ShopConfig.SHOP_DETAIL_DIALOG_EXCHANGE_FAIL
+                                    dialogEvent.value = ShopConfig.SHOP_DETAIL_DIALOG_EXCHANGE_SUCCESS
                                 } else {
                                     // 兑换成功
-                                    dialogEvent.value = ShopConfig.SHOP_DETAIL_DIALOG_EXCHANGE_SUCCESS
+                                    dialogEvent.value = ShopConfig.SHOP_DETAIL_DIALOG_EXCHANGE_FAIL
                                 }
                             }
 

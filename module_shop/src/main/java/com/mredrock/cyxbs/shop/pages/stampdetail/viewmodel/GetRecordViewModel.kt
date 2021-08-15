@@ -28,9 +28,7 @@ class GetRecordViewModel : BaseViewModel() {
 
     val isSuccess = MutableLiveData<Boolean>()
 
-    fun getGetRecordData(position: Int) = Transformations.map(getRecordData) {
-        it[position]
-    }
+    fun getGetRecordData(position: Int) = getRecordData.value?.get(position)
 
     fun getRecordDataSize(): Int {
         return getRecordData.value?.size ?: 0
