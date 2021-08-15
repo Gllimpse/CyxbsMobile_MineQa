@@ -10,6 +10,7 @@ import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
 import kotlinx.android.synthetic.main.shop_dialog_detail_exchange.view.*
 
 object ShopDialog {
+
     fun show(context: Context, content: String, onDeny: (() -> Unit)? = null, onPositive: (() -> Unit)? ) {
         val dialog = Dialog(context, R.style.shop_transparent_dialog)
         dialog.setContentView(R.layout.shop_dialog_detail_exchange)
