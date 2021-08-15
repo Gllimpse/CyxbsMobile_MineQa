@@ -3,5 +3,5 @@
     <corners
         android:topLeftRadius="16dp"
         android:topRightRadius="16dp" />
-    <solid android:color="#FBFCFF" />
+    <solid android:color="@color/shop_vp_bg_color" />
 </shape>

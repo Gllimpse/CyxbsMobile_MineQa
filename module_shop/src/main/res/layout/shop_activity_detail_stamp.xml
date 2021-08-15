@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F2F3F8"
+    android:background="@color/shop_activity_bg_color"
     android:fitsSystemWindows="true">
 
     <ImageView
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/shop_stampdetail_title"
-        android:textColor="#15315B"
+        android:textColor="@color/shop_title_color"
         android:textSize="22sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@+id/shop_stampdetail_iv_back"
@@ -51,10 +51,10 @@
         app:layout_constraintTop_toBottomOf="@+id/shop_detail_stamp_tv_line"
         app:tabGravity="fill"
         app:tabMode="fixed"
-        app:tabIndicatorColor="#F2F3F8"
-        android:background="#F2F3F8"
-        app:tabSelectedTextColor="#5F75E4"
-        app:tabTextColor="#CC15315B"
+        app:tabIndicatorColor="@android:color/transparent"
+        app:tabBackground="@color/common_transparent_background"
+        app:tabSelectedTextColor="@color/shop_stamp_detail_tab_selected_text_color"
+        app:tabTextColor="@color/shop_stamp_detail_tab_text_color"
         app:tabRippleColor="@color/common_transparent_background"/>
 
     <androidx.viewpager2.widget.ViewPager2

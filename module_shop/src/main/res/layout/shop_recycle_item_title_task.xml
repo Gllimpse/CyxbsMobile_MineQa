@@ -8,10 +8,10 @@
         android:id="@+id/shop_item_title_task_title"
         android:layout_width="wrap_content"
         android:layout_height="28dp"
-        android:text="更多任务"
+        android:text="@string/shop_center_recycler_title_task"
         android:textSize="20sp"
         android:gravity="center"
-        android:textColor="#15315B"
+        android:textColor="@color/shop_center_recycler_more_task_color"
         android:layout_marginTop="37dp"
         android:layout_marginStart="17dp" />
 </layout>

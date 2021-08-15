@@ -9,11 +9,10 @@
 
     <TextView
         android:id="@+id/shop_dialog_tv_content"
-        android:layout_width="216dp"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginTop="34dp"
-        android:text="确认要用100邮票兑换PM名片吗"
-        android:textColor="#15315B"
+        android:textColor="@color/shop_dialog_content_color"
         android:textSize="14sp"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,7 +24,7 @@
         android:layout_width="93dp"
         android:layout_height="34dp"
         android:layout_marginBottom="34dp"
-        android:text="取消"
+        android:text="@string/shop_dialog_cancel"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
         android:gravity="center"

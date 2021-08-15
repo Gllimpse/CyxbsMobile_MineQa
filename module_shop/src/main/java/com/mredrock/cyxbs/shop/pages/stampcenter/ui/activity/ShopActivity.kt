@@ -5,9 +5,9 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
-import android.util.Log
 import android.view.Window
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.observe
 import com.aefottt.module_shop.R
 import com.aefottt.module_shop.databinding.ShopActivityMainBinding
@@ -17,10 +17,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
 import com.mredrock.cyxbs.common.config.SHOP_ENTRY
 import com.mredrock.cyxbs.common.ui.BaseViewModelActivity
-import com.mredrock.cyxbs.common.utils.extensions.dp2px
-import com.mredrock.cyxbs.common.utils.extensions.editor
-import com.mredrock.cyxbs.common.utils.extensions.setOnSingleClickListener
-import com.mredrock.cyxbs.common.utils.extensions.sharedPreferences
+import com.mredrock.cyxbs.common.utils.extensions.*
 import com.mredrock.cyxbs.shop.config.ShopConfig
 import com.mredrock.cyxbs.shop.pages.stampcenter.adapter.ShopPagerAdapter
 import com.mredrock.cyxbs.shop.pages.stampcenter.ui.fragment.ShopFragment
@@ -33,7 +30,12 @@ import java.util.*
 
 @Route(path = SHOP_ENTRY)
 class ShopActivity : BaseViewModelActivity<ShopViewModel>() {
+
     private lateinit var binding : ShopActivityMainBinding
+
+    // 是否第一次刷新
+    private var isFirstRefresh = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
         setExitSharedElementCallback(MaterialContainerTransformSharedElementCallback())
@@ -54,9 +56,16 @@ class ShopActivity : BaseViewModelActivity<ShopViewModel>() {
 
     private fun initObserve(){
         viewModel.stampCount.observe(this) {
-            Log.d("TAG","(ShopActivity.kt:57)->stamp======$it")
             shop_main_tv_banner_number.setCurrNum(it)
         }
+        viewModel.isSuccess.observe(this, Observer{
+            shop_main_refresh.isRefreshing = false
+            if (isFirstRefresh){
+                isFirstRefresh = false
+            }else{
+                toast("刷新成功")
+            }
+        })
     }
 
     private fun initView() {
@@ -132,6 +141,8 @@ class ShopActivity : BaseViewModelActivity<ShopViewModel>() {
             }
         }.attach()
 
+        initRefreshLayout()
+
         // 卡券动画
         shop_main_iv_coupon.animate().setDuration(600)
                 .translationY(0f).alpha(1f).start()
@@ -149,6 +160,19 @@ class ShopActivity : BaseViewModelActivity<ShopViewModel>() {
         shop_main_ll_bottom.post {
             shop_main_ll_bottom.getLocationOnScreen(arr)
             ShopConfig.SHOP_CHILD_TOP = arr[1]
+        }
+    }
+
+    private fun initRefreshLayout(){
+        try {
+            val field = shop_main_refresh.javaClass.getDeclaredField("mTouchSlop")
+            field.isAccessible = true
+            field.set(shop_main_refresh, 300)
+        }catch (e: Exception){
+            e.printStackTrace()
+        }
+        shop_main_refresh.setOnRefreshListener {
+            viewModel.initData()
         }
     }
 

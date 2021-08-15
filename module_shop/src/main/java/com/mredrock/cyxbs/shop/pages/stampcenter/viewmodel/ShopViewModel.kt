@@ -1,13 +1,8 @@
 package com.mredrock.cyxbs.shop.pages.stampcenter.viewmodel
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.aefottt.module_shop.R
-import com.mredrock.cyxbs.common.network.ApiGenerator
-import com.mredrock.cyxbs.common.utils.extensions.mapOrThrowApiException
-import com.mredrock.cyxbs.common.utils.extensions.safeSubscribeBy
-import com.mredrock.cyxbs.common.utils.extensions.setSchedulers
 import com.mredrock.cyxbs.common.viewmodel.BaseViewModel
 import com.mredrock.cyxbs.mine.TestRetrofit
 import com.mredrock.cyxbs.shop.bean.CenterResp
@@ -45,8 +40,6 @@ class ShopViewModel : BaseViewModel() {
      * 用户邮票数量
      */
     val stampCount =MutableLiveData<Int>()
-//    val stampCount : LiveData<Int>
-//    get() = _stampCount
 
     /**
      * 是否有未领取商品
@@ -56,12 +49,11 @@ class ShopViewModel : BaseViewModel() {
     /**
      * 网络请求，获取邮票中心数据
      */
-    fun getCenterData(){
+    private fun getCenterData(){
         TestRetrofit.testRetrofit.create(ApiService::class.java)
                 .getCenterData()
                 .enqueue(object :Callback<CenterResp>{
                     override fun onResponse(call: Call<CenterResp>, response: Response<CenterResp>) {
-//                        Log.d("TAG","(ShopViewModel.kt:61)->${response.body().toString()}")
                         val decorArray = ArrayList<CenterShop>()
                         val stampArray = ArrayList<CenterShop>()
                         val todayArray = ArrayList<CenterTask>()
@@ -94,10 +86,13 @@ class ShopViewModel : BaseViewModel() {
                                 }
                             } else {
                                 toastEvent.value = R.string.shop_good_toast_get_all_decoration_info_error
+                                isSuccess.value = false
                             }
                         }
                     }
                     override fun onFailure(call: Call<CenterResp>, t: Throwable) {
+                        toastEvent.value = R.string.shop_good_toast_get_all_decoration_info_error
+                        isSuccess.value = false
                     }
                 })
     }

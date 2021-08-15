@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/shop_bg_activity">
+        android:background="@color/shop_activity_bg_color">
 
         <ImageView
             android:id="@+id/shop_main_iv_back"
@@ -32,7 +32,7 @@
             android:layout_marginTop="53dp"
             android:gravity="center"
             android:text="@string/shop_title_stamp_center"
-            android:textColor="#15315B"
+            android:textColor="@color/shop_title_color"
             android:textSize="22sp"
             app:layout_constraintStart_toEndOf="@+id/shop_main_iv_back"
             app:layout_constraintTop_toTopOf="parent" />
@@ -73,7 +73,7 @@
             android:id="@+id/shop_main_bg_mask"
             android:layout_width="80dp"
             android:layout_height="27dp"
-            android:background="@color/shop_bg_activity"
+            android:background="@color/shop_activity_bg_color"
             android:layout_marginEnd="16dp"
             android:layout_marginTop="55dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -192,13 +192,20 @@
                     app:tabMode="fixed"
                     app:tabRippleColor="@color/common_transparent_background"
                     app:tabSelectedTextColor="@color/common_level_two_font_color"
-                    app:tabTextColor="@color/common_alpha_level_two_font_color" />
+                    app:tabTextColor="@color/shop_center_tab_text_color" />
 
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/shop_main_vp"
+                <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                    android:id="@+id/shop_main_refresh"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/shop_shape_tab_bg" />
+                    android:layout_height="match_parent">
+
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/shop_main_vp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/shop_shape_tab_bg" />
+
+                </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
             </LinearLayout>
 
