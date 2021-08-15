@@ -3,5 +3,5 @@
     <corners
         android:radius="26dp"/>
     <solid
-        android:color="#C3D4EE"/>
+        android:color="@color/shop_dialog_negative"/>
 </shape>

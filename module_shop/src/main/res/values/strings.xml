@@ -6,8 +6,7 @@
 
     <string name="shop_detail_toast_get_good_info_error">获取商品信息失败</string>
 
-    <string name="shop_good_toast_get_all_stamp_good_info_error">获取邮货信息失败</string>
-    <string name="shop_good_toast_get_all_decoration_info_error">获取装饰信息失败</string>
+    <string name="shop_good_toast_get_all_decoration_info_error">获取信息失败</string>
 
     <string name="shop_detail_toast_get_all_ex_record_error">获取兑换记录信息失败</string>
     <string name="shop_detail_toast_get_all_get_record_error">获取获取记录信息失败</string>
@@ -46,5 +45,8 @@
     <string name="shop_stampdetail_title">邮票明细</string>
     <string name="shop_good_detail_not_collected">待领取</string>
     <string name="shop_get_detail_tv_cost_plus">+</string>
+    <string name="shop_center_recycler_title_tip">请在个人资料里查看</string>
+    <string name="shop_center_recycler_title_task">更多任务</string>
+    <string name="shop_dialog_cancel">取消</string>
 
 </resources>

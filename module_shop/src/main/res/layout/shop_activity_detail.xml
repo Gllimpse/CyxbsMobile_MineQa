@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/shop_white">
+        android:background="@color/shop_activity_bg_color">
 
         <ImageView
             android:id="@+id/shop_detail_iv_back"
@@ -32,7 +32,7 @@
             android:layout_height="31dp"
             android:gravity="center_vertical"
             app:detailTitleByType="@{viewModel.goodInfo.type}"
-            android:textColor="#15315B"
+            android:textColor="@color/shop_title_color"
             android:textSize="22sp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="53dp"
@@ -72,12 +72,12 @@
 
         <TextView
             android:id="@+id/shop_detail_tv_name"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="28dp"
             android:gravity="center"
-            android:textColor="#15315B"
+            android:textColor="@color/shop_detail_name_color"
             android:textSize="18sp"
             android:text="@{viewModel.goodInfo.title}"
             app:layout_constraintStart_toStartOf="parent"
@@ -85,12 +85,12 @@
 
         <TextView
             android:id="@+id/shop_detail_tv_left_count"
-            android:layout_width="77dp"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
             android:layout_marginEnd="15dp"
             android:gravity="center"
             android:text='@{@string/shop_detail_left_counts + String.valueOf(viewModel.goodInfo.amount)}'
-            android:textColor="#6615315B"
+            android:textColor="@color/shop_detail_left_counts_color"
             android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="@+id/shop_detail_tv_name"
             app:layout_constraintEnd_toEndOf="parent"
@@ -105,7 +105,7 @@
             android:layout_marginEnd="16dp"
             android:gravity="center_vertical"
             android:text="@{viewModel.goodInfo.description}"
-            android:textColor="#CC15315B"
+            android:textColor="@color/shop_detail_desc_color"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -113,13 +113,13 @@
 
         <TextView
             android:id="@+id/shop_detail_tv_valid_time"
-            android:layout_width="83dp"
+            android:layout_width="wrap_content"
             android:layout_height="18dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:gravity="center_vertical"
             android:text='@{@string/shop_detail_valid_time + String.valueOf(viewModel.goodInfo.life) + @string/shop_detail_valid_time_suffix}'
-            android:textColor="#CC15315B"
+            android:textColor="@color/shop_detail_valid_time_color"
             android:textSize="13sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_description" />
@@ -131,7 +131,7 @@
             android:layout_marginStart="17dp"
             android:layout_marginTop="8dp"
             android:text="@string/shop_detail_equity_desc_title"
-            android:textColor="#CC15315B"
+            android:textColor="@color/shop_detail_right_color"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_valid_time" />
@@ -143,6 +143,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="15dp"
+            android:textColor="@color/shop_detail_right_tips_color"
             app:detailRightTipsByType="@{viewModel.goodInfo.type}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -152,7 +153,7 @@
             android:id="@+id/shop_detail_tv_line2"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#1A2A4E84"
+            android:background="@drawable/shop_shape_detail_bottom_line"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -170,7 +171,7 @@
 
         <TextView
             android:id="@+id/shop_detail_tv_price"
-            android:layout_width="29dp"
+            android:layout_width="wrap_content"
             android:layout_height="22dp"
             android:layout_marginStart="5dp"
             android:gravity="center"
@@ -183,12 +184,13 @@
 
         <TextView
             android:id="@+id/shop_detail_tv_stamp_count"
-            android:layout_width="60dp"
+            android:layout_width="wrap_content"
             android:layout_height="15dp"
             android:layout_marginStart="15dp"
             android:layout_marginTop="6dp"
             android:text='@{@string/shop_detail_stamp_count + String.valueOf(viewModel.myStamps)}'
             android:textSize="11sp"
+            android:textColor="@color/shop_detail_stamp_count_color"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/shop_detail_tv_price" />
 

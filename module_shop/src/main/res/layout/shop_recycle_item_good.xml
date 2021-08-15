@@ -27,7 +27,7 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="0dp"
             android:layout_gravity="center"
-            app:cardBackgroundColor="@color/shop_white">
+            app:cardBackgroundColor="@color/shop_center_recycler_good_card_bg_color">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -45,11 +45,11 @@
 
                 <TextView
                     android:id="@+id/shop_item_tv_title"
-                    android:layout_width="143dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="20dp"
                     android:layout_marginTop="10dp"
                     android:gravity="center_vertical"
-                    android:textColor="#15315B"
+                    android:textColor="@color/shop_center_recycler_good_title_color"
                     android:textSize="14sp"
                     android:text="@{view_model.getGoodData(type,position).title}"
                     app:layout_constraintEnd_toEndOf="@+id/shop_item_iv_desc"
@@ -58,10 +58,10 @@
 
                 <TextView
                     android:id="@+id/shop_item_tv_left_count"
-                    android:layout_width="47dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="15dp"
                     android:gravity="center_vertical"
-                    android:textColor="#B315315B"
+                    android:textColor="@color/shop_center_recycler_good_left_counts_color"
                     android:textSize="11sp"
                     android:text='@{"库存量："+view_model.getGoodData(type,position).amount}'
                     app:layout_constraintEnd_toEndOf="@+id/shop_item_tv_title"
@@ -87,7 +87,7 @@
                     android:layout_height="17dp"
                     android:layout_marginStart="4dp"
                     android:gravity="center_vertical"
-                    android:textColor="#5177FF"
+                    android:textColor="@color/shop_center_recycler_good_price_color"
                     android:textSize="14sp"
                     android:text="@{String.valueOf(view_model.getGoodData(type,position).price)}"
                     app:layout_constraintBottom_toBottomOf="@+id/shop_item_iv_stamp"

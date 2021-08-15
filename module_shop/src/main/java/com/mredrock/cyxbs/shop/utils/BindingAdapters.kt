@@ -29,17 +29,26 @@ fun detailRightTipsByType(tv: TextView, type: Int){
     else tv.context.getString(R.string.shop_detail_right_tips_decoration)
 }
 
+/**
+ * 兑换详情界面是否显示待领取图标
+ */
 @BindingAdapter("app:goodsDetailGetVisible")
 fun goodsDetailGetVisible(tv: TextView, isCollected: Boolean){
     tv.visibility = if (isCollected) View.GONE else View.VISIBLE
 }
 
+/**
+ * 邮票详细两个界面Item中的时间转换
+ */
 @BindingAdapter("app:stampDetailTime")
 fun stampDetailTime(tv: TextView, time: Long){
     val format = SimpleDateFormat("yyyy.MM.dd", Locale.CHINA)
     tv.text = format.format(Date(time))
 }
 
+/**
+ * 兑换详情界面时间转换
+ */
 @BindingAdapter("app:exchangeDetailTime")
 fun exchangeDetailTime(tv: TextView, time: Long){
     val format = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA)

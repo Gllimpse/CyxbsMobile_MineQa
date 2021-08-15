@@ -2,5 +2,66 @@
 <resources>
     <color name="shop_black">#FF000000</color>
     <color name="shop_white">#FFFFFFFF</color>
-    <color name="shop_bg_activity">#E5E5E5</color>
+    <!-- 邮票中心Activity背景颜色 -->
+    <color name="shop_activity_bg_color">#F2F3F8</color>
+    <!-- 邮票中心标题 -->
+    <color name="shop_title_color">#15315B</color>
+    <!-- 邮票中心Vp背景颜色 -->
+    <color name="shop_vp_bg_color">#FBFCFF</color>
+    <!-- 邮票中心Tab文字颜色 -->
+    <color name="shop_center_tab_text_color">#15315B</color>
+    <!-- 邮票中心商品列表卡片的背景颜色 -->
+    <color name="shop_center_recycler_good_card_bg_color">#FFFFFFFF</color>
+    <!-- 邮票中心商品列表卡片标题文字颜色 -->
+    <color name="shop_center_recycler_good_title_color">#15315B</color>
+    <!-- 邮票中心商品列表卡片余额文字颜色 -->
+    <color name="shop_center_recycler_good_left_counts_color">#B315315B</color>
+    <!-- 邮票中心商品列表卡片价格文字颜色 -->
+    <color name="shop_center_recycler_good_price_color">#5177FF</color>
+    <!-- 邮票中心商品列表Title文字颜色 -->
+    <color name="shop_center_recycler_good_title_good_color">#15315B</color>
+    <!-- 邮票中心商品列表Title提示文字颜色 -->
+    <color name="shop_center_recycler_good_title_tip_color">#6615315B</color>
+    <!-- 邮票中心任务列表标题文字颜色 -->
+    <color name="shop_center_recycler_task_title_color">#15315B</color>
+    <!-- 邮票中心任务列表描述文字颜色 -->
+    <color name="shop_center_recycler_task_desc_color">#6615315B</color>
+    <!-- 邮票中心任务列表更多任务标题 -->
+    <color name="shop_center_recycler_more_task_color">#15315B</color>
+
+    <!-- 邮票详情名称颜色 -->
+    <color name="shop_detail_name_color">#15315B</color>
+    <!-- 邮票详情余额颜色 -->
+    <color name="shop_detail_left_counts_color">#6615315B</color>
+    <!-- 邮票详情描述颜色 -->
+    <color name="shop_detail_desc_color">#CC15315B</color>
+    <!-- 邮票详情有效期颜色 -->
+    <color name="shop_detail_valid_time_color">#CC15315B</color>
+    <!-- 邮票详情权益说明颜色 -->
+    <color name="shop_detail_right_color">#CC15315B</color>
+    <!-- 邮票详情权益提示颜色 -->
+    <color name="shop_detail_right_tips_color">#6615315B</color>
+    <!-- 邮票详情邮票余额颜色 -->
+    <color name="shop_detail_stamp_count_color">#6615315B</color>
+    <!-- 邮票明细tab默认文字颜色 -->
+    <color name="shop_stamp_detail_tab_text_color">#CC15315B</color>
+    <!-- 邮票明细tab选中文字颜色 -->
+    <color name="shop_stamp_detail_tab_selected_text_color">#5F75E4</color>
+    <!-- 邮票明细待领取标识背景颜色 -->
+    <color name="shop_stamp_detail_not_receive_bg_color">#E8F0FC</color>
+    <!-- 邮票明细Title颜色 -->
+    <color name="shop_stamp_detail_recycler_title_color">#15315B</color>
+    <!-- 邮票明细Time颜色 -->
+    <color name="shop_stamp_detail_recycler_time_color">#6615315B</color>
+    <!-- 兑换详情背景颜色 -->
+    <color name="shop_exchange_detail_bg_color">#FBFCFF</color>
+    <!-- 兑换详情商品详情颜色 -->
+    <color name="shop_exchange_detail_good_detail_color">#15315B</color>
+    <!-- 兑换详情描述文字颜色 -->
+    <color name="shop_exchange_detail_desc_color">#15315B</color>
+
+    <!-- Dialog背景颜色 -->
+    <color name="shop_dialog_bg_color">#FFFFFF</color>
+    <color name="shop_dialog_content_color">#15315B</color>
+    <color name="shop_dialog_negative">#C3D4EE</color>
 </resources>
