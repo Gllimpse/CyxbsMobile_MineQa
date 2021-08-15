@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.view.animation.LayoutAnimationController
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aefottt.module_shop.R
@@ -53,6 +54,7 @@ class TaskFragment: BaseViewModelFragment<ShopViewModel>() {
                                         it.shopItemTaskTvGo.apply {
                                             if (viewModel.getTaskData(ShopConfig.SHOP_TASK_TYPE_TODAY,position).curProgress == viewModel.getTaskData(ShopConfig.SHOP_TASK_TYPE_TODAY,position).maxProgress){
                                                 text = "已完成"
+                                                setTextColor(ContextCompat.getColor(context, R.color.shop_center_recycler_task_finished_text_color))
                                                 background = context.getDrawable(R.drawable.shop_bg_recycle_item_btn_go_finished)
                                                 isClickable = false
                                             }
@@ -80,6 +82,7 @@ class TaskFragment: BaseViewModelFragment<ShopViewModel>() {
                                         it.shopItemTaskTvGo.apply {
                                             if (viewModel.getTaskData(ShopConfig.SHOP_TASK_TYPE_MORE,position).curProgress == viewModel.getTaskData(ShopConfig.SHOP_TASK_TYPE_MORE,position).maxProgress){
                                                 text = "已完成"
+                                                setTextColor(ContextCompat.getColor(context, R.color.shop_center_recycler_task_finished_text_color))
                                                 background = context.getDrawable(R.drawable.shop_bg_recycle_item_btn_go_finished)
                                                 isClickable = false
                                             }

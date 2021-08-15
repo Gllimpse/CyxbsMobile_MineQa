@@ -37,54 +37,51 @@
             app:layout_constraintStart_toEndOf="@+id/shop_main_iv_back"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <View
-            android:id="@+id/shop_main_bg_my_stamps"
-            android:layout_width="80dp"
-            android:layout_height="27dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="55dp"
-            android:background="@drawable/shop_shape_tv_stamp_counts"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/shop_main_iv_my_stamps"
-            android:layout_width="21dp"
-            android:layout_height="21dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="57dp"
-            android:src="@drawable/shop_ic_my_stamp"
-            app:layout_constraintStart_toStartOf="@+id/shop_main_bg_my_stamps"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/shop_main_tv_my_stamps"
+        <LinearLayout
+            android:id="@+id/shop_main_ll_my_stamps"
             android:layout_width="wrap_content"
-            android:layout_height="22dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="57dp"
-            android:text="@{String.valueOf(view_model.stampCount)}"
-            android:textColor="#E9F2FB"
-            android:textSize="17sp"
-            app:layout_constraintStart_toEndOf="@+id/shop_main_iv_my_stamps"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="27dp"
+            android:layout_marginTop="55dp"
+            android:layout_marginEnd="16dp"
+            android:padding="2dp"
+            android:background="@drawable/shop_shape_tv_stamp_counts"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/shop_main_iv_my_stamps"
+                android:layout_width="21dp"
+                android:layout_height="21dp"
+                android:src="@drawable/shop_ic_my_stamp" />
+
+            <TextView
+                android:id="@+id/shop_main_tv_my_stamps"
+                android:layout_width="wrap_content"
+                android:layout_height="22dp"
+                android:layout_marginStart="4.7dp"
+                android:text="@{String.valueOf(view_model.stampCount)}"
+                android:textColor="#E9F2FB"
+                android:textSize="17sp" />
+
+        </LinearLayout>
 
         <View
             android:id="@+id/shop_main_bg_mask"
-            android:layout_width="80dp"
+            android:layout_width="120dp"
             android:layout_height="27dp"
-            android:background="@color/shop_activity_bg_color"
-            android:layout_marginEnd="16dp"
             android:layout_marginTop="55dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/shop_activity_bg_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="85dp"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="85dp">
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/shop_main_cl_banner"
@@ -133,9 +130,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="18dp"
+                    android:alpha="0.8"
                     android:drawablePadding="2dp"
                     android:text="@string/shop_main_banner_detail"
-                    android:alpha="0.8"
                     android:textColor="#FFFFFF"
                     android:textSize="10sp"
                     app:drawableStartCompat="@drawable/shop_ic_stamp_detail"
@@ -157,10 +154,10 @@
                     android:layout_height="18dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginBottom="18dp"
+                    android:alpha="0.8"
                     android:text="@{view_model.bannerData}"
                     android:textColor="#FFFFFF"
                     android:textSize="12sp"
-                    android:alpha="0.8"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
@@ -180,24 +177,25 @@
                     android:layout_marginTop="16dp"
                     app:tabBackground="@color/common_transparent_background"
                     app:tabGravity="fill"
-                    app:tabMaxWidth="160dp"
-                    app:tabMinWidth="150dp"
-                    app:tabPaddingStart="40dp"
-                    app:tabPaddingEnd="40dp"
-                    app:tabTextAppearance="@style/shop_tab_size"
                     app:tabIndicator="@drawable/shop_ic_tab_indicator"
                     app:tabIndicatorColor="@android:color/transparent"
                     app:tabIndicatorFullWidth="false"
                     app:tabIndicatorHeight="3dp"
+                    app:tabMaxWidth="160dp"
+                    app:tabMinWidth="150dp"
                     app:tabMode="fixed"
+                    app:tabPaddingEnd="40dp"
+                    app:tabPaddingStart="40dp"
                     app:tabRippleColor="@color/common_transparent_background"
                     app:tabSelectedTextColor="@color/common_level_two_font_color"
+                    app:tabTextAppearance="@style/shop_tab_size"
                     app:tabTextColor="@color/shop_center_tab_text_color" />
 
                 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                     android:id="@+id/shop_main_refresh"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:paddingTop="2dp">
 
                     <androidx.viewpager2.widget.ViewPager2
                         android:id="@+id/shop_main_vp"

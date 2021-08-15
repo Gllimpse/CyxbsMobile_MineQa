@@ -35,14 +35,10 @@ class NestedHeaderBehavior constructor(context: Context, attrs: AttributeSet) :
         child.scaleY = value
         child.alpha = 1 + dependency.translationY / (child.height * 0.9f)
         // 改变右上角我的邮票动画
-        val myStampBg = parent.rootView.findViewById<View>(R.id.shop_main_bg_my_stamps)
-        myStampBg.alpha = -dependency.translationY / (child.height * 1.2f)
-        parent.rootView.findViewById<View>(R.id.shop_main_iv_my_stamps)
-            .alpha = -dependency.translationY / (child.height * 1.2f)
-        parent.rootView.findViewById<View>(R.id.shop_main_tv_my_stamps)
-            .alpha = -dependency.translationY / (child.height * 1.2f)
+        val llStamps = parent.rootView.findViewById<View>(R.id.shop_main_ll_my_stamps)
+        llStamps.alpha = -dependency.translationY / (child.height * 1.2f)
         parent.rootView.findViewById<View>(R.id.shop_main_bg_mask)
-            .translationX = -dependency.translationY / (child.height * 1.2f) * myStampBg.measuredWidth * 2
+            .translationX = -dependency.translationY / (child.height * 1.2f) * llStamps.measuredWidth * 2
         return true
     }
 }
