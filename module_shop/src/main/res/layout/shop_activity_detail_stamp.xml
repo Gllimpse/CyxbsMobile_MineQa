@@ -51,6 +51,7 @@
         app:layout_constraintTop_toBottomOf="@+id/shop_detail_stamp_tv_line"
         app:tabGravity="fill"
         app:tabMode="fixed"
+        app:tabIndicatorHeight="0dp"
         app:tabIndicatorColor="@android:color/transparent"
         app:tabBackground="@color/common_transparent_background"
         app:tabSelectedTextColor="@color/shop_stamp_detail_tab_selected_text_color"

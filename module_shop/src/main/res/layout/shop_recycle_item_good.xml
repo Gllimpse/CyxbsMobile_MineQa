@@ -52,7 +52,7 @@
                     android:layout_marginTop="10dp"
                     android:gravity="center_vertical"
                     android:text="@{view_model.getGoodData(type,position).title}"
-                    android:textColor="#15315B"
+                    android:textColor="@color/shop_center_recycler_good_title_color"
                     android:textSize="14sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/shop_item_iv_desc" />
@@ -65,7 +65,7 @@
                     android:layout_marginTop="8dp"
                     android:gravity="center_vertical"
                     android:text='@{"库存量："+view_model.getGoodData(type,position).amount}'
-                    android:textColor="#B315315B"
+                    android:textColor="@color/shop_center_recycler_good_left_counts_color"
                     android:textSize="11sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/shop_item_tv_title" />
@@ -87,7 +87,7 @@
                     android:layout_height="17dp"
                     android:layout_marginStart="4dp"
                     android:gravity="center_vertical"
-                    android:textColor="#5177FF"
+                    android:textColor="@color/shop_center_recycler_good_price_color"
                     android:textSize="14sp"
                     android:text="@{String.valueOf(view_model.getGoodData(type,position).price)}"
                     app:layout_constraintBottom_toBottomOf="@+id/shop_item_iv_stamp"
